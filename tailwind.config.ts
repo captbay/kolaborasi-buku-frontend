@@ -13,6 +13,18 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        primaryColor: "#18415F",
+        whiteColor: "#F8F9FA",
+        blackColor: "#232323",
+        disableColor: "#6b7280",
+        dangerColor: "#ef4444",
+
+        hoverColor: "#0f2a3d",
+
+        primaryCard: "#edf4fa",
+        primaryBorder: "#e5e7eb",
+      },
     },
   },
   plugins: [],

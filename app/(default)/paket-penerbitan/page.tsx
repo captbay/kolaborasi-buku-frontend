@@ -31,16 +31,18 @@ export default async function Page() {
   // } = await fetchCardData();
 
   return (
-    <main>
-      <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-        Paket Penerbitan
-      </h1>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <main id="content">
+      <header>
+        <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
+          Paket Penerbitan
+        </h1>
+      </header>
+      <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {/* <Suspense fallback={<CardsSkeleton />}>
           <CardWrapper />
         </Suspense> */}
-      </div>
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
+      </section>
+      <section className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
         {/* <RevenueChart revenue={revenue} /> */}
         {/* <Suspense fallback={<RevenueChartSkeleton />}>
           <RevenueChart />
@@ -48,7 +50,7 @@ export default async function Page() {
         <Suspense fallback={<LatestInvoicesSkeleton />}>
           <LatestInvoices />
         </Suspense> */}
-      </div>
+      </section>
     </main>
   );
 }

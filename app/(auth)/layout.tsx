@@ -27,18 +27,18 @@ export default function AuthLayout({
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
         <main className="min-w-screen min-h-screen relative lg:static lg:flex lg:flex-row lg:justify-around">
-          <div className="w-full items-center justify-center lg:static absolute z-10 lg:">
+          <figure className="w-full h-screen items-center justify-center lg:static absolute z-10 lg:">
             <Image
               src={BackgroundLogin}
-              alt=""
+              alt="Book Images"
               width={1000}
               height={1000}
               className="w-full h-screen lg:h-full object-cover"
             ></Image>
-          </div>
+          </figure>
           <div className="w-full h-screen flex items-center justify-center align-middle absolute lg:static z-20 my-auto">
             <div>
-              <div className="flex h-20 w-full items-end rounded-lg bg-primaryColor p-3 md:h-36">
+              <div className="flex h-20 w-full items-end rounded-lg bg-primaryCard p-3 md:h-36">
                 <Logo />
               </div>
               {children}

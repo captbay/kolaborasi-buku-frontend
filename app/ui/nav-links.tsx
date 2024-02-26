@@ -22,20 +22,20 @@ export default function NavLinks() {
     <>
       {links.map((link) => {
         return (
-          <nav>
+          <li>
             <Link
               key={link.name}
               href={link.href}
               className={clsx(
-                "flex grow items-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 ",
+                "flex grow items-center rounded-md px-3 text-sm font-medium hover:text-primaryColor ",
                 {
-                  "bg-sky-100 text-blue-600": pathname === link.href,
+                  "text-primaryColor": pathname === link.href,
                 }
               )}
             >
-              <p className="block">{link.name}</p>
+              {link.name}
             </Link>
-          </nav>
+          </li>
         );
       })}
     </>

@@ -3,31 +3,112 @@ import Link from "next/link";
 // import AcmeLogo from '@/app/ui/acme-logo';
 import { PowerIcon } from "@heroicons/react/24/outline";
 // import { signOut } from '@/auth';
+import Logo from "@/app/ui/penerbitan-buku-logo";
+import Image from "next/image";
+import { Button } from "./button";
 
-export default function SideNav() {
+export default function Footer() {
   return (
-    <div className="flex h-full flex-col px-3 py-4 md:px-2">
-      <Link
-        className="mb-2 flex h-20 items-end justify-start rounded-md bg-blue-600 p-4 md:h-40"
-        href="/"
-      >
-        <div className="w-32 text-white md:w-40">{/* <AcmeLogo /> */}</div>
-      </Link>
-      <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
-        {/* <NavLinks /> */}
-        <div className="hidden h-auto w-full grow rounded-md bg-gray-50 md:block"></div>
-        <form
-          action={async () => {
-            "use server";
-            // await signOut();
-          }}
-        >
-          <button className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
-            <PowerIcon className="w-6" />
-            <div className="hidden md:block">Sign Out</div>
-          </button>
-        </form>
+    <footer className="flex h-full flex-col py-16 px-28 bottom-0">
+      <div className="flex justify-between mb-12">
+        <div className="w-1/3">
+          <Link href="/">
+            <Logo />
+          </Link>
+          {/* description perusahan */}
+          <p className="mt-4 text-wrap text-xs">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+            tincidunt, nunc vitae. Lorem ipsum dolor sit amet, consectetur
+            adipiscing elit. Nunc tincidunt, nunc vitae.
+          </p>
+        </div>
+        <div>
+          <h1 className="text-sm font-medium">Fitur-Fitur</h1>
+          <nav>
+            <ul className="mt-4">
+              <li>
+                <Link href="/">
+                  <p className="text-wrap text-xs">Kolaborasi</p>
+                </Link>
+              </li>
+              <li>
+                <Link href="/">
+                  <p className="mt-2 text-wrap text-xs">Penerbitan</p>
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div>
+          <h1 className="text-sm font-medium">Fitur-Fitur</h1>
+          <nav>
+            <ul className="mt-4">
+              <li>
+                <Link href="/">
+                  <p className="text-wrap text-xs">Kolaborasi</p>
+                </Link>
+              </li>
+              <li>
+                <Link href="/">
+                  <p className="mt-2 text-wrap text-xs">Penerbitan</p>
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <div className="w-1/3">
+          <h1 className="text-sm font-medium">Memiliki Pertanyaan ?</h1>
+          <p className="mt-4 text-wrap text-xs">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+            tincidunt, nunc vitae.
+          </p>
+          <Button className="w-full h-8 mt-2">Hubungi Kami</Button>
+        </div>
       </div>
-    </div>
+      <div className="h-0.5 w-full bg-primaryCard px-20"></div>
+      <div className="flex justify-between mt-6">
+        <p>© 2024 Penerbitan Buku</p>
+        <figure className="flex">
+          <Link href="/">
+            <Image
+              src="/instagram.svg"
+              alt="instagram"
+              width={24}
+              height={24}
+            />
+          </Link>
+          <Link href="/">
+            <Image
+              src="/instagram.svg"
+              alt="instagram"
+              width={24}
+              height={24}
+              className="ml-6"
+            />
+          </Link>
+          <Link href="/">
+            <Image
+              src="/instagram.svg"
+              alt="instagram"
+              width={24}
+              height={24}
+              className="ml-6"
+            />
+          </Link>
+          <Link href="/">
+            <Image
+              src="/instagram.svg"
+              alt="instagram"
+              width={24}
+              height={24}
+              className="ml-6"
+            />
+          </Link>
+        </figure>
+      </div>
+    </footer>
   );
 }
+
+//
+// NANTI DI FOOTER ITU PAKE tag footer ya buat ada link nnya

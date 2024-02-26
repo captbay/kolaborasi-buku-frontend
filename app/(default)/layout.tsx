@@ -20,22 +20,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="id">
       <body className={`${inter.className} antialiased`}>
         <NavBar />
-        <div className="p-6 md:p-12 bg-primaryCard">{children} 1</div>
-        <div className="p-6 md:p-12 bg-primaryCard">{children}</div>
-        <div className="p-6 md:p-12 bg-primaryCard">{children}</div>
-        <div className="p-6 md:p-12 bg-primaryCard">{children}</div>
-        <div className="p-6 md:p-12 bg-primaryCard">{children}</div>
-        <div className="p-6 md:p-12 bg-primaryCard">{children}</div>
-        <div className="p-6 md:p-12 bg-primaryCard">{children}</div>
-        <div className="p-6 md:p-12 bg-primaryCard">{children}</div>
-        <div className="p-6 md:p-12 bg-primaryCard">{children}</div>
-        <div className="p-6 md:p-12 bg-primaryCard">{children}</div>
-        <div className="p-6 md:p-12 bg-primaryCard">{children}</div>
-        <div className="p-6 md:p-12 bg-primaryCard">{children}</div>
-        {/* <Footer /> */}
+        <div className="p-6 md:px-28 bg-primaryCard">{children} 1</div>
+        <div className="p-6 md:px-28 bg-primaryCard">{children} 1</div>
+        <div className="p-6 md:px-28 bg-primaryCard">{children} 1</div>
+        <div className="p-6 md:px-28 bg-primaryCard">{children} 1</div>
+        <div className="p-6 md:px-28 bg-primaryCard">{children} 1</div>
+        <Footer />
       </body>
     </html>
   );

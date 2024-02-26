@@ -6,9 +6,9 @@ export default function Logo() {
     <div
       className={`${lusitana.className} flex items-center  leading-none text-primaryColor`}
     >
-      <GlobeAltIcon className="h-12 w-12 rotate-[15deg]" />
+      <GlobeAltIcon className="h-6 w-6 rotate-[15deg]" />
       <div>
-        <p className="text-[20px]">PT Penerbitan Buku</p>
+        <p className="text-[16px]">PT Penerbitan Buku</p>
       </div>
     </div>
   );

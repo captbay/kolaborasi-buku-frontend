@@ -16,7 +16,7 @@ export default async function Page() {
       <section>
         <Jumbotron
           judul="Paket Penerbitan Buku"
-          deskripsi="Paket Penerbitan Buku"
+          deskripsi="Kami siap membantu Anda dalam menerbitkan buku Anda. Pilih paket yang sesuai dengan kebutuhan Anda, kami selalu siap berikan yang sebaik mungkin."
         />
       </section>
       <section className="px-28 py-16">

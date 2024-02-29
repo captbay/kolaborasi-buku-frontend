@@ -4,7 +4,7 @@ import { Metadata } from "next";
 
 import Pricing from "@/app/ui/paket-penerbitan/pricing";
 import Testimoni from "@/app/ui/beranda/testimoni";
-import { Button } from "@/app/ui/button";
+import Jumbotron from "@/app/ui/jumbotron";
 
 export const metadata: Metadata = {
   title: "Paket Penerbitan",
@@ -13,19 +13,11 @@ export const metadata: Metadata = {
 export default async function Page() {
   return (
     <main id="content">
-      <section className="bg-center bg-no-repeat bg-gray-700 bg-blend-multiply">
-        <div className="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
-          <header>
-            <h1
-              className={`${lusitana.className} mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl`}
-            >
-              Paket Penerbitan Buku
-            </h1>
-          </header>
-          <p className="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">
-            Anda bisa menerbitkan buku dengan mudah dan cepat dengan kami.
-          </p>
-        </div>
+      <section>
+        <Jumbotron
+          judul="Paket Penerbitan Buku"
+          deskripsi="Paket Penerbitan Buku"
+        />
       </section>
       <section className="px-28 py-16">
         <div className="flex flex-col justify-center items-center px-8">

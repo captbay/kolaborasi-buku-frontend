@@ -1,7 +1,7 @@
 import React from "react";
 import { lusitana } from "@/app/ui/fonts";
 
-export default function jumbotron({
+export default async function jumbotron({
   judul,
   deskripsi,
 }: {

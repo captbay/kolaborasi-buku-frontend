@@ -22,7 +22,7 @@ export default function NavLinks() {
     <>
       {links.map((link) => {
         return (
-          <li>
+          <li key={link.name}>
             <Link
               key={link.name}
               href={link.href}

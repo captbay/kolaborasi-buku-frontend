@@ -12,7 +12,7 @@ import { useFormState, useFormStatus } from "react-dom";
 import { authenticate } from "@/app/lib/actions";
 import Logo from "../penerbitan-buku-logo";
 
-export default function LoginForm() {
+export default function RegisterForm() {
   // const [errorMessage, dispatch] = useFormState(authenticate, undefined);
 
   return (

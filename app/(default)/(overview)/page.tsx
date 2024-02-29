@@ -86,7 +86,7 @@ export default async function Page() {
           </p>
         </div>
         {/* swiper with card element */}
-        <div className="flex justify-between mt-4">
+        <div className="mt-4">
           <Testimoni />
         </div>
       </section>

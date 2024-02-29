@@ -62,7 +62,9 @@ export default function Footer() {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             tincidunt, nunc vitae.
           </p>
-          <Button className="w-full h-8 mt-2">Hubungi Kami</Button>
+          <Link href="/hubungi-kami">
+            <Button className="w-full h-8 mt-2">Hubungi Kami</Button>
+          </Link>
         </div>
       </div>
       <div className="h-0.5 w-full bg-primaryCard px-20"></div>

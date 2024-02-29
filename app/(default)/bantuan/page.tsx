@@ -1,55 +1,49 @@
-// import { Card } from '@/app/ui/dashboard/cards';
-// import RevenueChart from '@/app/ui/dashboard/revenue-chart';
-// import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import { lusitana } from "@/app/ui/fonts";
-// import "@/app/lib/data";
-
-// import CardWrapper from '@/app/ui/dashboard/cards';
-
-// import { Suspense } from "react";
-
-// import {
-//   RevenueChartSkeleton,
-//   LatestInvoicesSkeleton,
-//   CardsSkeleton,
-// } from '@/app/ui/skeletons';
-
 import { Metadata } from "next";
+import Jumbotron from "@/app/ui/jumbotron";
+import Faq from "@/app/ui/bantuan/faq";
 
 export const metadata: Metadata = {
   title: "Bantuan",
 };
 
 export default async function Page() {
-  // const revenue = await fetchRevenue();
-  // const latestInvoices = await fetchLatestInvoices();
-  // const {
-  //   numberOfInvoices,
-  //   numberOfCustomers,
-  //   totalPaidInvoices,
-  //   totalPendingInvoices,
-  // } = await fetchCardData();
-
   return (
     <main id="content">
-      <header>
-        <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-          Bantuan
-        </h1>
-      </header>
-      <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {/* <Suspense fallback={<CardsSkeleton />}>
-          <CardWrapper />
-        </Suspense> */}
+      <section>
+        <section>
+          <Jumbotron
+            judul="Bantuan Yang Anda Perlukan"
+            deskripsi="Kami siap membantu Anda dalam menyelesaikan masalah yang Anda hadapi. Silahkan pilih FAQ yang sesuai dengan masalah Anda."
+          />
+        </section>
       </section>
-      <section className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-        {/* <RevenueChart revenue={revenue} /> */}
-        {/* <Suspense fallback={<RevenueChartSkeleton />}>
-          <RevenueChart />
-        </Suspense>
-        <Suspense fallback={<LatestInvoicesSkeleton />}>
-          <LatestInvoices />
-        </Suspense> */}
+      <section className="px-28 py-16">
+        <div className="flex flex-col justify-center items-center px-8">
+          <h2 className={`${lusitana.className} text-lg font-semibold`}>
+            Pembelian Buku
+          </h2>
+          <p className="text-center text-sm font-light">
+            Seluruh pertanyaan yang sering diajukan seputar pembelian buku
+          </p>
+        </div>
+        <div className="mt-4">
+          <Faq />
+        </div>
+      </section>
+      <section className="px-28 py-16">
+        <div className="flex flex-col justify-center items-center px-8">
+          <h2 className={`${lusitana.className} text-lg font-semibold`}>
+            Kolaborasi Pembuatan Buku
+          </h2>
+          <p className="text-center text-sm font-light">
+            Seluruh pertanyaan yang sering diajukan seputar kolaborasi pembuatan
+            buku
+          </p>
+        </div>
+        <div className="mt-4">
+          <Faq />
+        </div>
       </section>
     </main>
   );

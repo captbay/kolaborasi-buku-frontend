@@ -43,7 +43,7 @@ export default async function Page() {
             tincidunt, nisl non tincidunt.
           </p>
         </div>
-        <div className="flex justify-between mt-4">
+        <div className="mt-4">
           <Testimoni />
         </div>
       </section>

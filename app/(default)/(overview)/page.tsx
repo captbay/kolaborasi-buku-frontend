@@ -75,7 +75,7 @@ export default async function Page() {
           <Button className="mt-8">Lihat Detail</Button>
         </div>
       </section>
-      <section className="px-20 py-16">
+      <section className="px-28 py-16">
         <div className="flex flex-col justify-center items-center px-8">
           <h2 className={`${lusitana.className} text-lg font-semibold`}>
             Testimoni Pelanggan

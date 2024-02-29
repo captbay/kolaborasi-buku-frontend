@@ -8,7 +8,7 @@ export default function Logo() {
     >
       <GlobeAltIcon className="h-6 w-6 rotate-[15deg]" />
       <div>
-        <p className="text-[16px]">PT Penerbitan Buku</p>
+        <p className="text-lg">PT Penerbitan Buku</p>
       </div>
     </div>
   );

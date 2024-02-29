@@ -1,17 +1,13 @@
 import Link from "next/link";
 import NavLinks from "@/app/ui/nav-links";
 import Logo from "@/app/ui/penerbitan-buku-logo";
-import {
-  ShoppingCartIcon,
-  BellIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/outline";
+import { ShoppingCartIcon, BellIcon } from "@heroicons/react/24/outline";
 import { Button } from "./button";
 // import { signOut } from '@/auth';
 
 export default function TopNav() {
   return (
-    <div className="sticky top-0 w-full bg-whiteColor px-28">
+    <div className="sticky top-0 w-full bg-whiteColor px-28 z-10">
       <div className="flex flex-col">
         <div className="flex justify-between py-4 items-center">
           <Link href="/">

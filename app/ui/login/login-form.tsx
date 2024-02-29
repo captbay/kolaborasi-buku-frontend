@@ -10,12 +10,17 @@ import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "../button";
 import { useFormState, useFormStatus } from "react-dom";
 import { authenticate } from "@/app/lib/actions";
+import Link from "next/link";
+import Logo from "../penerbitan-buku-logo";
 
 export default function LoginForm() {
   // const [errorMessage, dispatch] = useFormState(authenticate, undefined);
 
   return (
     <div className="rounded-lg bg-primaryCard px-6 pb-4 pt-8 w-[400px]">
+      <div className="mb-4 flex justify-center">
+        <Logo />
+      </div>
       <form
         // action={dispatch}
         className="space-y-3"
@@ -82,9 +87,8 @@ export default function LoginForm() {
       </form>
       {/* regis when dont have account */}
       <div className="">
-        <p className="text-sm text-disableColor">
-          Tidak Punya Akun? <RegisButton />
-        </p>
+        <p className="text-sm text-disableColor">Tidak Punya Akun?</p>
+        <RegisButton />
       </div>
     </div>
   );
@@ -102,8 +106,10 @@ function LoginButton() {
 
 function RegisButton() {
   return (
-    <Button className="mt-4 w-full">
-      Register <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
-    </Button>
+    <Link href="/register">
+      <Button className="mt-4 w-full">
+        Register <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+      </Button>
+    </Link>
   );
 }

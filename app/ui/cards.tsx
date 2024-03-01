@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const cards = () => {
   return (
-    <div className="flex flex-col mx-6 items-center bg-white border border-gray-200 rounded-lg shadow">
+    <div className="flex flex-col mx-8 items-center bg-white border border-gray-200 rounded-lg shadow">
       <figure>
         <Image
           className="p-4 w-48 h-48"
@@ -69,7 +69,7 @@ const cards = () => {
               5.0
             </span>
           </div>
-          <span className="text-xl font-bold text-gray-900 ">$599</span>
+          <p className="text-xl font-bold text-gray-900 ">$599</p>
         </div>
       </div>
     </div>

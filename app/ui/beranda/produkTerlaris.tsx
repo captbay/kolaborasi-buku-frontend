@@ -43,9 +43,6 @@ export default () => {
           swiperRef.current = swiper;
         }}
         onSwiper={(swiper) => console.log(swiper)}
-        onReachEnd={() => {
-          /*back to first slide*/
-        }}
       >
         <SwiperSlide>
           <CardBooks />

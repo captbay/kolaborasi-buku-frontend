@@ -22,7 +22,6 @@ export default async function Page() {
         <Coursell />
       </section>
       <section className="px-20 py-16">
-        {/* swiper with card element */}
         <ProdukTerlaris />
       </section>
       <section className="px-28 py-8">
@@ -85,7 +84,6 @@ export default async function Page() {
             tincidunt, nisl non tincidunt.
           </p>
         </div>
-        {/* swiper with card element */}
         <div className="mt-4">
           <Testimoni />
         </div>

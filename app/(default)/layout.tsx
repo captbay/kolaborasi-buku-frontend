@@ -1,6 +1,6 @@
 import "./../ui/globals.css";
 import { inter } from "@/app/ui/fonts";
-import NavBar from "@/app/ui/navigation";
+import NavBar from "@/app/ui/navbar/navigation";
 import Footer from "@/app/ui/footer";
 
 import { Metadata } from "next";

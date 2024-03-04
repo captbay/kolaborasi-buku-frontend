@@ -7,8 +7,9 @@ import clsx from "clsx";
 // Depending on the size of the application, this would be stored in a database.
 const links = [
   { name: "Beranda", href: "/" },
+  { name: "Koleksi", href: "/koleksi-buku" },
   { name: "Kolaborasi", href: "/kolaborasi" },
-  { name: "Penerbitan", href: "/paket-penerbitan" },
+  { name: "Paket Penerbitan", href: "/paket-penerbitan" },
   { name: "Bantuan", href: "/bantuan" },
   {
     name: "Hubungi Kami",

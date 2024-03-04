@@ -11,6 +11,7 @@ import { Button } from "../button";
 import { useFormState, useFormStatus } from "react-dom";
 import { authenticate } from "@/app/lib/actions";
 import Logo from "../penerbitan-buku-logo";
+import Link from "next/link";
 
 export default function RegisterForm() {
   // const [errorMessage, dispatch] = useFormState(authenticate, undefined);
@@ -18,7 +19,9 @@ export default function RegisterForm() {
   return (
     <div className="rounded-lg bg-primaryCard px-6 pb-4 pt-8 w-[400px]">
       <div className="mb-4 flex justify-center">
-        <Logo />
+        <Link href="/">
+          <Logo />
+        </Link>
       </div>
       <form
         //  action={dispatch}

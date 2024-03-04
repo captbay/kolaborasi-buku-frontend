@@ -3,13 +3,13 @@ import { lusitana } from "@/app/ui/fonts";
 import Image from "next/image";
 
 import { Metadata } from "next";
-import Link from "next/link";
 
 import CardBooks from "@/app/ui/cards";
 import Coursell from "@/app/ui/beranda/coursell";
 import { Button } from "@/app/ui/button";
 import Testimoni from "@/app/ui/beranda/testimoni";
 import ProdukTerlaris from "@/app/ui/beranda/produkTerlaris";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Beranda",
@@ -46,32 +46,40 @@ export default async function Page() {
       </section>
       <section className="px-20 py-16">
         <div className="flex justify-center items-center px-8">
-          <h2 className={`${lusitana.className} text-lg`}>Koleksi Buku</h2>
+          <h2 className={`${lusitana.className} text-lg font-semibold`}>
+            Koleksi Buku
+          </h2>
         </div>
         {/* swiper with card element */}
-        <div className="flex justify-between mt-4">
+        <div className="flex justify-between mt-4 px-8 gap-8">
           <CardBooks />
           <CardBooks />
           <CardBooks />
           <CardBooks />
         </div>
         <div className="flex justify-center items-center px-8">
-          <Button className="mt-8">Lihat Detail</Button>
+          <Link href={"/koleksi-buku"}>
+            <Button className="mt-8">Lihat Detail</Button>
+          </Link>
         </div>
       </section>
       <section className="px-20 py-16">
         <div className="flex justify-center items-center px-8">
-          <h2 className={`${lusitana.className} text-lg`}>Ayo Kolaborasi!</h2>
+          <h2 className={`${lusitana.className} text-lg font-semibold`}>
+            Ayo Kolaborasi!
+          </h2>
         </div>
         {/* swiper with card element */}
-        <div className="flex justify-between mt-4">
+        <div className="flex justify-between mt-4 px-8 gap-8">
           <CardBooks />
           <CardBooks />
           <CardBooks />
           <CardBooks />
         </div>
         <div className="flex justify-center items-center px-8">
-          <Button className="mt-8">Lihat Detail</Button>
+          <Link href={"/kolaborasi"}>
+            <Button className="mt-8">Lihat Detail</Button>
+          </Link>
         </div>
       </section>
       <section className="px-28 py-16">

@@ -19,7 +19,9 @@ export default function LoginForm() {
   return (
     <div className="rounded-lg bg-primaryCard px-6 pb-4 pt-8 w-[400px]">
       <div className="mb-4 flex justify-center">
-        <Logo />
+        <Link href="/">
+          <Logo />
+        </Link>
       </div>
       <form
         // action={dispatch}

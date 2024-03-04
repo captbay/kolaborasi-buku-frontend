@@ -5,7 +5,7 @@ import BackgroundLogin from "./../background_login.jpg";
 
 import "../ui/globals.css";
 import { inter } from "@/app/ui/fonts";
-import Nav from "@/app/ui/navigation";
+import Nav from "@/app/ui/navbar/navigation";
 
 import { Metadata } from "next";
 

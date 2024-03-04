@@ -16,9 +16,9 @@ export default async function bucketList() {
       <div className="mx-8 flex-[0.5]">
         <div className="bg-white border border-gray-200 rounded-lg min-w-full sticky top-[182px]">
           <div className="flex flex-col m-6">
-            <h3 className="text-2xl font-semibold tracking-tight text-blackColor">
+            <h2 className="text-2xl font-semibold tracking-tight text-blackColor">
               Ringkasan Belanja
-            </h3>
+            </h2>
             <div className="flex justify-between mt-4">
               <h3 className="text-base font-light tracking-tight text-blackColor">
                 Total Harga

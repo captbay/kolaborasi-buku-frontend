@@ -15,7 +15,6 @@ export default async function keranjang() {
         <BucketList />
       </section>
       <section className="px-20 py-16">
-        {/* swiper with card element */}
         <ProdukTerlaris />
       </section>
     </main>

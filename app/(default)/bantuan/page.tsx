@@ -11,12 +11,10 @@ export default async function Page() {
   return (
     <main id="content">
       <section>
-        <section>
           <Jumbotron
             judul="Bantuan Yang Anda Perlukan"
             deskripsi="Kami siap membantu Anda dalam menyelesaikan masalah yang Anda hadapi. Silahkan pilih FAQ yang sesuai dengan masalah Anda."
           />
-        </section>
       </section>
       <section className="px-28 py-16">
         <div className="flex flex-col justify-center items-center px-8">

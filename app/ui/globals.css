@@ -16,3 +16,19 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+/* i want set input text focus inline to 0 or not show */
+input:focus {
+  border-color: #18415f !important;
+  box-shadow: none !important;
+}
+
+/* outline: 2px solid transparent;
+outline-offset: 2px;
+--tw-ring-inset: var(--tw-empty, ! !);
+--tw-ring-offset-width: 0px;
+--tw-ring-offset-color: #fff;
+--tw-ring-color: #1C64F2;
+--tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+--tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow); */

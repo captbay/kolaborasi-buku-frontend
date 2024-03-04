@@ -1,55 +1,23 @@
-// import { Card } from '@/app/ui/dashboard/cards';
-// import RevenueChart from '@/app/ui/dashboard/revenue-chart';
-// import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
-import { lusitana } from "@/app/ui/fonts";
-// import "@/app/lib/data";
-
-// import CardWrapper from '@/app/ui/dashboard/cards';
-
-// import { Suspense } from "react";
-
-// import {
-//   RevenueChartSkeleton,
-//   LatestInvoicesSkeleton,
-//   CardsSkeleton,
-// } from '@/app/ui/skeletons';
-
 import { Metadata } from "next";
 
+import ListBukuKolaborasi from "@/app/ui/kolaborasi/listBukuKolaborasi";
+import Jumbotron from "@/app/ui/jumbotron";
+
 export const metadata: Metadata = {
-  title: "Kolaborasi",
+  title: "Kolaborasi Buku",
 };
 
 export default async function Page() {
-  // const revenue = await fetchRevenue();
-  // const latestInvoices = await fetchLatestInvoices();
-  // const {
-  //   numberOfInvoices,
-  //   numberOfCustomers,
-  //   totalPaidInvoices,
-  //   totalPendingInvoices,
-  // } = await fetchCardData();
-
   return (
     <main id="content">
-      <header>
-        <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-          Kolaborasi
-        </h1>
-      </header>
-      <section className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {/* <Suspense fallback={<CardsSkeleton />}>
-          <CardWrapper />
-        </Suspense> */}
+      <section>
+        <Jumbotron
+          judul="Ayo Kolaborasi Membuat Buku Dengan Kami"
+          deskripsi="Kolaborasi dengan kami untuk membuat buku yang bermanfaat bagi banyak orang. Dengan kolaborasi, Anda dapat memperoleh banyak keuntungan dari kolaborasi buku yang Anda buat."
+        />
       </section>
-      <section className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-        {/* <RevenueChart revenue={revenue} /> */}
-        {/* <Suspense fallback={<RevenueChartSkeleton />}>
-          <RevenueChart />
-        </Suspense>
-        <Suspense fallback={<LatestInvoicesSkeleton />}>
-          <LatestInvoices />
-        </Suspense> */}
+      <section className="px-20 py-16">
+        <ListBukuKolaborasi />
       </section>
     </main>
   );

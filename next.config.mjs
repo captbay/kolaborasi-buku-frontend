@@ -2,7 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["flowbite.s3.amazonaws.com"],
+    domains: [
+      "flowbite.s3.amazonaws.com",
+      "kolaborasi-buku-backend.test",
+      "via.placeholder.com",
+    ],
   },
 };
 

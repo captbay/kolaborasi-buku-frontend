@@ -1,86 +1,46 @@
-// This file contains type definitions for your data.
-// It describes the shape of the data, and what data type each property should accept.
-// For simplicity of teaching, we're manually defining these types.
-// However, these types are generated automatically if you're using an ORM such as Prisma.
-export type User = {
+export type Event = {
   id: string;
-  name: string;
-  email: string;
-  password: string;
+  tipe: string;
+  file: string;
+  waktu_mulai: string;
+  waktu_selesai: string;
+  active_flag: number;
+  created_at: string;
+  updated_at: string;
 };
 
-export type Customer = {
+export type CardData = {
   id: string;
-  name: string;
-  email: string;
-  image_url: string;
+  slug: string;
+  judul: string;
+  harga: number;
+  kategori: string;
+  cover_buku: string;
+  pembeli: number;
+  rating: number;
 };
 
-export type Invoice = {
-  id: string; // Will be created on the database
-  customer_id: string;
-  amount: number; // Stored in cents
-  status: "pending" | "paid";
-  date: string;
-};
-
-export type Revenue = {
-  month: string;
-  revenue: number;
-};
-
-export type LatestInvoice = {
+export type CardKolaborasiData = {
   id: string;
-  name: string;
-  image_url: string;
-  email: string;
-  amount: string;
+  slug: string;
+  judul: string;
+  kategori: string;
+  cover_buku: string;
+  jumlah_bab: number;
 };
 
-// The database returns a number for amount, but we later format it to a string with the formatCurrency function
-export type LatestInvoiceRaw = Omit<LatestInvoice, "amount"> & {
-  amount: number;
+export type Testimoni = {
+  ulasan: string;
+  rating: number;
+  nama_lengkap: string;
+  foto_profil: string;
 };
 
-export type InvoicesTable = {
+export type BookAds = {
   id: string;
-  customer_id: string;
-  name: string;
-  email: string;
-  image_url: string;
-  date: string;
-  amount: number;
-  status: "pending" | "paid";
-};
-
-export type CustomersTableType = {
-  id: string;
-  name: string;
-  email: string;
-  image_url: string;
-  total_invoices: number;
-  total_pending: number;
-  total_paid: number;
-};
-
-export type FormattedCustomersTable = {
-  id: string;
-  name: string;
-  email: string;
-  image_url: string;
-  total_invoices: number;
-  total_pending: string;
-  total_paid: string;
-};
-
-export type CustomerField = {
-  id: string;
-  name: string;
-};
-
-export type InvoiceForm = {
-  id: string;
-  customer_id: string;
-  amount: number;
-  status: "pending" | "paid";
+  slug: string;
+  judul: string;
+  kategori: string;
+  deskripsi: string;
+  cover_buku: string;
 };

@@ -1,74 +1,37 @@
-"use client";
-
-// Import Swiper React components
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import React from "react";
 
 import Image from "next/image";
+import { Carousel } from "flowbite-react";
 
-export default () => {
-  return (
-    <Swiper
-      style={
-        {
-          "--swiper-navigation-color": "#18415F",
-          "--swiper-theme-color": "#18415F",
-        } as React.CSSProperties
-      }
-      modules={[Navigation, Pagination, Autoplay]}
-      slidesPerView={1}
-      navigation={true}
-      spaceBetween={30}
-      centeredSlides={true}
-      autoplay={{
-        delay: 2000,
-        disableOnInteraction: false,
-      }}
-      pagination={{ clickable: true }}
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={(swiper) => console.log(swiper)}
-    >
-      <SwiperSlide>
-        <Image
-          src="/coursell/1.jpg"
-          alt="Picture of the author"
-          width={500}
-          height={500}
-          className="w-full h-[375px]"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Image
-          src="/coursell/2.jpg"
-          alt="Picture of the author"
-          width={500}
-          height={500}
-          className="w-full h-[375px]"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Image
-          src="/coursell/3.jpg"
-          alt="Picture of the author"
-          width={500}
-          height={500}
-          className="w-full h-[375px]"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Image
-          src="/coursell/4.jpg"
-          alt="Picture of the author"
-          width={500}
-          height={500}
-          className="w-full h-[375px]"
-        />
-      </SwiperSlide>
-    </Swiper>
-  );
+import { getEvent } from "@/app/lib/actions";
+import { Event } from "@/app/lib/definitions";
+
+import type { CustomFlowbiteTheme } from "flowbite-react";
+
+const customTheme: CustomFlowbiteTheme["carousel"] = {
+  scrollContainer: {
+    base: "flex h-full snap-mandatory overflow-y-hidden overflow-x-scroll scroll-smooth rounded-none",
+  },
 };
+
+export default async function Coursell() {
+  const data: Event[] = await getEvent();
+
+  return (
+    <section className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+      <Carousel slideInterval={3000} pauseOnHover theme={customTheme}>
+        {data.map((event, index) => (
+          <Image
+            key={index}
+            src={process.env.NEXT_PUBLIC_STORAGE_FILE + event.file}
+            alt="Picture of the event"
+            width={500}
+            height={500}
+            priority
+            className="w-full h-[375px]"
+          />
+        ))}
+      </Carousel>
+    </section>
+  );
+}

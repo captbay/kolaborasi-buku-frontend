@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
+import { useEffect, useState } from "react";
 // For Typescript
 import SwiperCore from "swiper";
 // Import Swiper React components
@@ -18,14 +19,33 @@ import "swiper/css/navigation";
 
 import CardBooks from "@/app/ui/cards";
 
+import { getBestSeller } from "@/app/lib/actions";
+import { CardData } from "@/app/lib/definitions";
+
 export default () => {
+  const [data, setData] = useState<CardData[]>([]);
   const swiperRef = useRef<SwiperCore>();
 
-  // cara ilangin bug
-  // const initialTheme = localStorage.getItem("theme") || "light";
+  useEffect(() => {
+    const fetchProjects = () => {
+      getBestSeller()
+        .then((res) => {
+          if (res.status === 200 || res.status === 201) {
+            setData(res.data.data);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+
+    fetchProjects();
+  }, []);
+
+  if (!data) return null;
 
   return (
-    <>
+    <section>
       <div className="flex justify-between items-center px-8 mb-4">
         <h2 className={`${lusitana.className} text-lg font-semibold`}>
           Produk Terlaris
@@ -44,29 +64,36 @@ export default () => {
           slidesPerView={4}
           className="mySwiper"
           spaceBetween={32}
-          onSlideChange={() => console.log("slide change")}
+          breakpoints={{
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 16,
+            },
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 32,
+            },
+          }}
           onBeforeInit={(swiper) => {
             swiperRef.current = swiper;
           }}
-          onSwiper={(swiper) => console.log(swiper)}
         >
-          <SwiperSlide>
-            <CardBooks />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardBooks />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardBooks />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardBooks />
-          </SwiperSlide>
-          <SwiperSlide>
-            <CardBooks />
-          </SwiperSlide>
+          {data.map((item, index) => (
+            <SwiperSlide key={item.id}>
+              <CardBooks
+                className="shadow-sm"
+                slug={item.slug}
+                judul={item.judul}
+                harga={item.harga}
+                kategori={item.kategori}
+                coverBuku={item.cover_buku}
+                pembeli={item.pembeli}
+                rating={item.rating}
+              />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
-    </>
+    </section>
   );
 };

@@ -8,7 +8,7 @@ import TestimoniBeranda from "@/app/ui/beranda/testimoniBeranda";
 import BannerBookVertical from "@/app/ui/beranda/bannerBookVertical";
 
 import { Suspense } from "react";
-import { CoursellSkeleton } from "@/app/ui/skeletons";
+// import { CoursellSkeleton } from "@/app/ui/skeletons";
 
 export const metadata: Metadata = {
   title: "Beranda",

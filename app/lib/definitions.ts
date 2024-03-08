@@ -44,3 +44,19 @@ export type BookAds = {
   deskripsi: string;
   cover_buku: string;
 };
+
+// faqData
+export type faqData = {
+  id: string;
+  judul: string;
+  answer: string;
+  active_flag: number;
+};
+
+// paketData
+export type paketData = {
+  id: string;
+  nama: string;
+  harga: number;
+  deskripsi: string;
+};

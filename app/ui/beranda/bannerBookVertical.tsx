@@ -54,7 +54,7 @@ export default () => {
         className="mySwiper"
       >
         {data.map((item, index) => (
-          <SwiperSlide key={item.id}>
+          <SwiperSlide key={index}>
             <CardAdsLandscape
               slug={item.slug}
               judul={item.judul}

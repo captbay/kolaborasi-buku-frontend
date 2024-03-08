@@ -12,7 +12,7 @@ interface Props {
   coverBuku: string;
 }
 
-export default async function cardAdsLandscape({
+export default function cardAdsLandscape({
   slug,
   judul,
   kategori,

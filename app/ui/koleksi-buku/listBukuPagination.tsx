@@ -12,16 +12,15 @@ export default async function listBukuPagination() {
       </div>
       <div className="flex flex-col w-fit">
         <div className="grid grid-cols-4 gap-4 mx-8 flex-1">
-          <CardBooks />
-          <CardBooks />
-          <CardBooks />
-          <CardBooks />
-          <CardBooks />
-          <CardBooks />
-          <CardBooks />
-          <CardBooks />
-          <CardBooks />
-          <CardBooks />
+          {/* <CardBooks
+            coverBuku=""
+            judul=""
+            harga={}
+            kategori=""
+            pembeli={}
+            rating={}
+            slug=""
+          /> */}
         </div>
         <div className="mt-5 flex w-full justify-center">
           <Pagination totalPages={100} />

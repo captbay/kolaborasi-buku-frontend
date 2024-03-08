@@ -28,7 +28,7 @@ export default async function Coursell() {
             width={500}
             height={500}
             priority
-            className="w-full h-[375px]"
+            className="w-full h-full"
           />
         ))}
       </Carousel>

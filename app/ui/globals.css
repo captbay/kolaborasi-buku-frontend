@@ -23,6 +23,11 @@ input:focus {
   box-shadow: none !important;
 }
 
+textarea:focus {
+  border-color: #18415f !important;
+  box-shadow: none !important;
+}
+
 .swiper {
   height: 100%;
 }

@@ -12,16 +12,13 @@ export default async function listBukuKolaborasi() {
       </div>
       <div className="flex flex-col w-fit">
         <div className="grid grid-cols-4 gap-4 mx-8 flex-1">
-          <CardKolaborasiBooks />
-          <CardKolaborasiBooks />
-          <CardKolaborasiBooks />
-          <CardKolaborasiBooks />
-          <CardKolaborasiBooks />
-          <CardKolaborasiBooks />
-          <CardKolaborasiBooks />
-          <CardKolaborasiBooks />
-          <CardKolaborasiBooks />
-          <CardKolaborasiBooks />
+          {/* <CardKolaborasiBooks
+            coverBuku=""
+            judul=""
+            jumlahBab=""
+            kategori=""
+            slug=""
+          /> */}
         </div>
         <div className="mt-5 flex w-full justify-center">
           <Pagination totalPages={100} />

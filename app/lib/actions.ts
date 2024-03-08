@@ -19,6 +19,23 @@ export async function getEvent() {
 }
 
 /*
+ event
+ */
+export async function getPaket() {
+  noStore();
+  return await axios
+    .get("/paket/all")
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+/*
  buku
  */
 export async function getBuku(limit: number, bookAds: boolean = false) {
@@ -77,7 +94,7 @@ export async function getKolaborasi(limit: number) {
 }
 
 /*
- kolaborasi buku
+ Testimoni
  */
 export async function getTestimoni(limit: number) {
   noStore();
@@ -87,6 +104,23 @@ export async function getTestimoni(limit: number) {
         limit: limit,
       },
     })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+/*
+  FAQ
+  */
+export async function getFaq() {
+  noStore();
+  return await axios
+    .get("/faq/all")
     .then((response) => {
       if (response.status === 200 || response.status === 201) {
         return response.data.data;

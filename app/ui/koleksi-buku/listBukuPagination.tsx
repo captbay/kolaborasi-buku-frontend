@@ -1,31 +1,61 @@
 import React from "react";
 
 import CardBooks from "@/app/ui/cards";
-import FilterBox from "@/app/ui/filter-box";
+import { getBukuAllResponse } from "@/app/lib/definitions";
+import { getBuku } from "@/app/lib/actions";
 import Pagination from "@/app/ui/pagination";
+import EmptyData from "../emptyData";
 
-export default async function listBukuPagination() {
+export default async function listBukuPagination({
+  search,
+  currentPage,
+  order,
+  kategori,
+  hargaMin,
+  hargaMax,
+}: {
+  search?: string;
+  currentPage: number;
+  order: string;
+  kategori: string;
+  hargaMin?: number;
+  hargaMax?: number;
+}) {
+  const buku: getBukuAllResponse = await getBuku({
+    limit: 12,
+    page: currentPage,
+    search: search,
+    order: order,
+    kategori: kategori,
+    hargaMin: hargaMin,
+    hargaMax: hargaMax,
+  });
+
+  if (buku.data.length < 1) {
+    return <EmptyData />;
+  }
+
   return (
-    <div className="flex justify-between">
-      <div className="ml-8">
-        <FilterBox />
+    <>
+      <section className="grid grid-cols-4 gap-4 mx-8">
+        {buku?.data?.map((item, index) => (
+          <CardBooks
+            key={index}
+            slug={item.slug}
+            judul={item.judul}
+            harga={item.harga}
+            kategori={item.kategori}
+            coverBuku={item.cover_buku}
+            pembeli={item.pembeli}
+            rating={item.rating}
+          />
+        ))}
+      </section>
+      <div className="mt-5 flex w-full justify-center">
+        {buku?.data.length > 0 ? (
+          <Pagination totalPages={buku?.last_page} />
+        ) : null}
       </div>
-      <div className="flex flex-col w-fit">
-        <div className="grid grid-cols-4 gap-4 mx-8 flex-1">
-          {/* <CardBooks
-            coverBuku=""
-            judul=""
-            harga={}
-            kategori=""
-            pembeli={}
-            rating={}
-            slug=""
-          /> */}
-        </div>
-        <div className="mt-5 flex w-full justify-center">
-          <Pagination totalPages={100} />
-        </div>
-      </div>
-    </div>
+    </>
   );
 }

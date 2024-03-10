@@ -9,6 +9,14 @@ export type Event = {
   updated_at: string;
 };
 
+// Buku Dijual
+export type getBukuAllResponse = {
+  current_page: number;
+  data: CardData[];
+  last_page: number;
+  total: number;
+};
+
 export type CardData = {
   id: string;
   slug: string;
@@ -20,6 +28,7 @@ export type CardData = {
   rating: number;
 };
 
+// Buku Kolaborasi
 export type CardKolaborasiData = {
   id: string;
   slug: string;
@@ -51,6 +60,13 @@ export type faqData = {
   judul: string;
   answer: string;
   active_flag: number;
+};
+
+// kategori
+export type kategoriData = {
+  id: string;
+  nama: string;
+  slug: string;
 };
 
 // paketData

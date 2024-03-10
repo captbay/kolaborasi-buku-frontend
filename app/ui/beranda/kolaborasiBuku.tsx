@@ -30,9 +30,9 @@ export default async function kolaborasiBuku() {
           />
         ))}
       </div>
-      <div className="flex justify-center items-center px-8">
+      <div className="flex justify-center items-center mt-8">
         <Link href={"/kolaborasi"}>
-          <Button className="mt-8">Lihat Detail</Button>
+          <Button>Lihat Detail</Button>
         </Link>
       </div>
     </section>

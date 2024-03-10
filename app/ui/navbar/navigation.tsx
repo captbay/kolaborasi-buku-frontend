@@ -8,31 +8,20 @@ import {
 import { Button } from "@/app/ui/button";
 import ProfileCircle from "@/app/ui/navbar/profile-cirlce";
 import Notification from "@/app/ui/navbar/notification";
+import Search from "../search";
 
 // import { signOut } from '@/auth';
 
 export default function TopNav() {
   return (
-    <div className="sticky top-0 w-full bg-whiteColor px-28 z-10">
+    <div className="sticky top-0 w-full bg-whiteColor px-28 z-20">
       <div className="flex flex-col">
         <div className="flex justify-between py-4 items-center">
           <Link href="/">
             <Logo />
           </Link>
           {/* searchbox */}
-          <div>
-            <div className="relative">
-              <input
-                className="peer block w-full rounded-md border border-primaryBorder py-[14px] pl-10 text-sm outline-2 placeholder:text-disableColor"
-                id="searchbox"
-                type="text"
-                name="searchbox"
-                placeholder="Cari Buku.."
-                // required
-              />
-              <MagnifyingGlassIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor" />
-            </div>
-          </div>
+          <Search placeholder="Cari buku berdasarkan judul atau penulis..." />
           <div className="flex items-center">
             {/* logo cart */}
             <Link className="px-1" href="/keranjang">

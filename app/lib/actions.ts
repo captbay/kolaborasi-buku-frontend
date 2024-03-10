@@ -36,17 +36,12 @@ export async function getPaket() {
 }
 
 /*
- buku
+ kategori
  */
-export async function getBuku(limit: number, bookAds: boolean = false) {
+export async function getKategori() {
   noStore();
   return await axios
-    .get("/buku/all", {
-      params: {
-        limit: limit,
-        bookAds: bookAds,
-      },
-    })
+    .get("/kategori/all")
     .then((response) => {
       if (response.status === 200 || response.status === 201) {
         return response.data.data;
@@ -54,6 +49,58 @@ export async function getBuku(limit: number, bookAds: boolean = false) {
     })
     .catch((error) => {
       console.error(error);
+    });
+}
+
+/*
+ buku
+ */
+export async function getBuku({
+  limit = 10,
+  page,
+  search,
+  order,
+  kategori,
+  hargaMin,
+  hargaMax,
+}: {
+  limit: number;
+  page: number;
+  search?: string;
+  order?: string;
+  kategori?: string;
+  hargaMin?: number;
+  hargaMax?: number;
+}) {
+  noStore();
+  return await axios
+    .get("/buku/all", {
+      params: {
+        limit: limit,
+        page: page,
+        search: search,
+        order: order,
+        kategori: kategori,
+        hargaMin: hargaMin,
+        hargaMax: hargaMax,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        // console.log(limit);
+        // console.log(page);
+        // console.log(search);
+        // console.log(order);
+        // console.log(kategori);
+        // console.log(hargaMin);
+        // console.log(hargaMax);
+        // console.log(response.data.data);
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      return error;
     });
 }
 

@@ -40,7 +40,7 @@ const CardBooks: React.FC<CardBooksProps> = ({
         <figure className="flex justify-center">
           <Image
             className="p-4 w-48 h-48"
-            src={coverBuku}
+            src={process.env.NEXT_PUBLIC_STORAGE_FILE + coverBuku}
             alt="product image"
             width={500}
             height={500}

@@ -24,7 +24,7 @@ export default () => {
       getAds()
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
-            setData(res.data.data);
+            setData(res.data.data.data);
           }
         })
         .catch((err) => {

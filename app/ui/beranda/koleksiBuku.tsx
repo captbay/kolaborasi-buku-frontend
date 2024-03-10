@@ -6,10 +6,13 @@ import { Button } from "@/app/ui/button";
 import Link from "next/link";
 
 import { getBuku } from "@/app/lib/actions";
-import { CardData } from "@/app/lib/definitions";
+import { getBukuAllResponse } from "@/app/lib/definitions";
 
 export default async function koleksiBuku() {
-  const data: CardData[] = await getBuku(4);
+  const buku: getBukuAllResponse = await getBuku({
+    limit: 4,
+    page: 1,
+  });
 
   return (
     <section>
@@ -20,7 +23,7 @@ export default async function koleksiBuku() {
       </div>
       {/* swiper with card element */}
       <div className="grid grid-cols-4 h-full mt-4 px-8 gap-8">
-        {data?.map((item, index) => (
+        {buku.data.map((item, index) => (
           <CardBooks
             key={index}
             slug={item.slug}
@@ -33,9 +36,9 @@ export default async function koleksiBuku() {
           />
         ))}
       </div>
-      <div className="flex justify-center items-center px-8">
+      <div className="flex justify-center items-center mt-8">
         <Link href={"/koleksi-buku"}>
-          <Button className="mt-8">Lihat Detail</Button>
+          <Button>Lihat Detail</Button>
         </Link>
       </div>
     </section>

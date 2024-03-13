@@ -26,7 +26,7 @@ export default async function priceCards({
           {formatCurrency(harga)}
         </span>
         <span className="ms-1 text-xl font-normal text-gray-500 dark:text-gray-400">
-          /bulan
+          / terbitan
         </span>
       </div>
       <p className="my-4 text-sm text-gray-500 dark:text-gray-400">

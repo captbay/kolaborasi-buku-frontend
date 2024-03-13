@@ -7,9 +7,18 @@ import Link from "next/link";
 
 import { getKolaborasi } from "@/app/lib/actions";
 import { CardKolaborasiData } from "@/app/lib/definitions";
+import EmptyData from "../emptyData";
 
 export default async function kolaborasiBuku() {
   const data: CardKolaborasiData[] = await getKolaborasi(4);
+
+  if (data.length < 1) {
+    return (
+      <section className="p-4">
+        <EmptyData title="Belum ada Data" value="Tunggu Data nya ya!" />
+      </section>
+    );
+  }
 
   return (
     <section>

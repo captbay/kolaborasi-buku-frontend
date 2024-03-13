@@ -15,6 +15,7 @@ import CardAdsLandscape from "@/app/ui/cardAdsLandscape";
 
 import { getAds } from "@/app/lib/actions";
 import { BookAds } from "@/app/lib/definitions";
+import EmptyData from "../emptyData";
 
 export default () => {
   const [data, setData] = useState<BookAds[]>([]);
@@ -35,7 +36,13 @@ export default () => {
     fetchProjects();
   }, []);
 
-  if (!data) return null;
+  if (data.length < 1) {
+    return (
+      <section className="p-4">
+        <EmptyData title="Belum ada Data" value="Tunggu Data nya ya!" />
+      </section>
+    );
+  }
 
   return (
     <section>

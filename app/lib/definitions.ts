@@ -1,3 +1,4 @@
+// event
 export type Event = {
   id: string;
   tipe: string;

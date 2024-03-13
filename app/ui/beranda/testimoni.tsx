@@ -5,9 +5,18 @@ import { getTestimoni } from "@/app/lib/actions";
 import { Testimoni } from "@/app/lib/definitions";
 
 import { Rating, RatingStar } from "flowbite-react";
+import EmptyData from "../emptyData";
 
 export default async function testimoni() {
   const data: Testimoni[] = await getTestimoni(4);
+
+  if (data.length < 1) {
+    return (
+      <section className="p-4">
+        <EmptyData title="Belum ada Data" value="Tunggu Data nya ya!" />
+      </section>
+    );
+  }
 
   return (
     <div className="grid mb-8 border border-gray-200 rounded-lg shadow-sm md:mb-12 md:grid-cols-2 bg-white ">

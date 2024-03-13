@@ -21,6 +21,7 @@ import CardBooks from "@/app/ui/cards";
 
 import { getBestSeller } from "@/app/lib/actions";
 import { CardData } from "@/app/lib/definitions";
+import EmptyData from "../emptyData";
 
 export default () => {
   const [data, setData] = useState<CardData[]>([]);
@@ -42,7 +43,13 @@ export default () => {
     fetchProjects();
   }, []);
 
-  if (!data) return null;
+  if (data.length < 1) {
+    return (
+      <section className="p-4">
+        <EmptyData title="Belum ada Data" value="Tunggu Data nya ya!" />
+      </section>
+    );
+  }
 
   return (
     <section>

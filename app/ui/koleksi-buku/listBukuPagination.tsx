@@ -32,7 +32,14 @@ export default async function listBukuPagination({
   });
 
   if (buku.data.length < 1) {
-    return <EmptyData />;
+    return (
+      <EmptyData
+        hrefBack="/koleksi-buku"
+        title="Data tidak ditemukan"
+        value="Silahkan mencari buku lainnya"
+        isButton={true}
+      />
+    );
   }
 
   return (

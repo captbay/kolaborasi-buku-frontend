@@ -7,12 +7,21 @@ import Link from "next/link";
 
 import { getBuku } from "@/app/lib/actions";
 import { getBukuAllResponse } from "@/app/lib/definitions";
+import EmptyData from "../emptyData";
 
 export default async function koleksiBuku() {
   const buku: getBukuAllResponse = await getBuku({
     limit: 4,
     page: 1,
   });
+
+  if (buku.data.length < 1) {
+    return (
+      <section className="p-4">
+        <EmptyData title="Belum ada Data" value="Tunggu Data nya ya!" />
+      </section>
+    );
+  }
 
   return (
     <section>

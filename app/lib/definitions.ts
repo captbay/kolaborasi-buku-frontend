@@ -76,4 +76,10 @@ export type paketData = {
   nama: string;
   harga: number;
   deskripsi: string;
+  jasa_paket_penerbitan: jasaPaketData[];
+};
+
+export type jasaPaketData = {
+  pake_penerbitan_id: string;
+  nama: string;
 };

@@ -8,9 +8,18 @@ import {
 
 import { getFaq } from "@/app/lib/actions";
 import { faqData } from "@/app/lib/definitions";
+import EmptyData from "../emptyData";
 
 export default async function faq() {
   const faq: faqData[] = await getFaq();
+
+  if (faq.length < 1) {
+    return (
+      <section className="p-4">
+        <EmptyData title="Belum ada Data" value="Tunggu Data nya ya!" />
+      </section>
+    );
+  }
 
   return (
     <Accordion className="bg-white">

@@ -38,7 +38,7 @@ export default async function testimoni() {
               className="rounded-full w-9 h-9"
               width={500}
               height={500}
-              src={testimoni.foto_profil}
+              src={process.env.NEXT_PUBLIC_STORAGE_FILE + testimoni.foto_profil}
               alt="profile picture"
             />
             <div className="space-y-0.5 font-medium  text-left rtl:text-right ms-3">

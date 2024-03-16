@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -22,17 +22,19 @@ export default async function faq() {
   }
 
   return (
-    <Accordion className="bg-white">
-      {faq.map((faq, index) => (
-        <AccordionPanel key={index} className="bg-white">
-          <AccordionTitle className="bg-white focus:ring-primaryColor focus:ring-2 text-black">
-            {faq.judul}
-          </AccordionTitle>
-          <AccordionContent>
-            <p className="mb-2 text-sm font-light">{faq.answer}</p>
-          </AccordionContent>
-        </AccordionPanel>
-      ))}
-    </Accordion>
+    <Suspense fallback={<p>Loading feed...</p>}>
+      <Accordion className="bg-white">
+        {faq.map((faq, index) => (
+          <AccordionPanel key={index} className="bg-white">
+            <AccordionTitle className="bg-white focus:ring-primaryColor focus:ring-2 text-black">
+              {faq.judul}
+            </AccordionTitle>
+            <AccordionContent>
+              <p className="mb-2 text-sm font-light">{faq.answer}</p>
+            </AccordionContent>
+          </AccordionPanel>
+        ))}
+      </Accordion>
+    </Suspense>
   );
 }

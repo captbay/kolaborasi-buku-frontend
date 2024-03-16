@@ -59,9 +59,9 @@ const CardBooks: React.FC<CardBooksProps> = ({
               <Rating>
                 <RatingStar />
                 <p className="ml-2 text-sm font-medium text-blackColor dark:text-white">
-                  {rating}
+                  {rating ? rating : "-"}
                 </p>
-                <span className="mx-1.5 h-1 w-1 rounded-full bg-gray-500 dark:bg-gray-400" />
+                <span className="mx-1.5 h-1 w-1 rounded-full bg-gray-500" />
                 <p className="text-sm font-medium text-blackColor underline hover:no-underline dark:text-white">
                   {pembeli} Pembeli
                 </p>

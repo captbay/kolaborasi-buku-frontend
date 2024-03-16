@@ -21,7 +21,7 @@ export default function TopNav() {
             <Logo />
           </Link>
           {/* searchbox */}
-          <Search placeholder="Cari buku berdasarkan judul atau penulis..." />
+          <Search placeholder="Cari koleksi buku berdasarkan judul atau penulis..." />
           <div className="flex items-center">
             {/* logo cart */}
             <Link className="px-1" href="/keranjang">

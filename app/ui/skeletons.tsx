@@ -52,3 +52,8 @@ export function KoleksiBukuSkeleton() {
     </section>
   );
 }
+
+// FilterBoxBuku
+export function FilterBukuSkeleton() {
+  return <div className={`animate-pulse w-72 h-72 rounded-md bg-white`} />;
+}

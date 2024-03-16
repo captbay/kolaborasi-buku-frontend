@@ -1,29 +1,60 @@
 import React from "react";
 
 import CardKolaborasiBooks from "@/app/ui/cards-kolaborasi";
-import FilterBoxKolaborasi from "@/app/ui/filter-box-kolaborasi";
 import Pagination from "@/app/ui/pagination";
+import EmptyData from "../emptyData";
+import { getKolaborasiBukuAllResponse } from "@/app/lib/definitions";
+import { getKolaborasi } from "@/app/lib/actions";
 
-export default async function listBukuKolaborasi() {
+export default async function listBukuKolaborasi({
+  search,
+  currentPage,
+  order,
+  kategori,
+}: {
+  search?: string;
+  currentPage: number;
+  order: string;
+  kategori: string;
+  hargaMin?: number;
+  hargaMax?: number;
+}) {
+  const buku: getKolaborasiBukuAllResponse = await getKolaborasi({
+    limit: 12,
+    page: currentPage,
+    order: order,
+    kategori: kategori,
+  });
+
+  if (buku?.data == null || buku?.data.length < 1) {
+    return (
+      <EmptyData
+        hrefBack="/kolaborasi"
+        title="Data tidak ditemukan"
+        value="Silahkan mencari kolaborasi lainnya"
+        isButton={true}
+      />
+    );
+  }
   return (
-    <div className="flex justify-between">
-      <div className="ml-8">
-        <FilterBoxKolaborasi />
+    <>
+      <section className="grid grid-cols-4 gap-4 mx-8">
+        {buku?.data?.map((item, index) => (
+          <CardKolaborasiBooks
+            key={index}
+            slug={item.slug}
+            judul={item.judul}
+            kategori={item.kategori}
+            coverBuku={item.cover_buku}
+            jumlahBab={item.jumlah_bab}
+          />
+        ))}
+      </section>
+      <div className="mt-5 flex w-full justify-center">
+        {buku?.data != null ? (
+          <Pagination totalPages={buku?.last_page} />
+        ) : null}
       </div>
-      <div className="flex flex-col w-fit">
-        <div className="grid grid-cols-4 gap-4 mx-8 flex-1">
-          {/* <CardKolaborasiBooks
-            coverBuku=""
-            judul=""
-            jumlahBab=""
-            kategori=""
-            slug=""
-          /> */}
-        </div>
-        <div className="mt-5 flex w-full justify-center">
-          <Pagination totalPages={100} />
-        </div>
-      </div>
-    </div>
+    </>
   );
 }

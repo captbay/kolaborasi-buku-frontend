@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 
 import Image from "next/image";
 import { Carousel } from "flowbite-react";
@@ -30,20 +30,22 @@ export default async function Coursell() {
   }
 
   return (
-    <section className="h-56 sm:h-64 xl:h-80 2xl:h-96">
-      <Carousel slideInterval={3000} pauseOnHover theme={customTheme}>
-        {data?.map((event, index) => (
-          <Image
-            key={index}
-            src={process.env.NEXT_PUBLIC_STORAGE_FILE + event.file}
-            alt="Picture of the event"
-            width={500}
-            height={500}
-            priority
-            className="w-full h-full"
-          />
-        ))}
-      </Carousel>
-    </section>
+    <Suspense fallback={<p>Loading feed...</p>}>
+      <section className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+        <Carousel slideInterval={3000} pauseOnHover theme={customTheme}>
+          {data?.map((event, index) => (
+            <Image
+              key={index}
+              src={process.env.NEXT_PUBLIC_STORAGE_FILE + event.file}
+              alt="Picture of the event"
+              width={500}
+              height={500}
+              priority
+              className="w-full h-full"
+            />
+          ))}
+        </Carousel>
+      </section>
+    </Suspense>
   );
 }

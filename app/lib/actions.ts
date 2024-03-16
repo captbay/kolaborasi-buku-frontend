@@ -19,7 +19,7 @@ export async function getEvent() {
 }
 
 /*
- event
+ Paket
  */
 export async function getPaket() {
   noStore();
@@ -87,20 +87,26 @@ export async function getBuku({
     })
     .then((response) => {
       if (response.status === 200 || response.status === 201) {
-        // console.log(limit);
-        // console.log(page);
-        // console.log(search);
-        // console.log(order);
-        // console.log(kategori);
-        // console.log(hargaMin);
-        // console.log(hargaMax);
-        // console.log(response.data.data);
         return response.data.data;
       }
     })
     .catch((error) => {
       console.error(error);
       return error;
+    });
+}
+
+export async function getDetailBuku(slug: string) {
+  noStore();
+  return await axios
+    .get(`/buku/detail/${slug}`)
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
     });
 }
 
@@ -122,12 +128,28 @@ export async function getBestSeller() {
 /*
  kolaborasi buku
  */
-export async function getKolaborasi(limit: number) {
+export async function getKolaborasi({
+  limit = 10,
+  search,
+  page,
+  order,
+  kategori,
+}: {
+  limit: number;
+  search?: string;
+  page: number;
+  order?: string;
+  kategori?: string;
+}) {
   noStore();
   return await axios
     .get("/buku-kolaborasi/all", {
       params: {
         limit: limit,
+        page: page,
+        search: search,
+        order: order,
+        kategori: kategori,
       },
     })
     .then((response) => {

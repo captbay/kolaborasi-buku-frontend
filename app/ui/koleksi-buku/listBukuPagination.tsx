@@ -31,7 +31,7 @@ export default async function listBukuPagination({
     hargaMax: hargaMax,
   });
 
-  if (buku.data.length < 1) {
+  if (buku?.data == null || buku?.data.length < 1) {
     return (
       <EmptyData
         hrefBack="/koleksi-buku"
@@ -59,7 +59,7 @@ export default async function listBukuPagination({
         ))}
       </section>
       <div className="mt-5 flex w-full justify-center">
-        {buku?.data.length > 0 ? (
+        {buku?.data != null ? (
           <Pagination totalPages={buku?.last_page} />
         ) : null}
       </div>

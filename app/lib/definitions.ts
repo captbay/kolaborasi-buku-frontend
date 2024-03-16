@@ -29,7 +29,43 @@ export type CardData = {
   rating: number;
 };
 
+// Get Detail Buku Dijual
+export type getDetailBukuResponse = {
+  isbn: string;
+  slug: string;
+  judul: string;
+  harga: number;
+  kategori: string;
+  deskripsi: string;
+  tanggal_terbit: string;
+  jumlah_halaman: number;
+  bahasa: string;
+  penerbit: string;
+  list_penulis: string;
+  testimoni_pembeli: TestimoniDetail[];
+  gallery_foto: GalleryFoto[];
+};
+
+export type TestimoniDetail = {
+  nama: string;
+  foto_profil: string;
+  rating: number;
+  ulasan: string;
+  created_at: string;
+};
+
+export type GalleryFoto = {
+  foto: string;
+};
+
 // Buku Kolaborasi
+export type getKolaborasiBukuAllResponse = {
+  current_page: number;
+  data: CardKolaborasiData[];
+  last_page: number;
+  total: number;
+};
+
 export type CardKolaborasiData = {
   id: string;
   slug: string;

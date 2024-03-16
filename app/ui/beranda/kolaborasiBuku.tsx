@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { lusitana } from "@/app/ui/fonts";
 import CardKolaborasi from "@/app/ui/cards-kolaborasi";
 import { Button } from "@/app/ui/button";
@@ -6,13 +6,16 @@ import { Button } from "@/app/ui/button";
 import Link from "next/link";
 
 import { getKolaborasi } from "@/app/lib/actions";
-import { CardKolaborasiData } from "@/app/lib/definitions";
+import { getKolaborasiBukuAllResponse } from "@/app/lib/definitions";
 import EmptyData from "../emptyData";
 
 export default async function kolaborasiBuku() {
-  const data: CardKolaborasiData[] = await getKolaborasi(4);
+  const data: getKolaborasiBukuAllResponse = await getKolaborasi({
+    limit: 4,
+    page: 1,
+  });
 
-  if (data.length < 1) {
+  if (data.data.length < 1) {
     return (
       <section className="p-4">
         <EmptyData title="Belum ada Data" value="Tunggu Data nya ya!" />
@@ -27,18 +30,20 @@ export default async function kolaborasiBuku() {
           Ayo Kolaborasi!
         </h2>
       </div>
-      <div className="grid grid-cols-4 h-full mt-4 px-8 gap-8">
-        {data?.map((item, index) => (
-          <CardKolaborasi
-            key={index}
-            slug={item.slug}
-            judul={item.judul}
-            kategori={item.kategori}
-            coverBuku={item.cover_buku}
-            jumlahBab={item.jumlah_bab.toString()}
-          />
-        ))}
-      </div>
+      <Suspense fallback={<p>Loading feed...</p>}>
+        <div className="grid grid-cols-4 h-full mt-4 px-8 gap-8">
+          {data.data.map((item, index) => (
+            <CardKolaborasi
+              key={index}
+              slug={item.slug}
+              judul={item.judul}
+              kategori={item.kategori}
+              coverBuku={item.cover_buku}
+              jumlahBab={item.jumlah_bab}
+            />
+          ))}
+        </div>
+      </Suspense>
       <div className="flex justify-center items-center mt-8">
         <Link href={"/kolaborasi"}>
           <Button>Lihat Detail</Button>

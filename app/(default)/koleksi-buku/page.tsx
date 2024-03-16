@@ -3,7 +3,7 @@ import { Suspense } from "react";
 
 import ListBukuPagination from "@/app/ui/koleksi-buku/listBukuPagination";
 import FilterBox from "@/app/ui/filter-box";
-import { KoleksiBukuSkeleton } from "@/app/ui/skeletons";
+import { KoleksiBukuSkeleton, FilterBukuSkeleton } from "@/app/ui/skeletons";
 
 import { kategoriData } from "@/app/lib/definitions";
 import { getKategori } from "@/app/lib/actions";
@@ -38,7 +38,9 @@ export default async function Page({
       <section className="px-20 py-16">
         <div className="flex justify-between">
           <div className="ml-8">
-            <FilterBox dataKategori={dataKategori} />
+            <Suspense fallback={<FilterBukuSkeleton />}>
+              <FilterBox dataKategori={dataKategori} />
+            </Suspense>
           </div>
           <div className="flex flex-col w-fit flex-1">
             <Suspense

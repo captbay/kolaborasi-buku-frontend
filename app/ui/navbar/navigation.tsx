@@ -9,6 +9,7 @@ import { Button } from "@/app/ui/button";
 import ProfileCircle from "@/app/ui/navbar/profile-cirlce";
 import Notification from "@/app/ui/navbar/notification";
 import Search from "../search";
+import { Suspense } from "react";
 
 // import { signOut } from '@/auth';
 
@@ -21,7 +22,9 @@ export default function TopNav() {
             <Logo />
           </Link>
           {/* searchbox */}
-          <Search placeholder="Cari koleksi buku berdasarkan judul atau penulis..." />
+          <Suspense fallback={<p>Loading feed...</p>}>
+            <Search placeholder="Cari koleksi buku berdasarkan judul atau penulis..." />
+          </Suspense>
           <div className="flex items-center">
             {/* logo cart */}
             <Link className="px-1" href="/keranjang">

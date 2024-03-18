@@ -9,23 +9,23 @@ import { Button } from "./button";
 
 export default function Footer() {
   return (
-    <footer className="flex h-full flex-col py-16 px-28 bottom-0">
-      <div className="flex justify-between mb-12">
-        <div className="w-1/3">
+    <footer className="flex h-full flex-col py-16 px-14 md:px-28 bottom-0">
+      <div className="flex flex-col md:flex-row justify-between mb-12">
+        <div className="w-full md:w-1/3">
           <Link href="/">
             <Logo />
           </Link>
           {/* description perusahan */}
-          <p className="mt-4 text-wrap text-xs">
+          <p className="mt-2 md:mt-4 text-wrap text-xs">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             tincidunt, nunc vitae. Lorem ipsum dolor sit amet, consectetur
             adipiscing elit. Nunc tincidunt, nunc vitae.
           </p>
         </div>
-        <div>
+        <div className="mt-8 md:mt-0">
           <h1 className="text-sm font-medium">Fitur-Fitur</h1>
           <nav>
-            <ul className="mt-4">
+            <ul className="mt-2 md:mt-4">
               <li>
                 <Link href="/">
                   <p className="text-wrap text-xs">Kolaborasi</p>
@@ -39,10 +39,10 @@ export default function Footer() {
             </ul>
           </nav>
         </div>
-        <div>
+        <div className="mt-8 md:mt-0">
           <h1 className="text-sm font-medium">Fitur-Fitur</h1>
           <nav>
-            <ul className="mt-4">
+            <ul className="mt-2 md:mt-4">
               <li>
                 <Link href="/">
                   <p className="text-wrap text-xs">Kolaborasi</p>
@@ -56,9 +56,9 @@ export default function Footer() {
             </ul>
           </nav>
         </div>
-        <div className="w-1/3">
+        <div className="w-full md:w-1/3 mt-8 md:mt-0">
           <h1 className="text-sm font-medium">Memiliki Pertanyaan ?</h1>
-          <p className="mt-4 text-wrap text-xs">
+          <p className="mt-2 md:mt-4 text-wrap text-xs">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             tincidunt, nunc vitae.
           </p>
@@ -68,9 +68,8 @@ export default function Footer() {
         </div>
       </div>
       <div className="h-0.5 w-full bg-primaryCard px-20"></div>
-      <div className="flex justify-between mt-6">
-        <p>© 2024 Penerbitan Buku</p>
-        <figure className="flex">
+      <div className="flex flex-col gap-8 md:flex-row md:gap-0 md:justify-between mt-6">
+        <figure className="flex gap-8 items-center justify-center">
           <Link href="/">
             <Image
               src="/instagram.svg"
@@ -85,7 +84,6 @@ export default function Footer() {
               alt="instagram"
               width={24}
               height={24}
-              className="ml-6"
             />
           </Link>
           <Link href="/">
@@ -94,7 +92,6 @@ export default function Footer() {
               alt="instagram"
               width={24}
               height={24}
-              className="ml-6"
             />
           </Link>
           <Link href="/">
@@ -103,10 +100,12 @@ export default function Footer() {
               alt="instagram"
               width={24}
               height={24}
-              className="ml-6"
             />
           </Link>
         </figure>
+        <p className="text-xs text-center md:text-base">
+          © 2024 Penerbitan Buku
+        </p>
       </div>
     </footer>
   );

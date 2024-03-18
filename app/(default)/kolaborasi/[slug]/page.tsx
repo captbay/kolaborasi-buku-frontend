@@ -37,7 +37,7 @@ export default async function Page({ params }: Props) {
   return (
     <main id="content">
       <Suspense fallback={<p>Loading feed...</p>}>
-        <section className="px-28 py-4">
+        <section className="px-14 md:px-28 py-4">
           <Breadcrumbs
             breadcrumbs={[
               { label: "Kolaborasi", href: "/kolaborasi" },
@@ -53,7 +53,7 @@ export default async function Page({ params }: Props) {
             ]}
           />
         </section>
-        <section className="px-28 py-12">
+        <section className="px-14 md:px-28 py-12">
           <div className="flex justify-between gap-16">
             <div className="flex flex-col gap-16">
               <div className="flex justify-between gap-8">

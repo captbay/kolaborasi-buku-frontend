@@ -36,13 +36,13 @@ export default async function Page({
   return (
     <main id="content">
       <section className="px-20 py-16">
-        <div className="flex justify-between">
-          <div className="ml-8">
+        <div className="flex flex-col md:flex-row gap-8 justify-between">
+          <div className="md:ml-8">
             <Suspense fallback={<FilterBukuSkeleton />}>
               <FilterBox dataKategori={dataKategori} />
             </Suspense>
           </div>
-          <div className="flex flex-col w-fit flex-1">
+          <div className="w-fit flex-1">
             <Suspense
               key={
                 search + currentPage + order + kategori + hargaMin + hargaMax

@@ -19,7 +19,7 @@ export default async function Page() {
           deskripsi="Kami siap membantu Anda dalam menerbitkan buku Anda. Pilih paket yang sesuai dengan kebutuhan Anda, kami selalu siap berikan yang sebaik mungkin."
         />
       </section>
-      <section className="px-28 py-16">
+      <section className="px-14 md:px-28 py-16">
         <div className="flex flex-col justify-center items-center px-8">
           <h2 className={`${lusitana.className} text-lg font-semibold`}>
             Paket-Paket Terbaik Kami
@@ -33,7 +33,7 @@ export default async function Page() {
           <Pricing />
         </div>
       </section>
-      <section className="px-28 py-16">
+      <section className="px-14 md:px-28 py-16">
         <div className="flex flex-col justify-center items-center px-8">
           <h2 className={`${lusitana.className} text-lg font-semibold`}>
             Testimoni Pelanggan

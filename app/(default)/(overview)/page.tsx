@@ -25,7 +25,7 @@ export default async function Page() {
           <ProdukTerlaris />
         </Suspense>
       </section>
-      <section className="px-28 py-8">
+      <section className="px-14 md:px-28 py-8">
         <Suspense fallback={<p>Loading feed...</p>}>
           <BannerBookVertical />
         </Suspense>
@@ -36,7 +36,7 @@ export default async function Page() {
       <section className="px-20 py-16">
         <KolaborasiBuku />
       </section>
-      <section className="px-28 py-16">
+      <section className="px-14 md:px-28 py-16">
         <TestimoniBeranda />
       </section>
     </main>

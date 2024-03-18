@@ -38,7 +38,7 @@ export default async function listBukuKolaborasi({
   }
   return (
     <>
-      <section className="grid grid-cols-4 gap-4 mx-8">
+      <section className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {buku?.data?.map((item, index) => (
           <CardKolaborasiBooks
             key={index}

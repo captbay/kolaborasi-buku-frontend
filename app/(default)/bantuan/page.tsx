@@ -16,7 +16,7 @@ export default async function Page() {
           deskripsi="Kami siap membantu Anda dalam menyelesaikan masalah yang Anda hadapi. Silahkan pilih FAQ yang sesuai dengan masalah Anda."
         />
       </section>
-      <section className="px-28 py-16">
+      <section className="px-14 md:px-28 py-16">
         <div className="flex flex-col justify-center items-center px-8">
           <h2 className={`${lusitana.className} text-lg font-semibold`}>FAQ</h2>
           <p className="text-center text-sm font-light">

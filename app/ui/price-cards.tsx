@@ -56,7 +56,7 @@ export default async function priceCards({
         </ul>
       </div>
       <Button className="">
-        <Link href="#">Pilih Paket</Link>
+        <Link href={id}>Pilih Paket</Link>
       </Button>
     </div>
   );

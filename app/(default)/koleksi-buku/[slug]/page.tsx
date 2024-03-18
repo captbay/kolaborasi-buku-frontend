@@ -49,7 +49,7 @@ export default async function Page({ params }: Props) {
                 href: `/koleksi-buku?kategori=${detailBuku.kategori}`,
               },
               {
-                label: "Nama Buku",
+                label: `${detailBuku.judul}`,
                 href: `/koleksi-buku/${slug}`,
                 active: true,
               },
@@ -65,7 +65,7 @@ export default async function Page({ params }: Props) {
                 </div>
                 <div className="w-full flex flex-col">
                   {/* head */}
-                  <div className="">
+                  <div>
                     <p className="text-gray-500 mt-2">{detailBuku.kategori}</p>
                     <h1 className={`${lusitana.className} text-4xl font-bold`}>
                       {detailBuku.judul}

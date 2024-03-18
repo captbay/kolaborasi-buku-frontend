@@ -75,6 +75,38 @@ export type CardKolaborasiData = {
   jumlah_bab: number;
 };
 
+// Get Detail Buku Kolaborasi
+export type getDetailBukuKolaborasiResponse = {
+  slug: string;
+  judul: string;
+  deskripsi: string;
+  kategori: string;
+  cover_buku: string;
+  jumlah_bab: number;
+  status_kolaborasi: string;
+  bab: BabKolaborasi[];
+  timeline_kolaborasi: TimelineKolaborasi[];
+};
+
+// BabKolaborasi
+export type BabKolaborasi = {
+  id: string;
+  no_bab: number;
+  judul: string;
+  harga: number;
+  durasi_pembuatan: number;
+  deskripsi: string;
+  is_terjual: boolean;
+};
+
+// TimelineKolaborasi
+export type TimelineKolaborasi = {
+  id: number;
+  judul: string;
+  count: string;
+  status: string;
+};
+
 export type Testimoni = {
   ulasan: string;
   rating: number;

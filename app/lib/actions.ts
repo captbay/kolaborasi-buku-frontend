@@ -162,6 +162,20 @@ export async function getKolaborasi({
     });
 }
 
+export async function getDetailBukuKolaborasi(slug: string) {
+  noStore();
+  return await axios
+    .get(`/buku-kolaborasi/detail/${slug}`)
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 /*
  Testimoni
  */

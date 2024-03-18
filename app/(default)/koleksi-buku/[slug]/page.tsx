@@ -40,7 +40,7 @@ export default async function Page({ params }: Props) {
   return (
     <main id="content">
       <Suspense fallback={<p>Loading feed...</p>}>
-        <section className="px-14 md:px-28 py-4">
+        <section className="hidden md:block px-14 md:px-28 py-4">
           <Breadcrumbs
             breadcrumbs={[
               { label: "Koleksi Buku", href: "/koleksi-buku" },
@@ -57,10 +57,10 @@ export default async function Page({ params }: Props) {
           />
         </section>
         <section className="px-14 md:px-28 py-12">
-          <div className="flex justify-between">
-            <div className="flex flex-col w-3/4">
-              <div className="flex justify-between gap-8">
-                <div className="w-1/2 flex flex-col sticky top-[182px] h-fit">
+          <div className="flex flex-col md:flex-row justify-between">
+            <div className="flex flex-col md:w-3/4">
+              <div className="flex flex-col md:flex-row justify-between gap-8">
+                <div className="md:w-1/2 flex flex-col md:sticky md:top-[182px] h-fit">
                   <ThumbSlider galleryFoto={detailBuku.gallery_foto} />
                 </div>
                 <div className="w-full flex flex-col">
@@ -82,7 +82,7 @@ export default async function Page({ params }: Props) {
                     </p>
                   </div>
                   {/* detail data */}
-                  <div className="flex gap-16 mt-8">
+                  <div className="flex flex-col md:flex-row gap-16 mt-8">
                     <div className="flex flex-col gap-8">
                       {/* isbn */}
                       <div className="flex flex-col gap-2">
@@ -137,7 +137,7 @@ export default async function Page({ params }: Props) {
                 <TestimoniPembeliBuku data={detailBuku.testimoni_pembeli} />
               </div>
             </div>
-            <div className="ml-8 w-1/4 h-fit sticky top-[182px]">
+            <div className="md:ml-8 md:w-1/4 h-fit md:sticky md:top-[182px]">
               <div className="bg-white border border-gray-200 rounded-lg min-w-full">
                 <div className="flex flex-col m-6">
                   <h2 className="text-2xl font-semibold tracking-tight text-blackColor">
@@ -155,7 +155,7 @@ export default async function Page({ params }: Props) {
             </div>
           </div>
         </section>
-        <section className="px-20 py-12">
+        <section className="px-14 md:px-20 py-12">
           <ProdukTerlaris />
         </section>
       </Suspense>

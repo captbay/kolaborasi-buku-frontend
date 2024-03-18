@@ -37,7 +37,7 @@ export default async function Page({ params }: Props) {
   return (
     <main id="content">
       <Suspense fallback={<p>Loading feed...</p>}>
-        <section className="px-14 md:px-28 py-4">
+        <section className="hidden md:block px-14 md:px-28 py-4">
           <Breadcrumbs
             breadcrumbs={[
               { label: "Kolaborasi", href: "/kolaborasi" },
@@ -54,10 +54,10 @@ export default async function Page({ params }: Props) {
           />
         </section>
         <section className="px-14 md:px-28 py-12">
-          <div className="flex justify-between gap-16">
+          <div className="flex flex-col md:flex-row justify-between gap-16">
             <div className="flex flex-col gap-16">
-              <div className="flex justify-between gap-8">
-                <div className="w-1/2 flex flex-col sticky top-[182px] h-fit">
+              <div className="flex flex-col md:flex-row justify-between gap-8">
+                <div className="md:w-1/2 flex flex-col md:sticky md:top-[182px] h-fit">
                   <Image
                     className="h-auto w-full max-w-full rounded-lg object-cover object-center md:h-[480px]"
                     src={
@@ -71,7 +71,7 @@ export default async function Page({ params }: Props) {
                 </div>
                 <div className="w-full flex flex-col">
                   {/* tag */}
-                  <div className="flex">
+                  <div className="flex flex-col md:flex-row">
                     {detailBuku.status_kolaborasi == "closed" ? (
                       <div className="bg-green-100 rounded-full px-4 py-2">
                         <p className="text-green-500">Kolaborator Terpenuhi</p>
@@ -97,7 +97,7 @@ export default async function Page({ params }: Props) {
                     </p>
                   </div>
                   {/* detail data */}
-                  <div className="flex gap-16 mt-8">
+                  <div className="flex flex-col md:flex-row gap-16 mt-8">
                     <div className="flex flex-col gap-2">
                       {/* jumlah halaman */}
                       <h2 className="text-lg font-semibold">Jumlah Bab</h2>
@@ -107,7 +107,7 @@ export default async function Page({ params }: Props) {
                 </div>
               </div>
               <div className="flex flex-col gap-4">
-                <div className="flex justify-center items-center">
+                <div className="flex flex-col md:flex-row justify-center items-center">
                   <h2 className={`${lusitana.className} text-lg font-semibold`}>
                     List Bab
                   </h2>
@@ -133,7 +133,7 @@ export default async function Page({ params }: Props) {
               <h2 className={`${lusitana.className} text-lg font-semibold`}>
                 Timeline
               </h2>
-              <div className="w-full mt-8 flex justify-center">
+              <div className="w-full mt-8 flex flex-col md:flex-row justify-center">
                 <TimelinePenulisan data={detailBuku.timeline_kolaborasi} />
               </div>
             </div>

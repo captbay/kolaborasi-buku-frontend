@@ -67,7 +67,7 @@ export default function Footer() {
           </Link>
         </div>
       </div>
-      <div className="h-0.5 w-full bg-primaryCard px-20"></div>
+      <div className="h-0.5 w-full bg-primaryCard px-14 md:px-20"></div>
       <div className="flex flex-col gap-8 md:flex-row md:gap-0 md:justify-between mt-6">
         <figure className="flex gap-8 items-center justify-center">
           <Link href="/">

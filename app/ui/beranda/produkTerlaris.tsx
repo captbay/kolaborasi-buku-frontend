@@ -53,7 +53,7 @@ export default () => {
 
   return (
     <section>
-      <div className="flex justify-between items-center md:px-8 mb-4">
+      <div className="flex justify-between items-center lg:px-8 mb-4">
         <h2 className={`${lusitana.className} text-lg font-semibold`}>
           Produk Terlaris
         </h2>
@@ -66,7 +66,7 @@ export default () => {
           </button>
         </div>
       </div>
-      <div className="md:px-8">
+      <div className="lg:px-8">
         <Swiper
           slidesPerView={4}
           className="mySwiper"

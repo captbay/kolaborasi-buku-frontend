@@ -20,11 +20,11 @@ export default async function testimoni() {
 
   return (
     <Suspense fallback={<p>Loading feed...</p>}>
-      <div className="grid mb-8 border border-gray-200 rounded-lg shadow-sm md:mb-12 md:grid-cols-2 bg-white ">
+      <div className="grid mb-8 border border-gray-200 rounded-lg shadow-sm lg:mb-12 lg:grid-cols-2 bg-white ">
         {data.map((testimoni, index) => (
           <figure
             key={index}
-            className="flex flex-col items-center justify-center p-4 text-center bg-white border-b border-gray-200 rounded-t-lg md:rounded-t-none md:rounded-ss-lg md:border-e  "
+            className="flex flex-col items-center justify-center p-4 text-center bg-white border-b border-gray-200 rounded-t-lg lg:rounded-t-none lg:rounded-ss-lg lg:border-e  "
           >
             <blockquote className="max-w-2xl mx-auto mb-4 text-gray-500 lg:mb-8 flex flex-col items-center">
               <Rating>

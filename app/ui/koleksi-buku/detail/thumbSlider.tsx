@@ -16,7 +16,7 @@ export default function thumbSlider({
     <div className="grid gap-4">
       <div>
         <Image
-          className="h-auto w-full max-w-full rounded-lg object-cover object-center md:h-[480px]"
+          className="h-auto w-full max-w-full rounded-lg object-cover object-center lg:h-[480px]"
           src={process.env.NEXT_PUBLIC_STORAGE_FILE + active}
           alt="hero_image"
           width={500}

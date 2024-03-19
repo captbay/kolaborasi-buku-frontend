@@ -20,7 +20,7 @@ export default async function Page() {
       <section>
         <Coursell />
       </section>
-      <section className="px-14 md:px-20 py-16">
+      <section className="px-14 lg:px-20 py-16">
         <Suspense fallback={<p>Loading feed...</p>}>
           <ProdukTerlaris />
         </Suspense>
@@ -30,13 +30,13 @@ export default async function Page() {
           <BannerBookVertical />
         </Suspense>
       </section>
-      <section className="px-14 md:px-20 py-16">
+      <section className="px-14 lg:px-20 py-16">
         <KoleksiBuku />
       </section>
-      <section className="px-14 md:px-20 py-16">
+      <section className="px-14 lg:px-20 py-16">
         <KolaborasiBuku />
       </section>
-      <section className="px-14 md:px-20 py-16">
+      <section className="px-14 lg:px-20 py-16">
         <TestimoniBeranda />
       </section>
     </main>

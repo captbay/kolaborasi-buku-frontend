@@ -26,7 +26,7 @@ export default function AuthLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        <main className="min-w-screen min-h-screen relative lg:static lg:flex lg:flex-row lg:justify-around">
+        <main className="min-w-screen min-h-screen lg:static lg:flex overflow-y-auto">
           <section>
             <figure className="w-full h-screen items-center justify-center lg:static absolute z-10">
               <Image
@@ -38,7 +38,7 @@ export default function AuthLayout({
               ></Image>
             </figure>
           </section>
-          <section>
+          <section className="lg:mx-28">
             <div className="w-full h-screen flex items-center justify-center align-middle absolute lg:static z-20 my-auto">
               <div>{children}</div>
             </div>

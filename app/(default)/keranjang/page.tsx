@@ -11,10 +11,10 @@ export const metadata: Metadata = {
 export default async function keranjang() {
   return (
     <main id="content">
-      <section className="px-14 md:px-20 py-16">
+      <section className="px-14 lg:px-20 py-16">
         <BucketList />
       </section>
-      <section className="px-14 md:px-20 py-16">
+      <section className="px-14 lg:px-20 py-16">
         <ProdukTerlaris />
       </section>
     </main>

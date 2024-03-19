@@ -31,7 +31,7 @@ export default async function koleksiBuku() {
         </h2>
       </div>
       <Suspense fallback={<p>Loading feed...</p>}>
-        <div className="grid grid-cols-1 md:grid-cols-4 h-full mt-4 md:px-8 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 h-full mt-4 lg:px-8 gap-8">
           {buku.data.map((item, index) => (
             <CardBooks
               key={index}

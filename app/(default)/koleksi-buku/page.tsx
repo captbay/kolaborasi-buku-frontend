@@ -35,9 +35,9 @@ export default async function Page({
 
   return (
     <main id="content">
-      <section className="px-14 md:px-20 py-16">
-        <div className="flex flex-col md:flex-row gap-8 justify-between">
-          <div className="md:ml-8">
+      <section className="px-14 lg:px-20 py-16">
+        <div className="flex flex-col lg:flex-row gap-8 justify-between">
+          <div className="lg:ml-8">
             <Suspense fallback={<FilterBukuSkeleton />}>
               <FilterBox dataKategori={dataKategori} />
             </Suspense>

@@ -44,7 +44,7 @@ export default async function listBukuPagination({
 
   return (
     <>
-      <section className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <section className="grid grid-cols-1 lg:grid-cols-4 gap-4">
         {buku?.data?.map((item, index) => (
           <CardBooks
             key={index}

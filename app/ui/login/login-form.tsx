@@ -17,7 +17,7 @@ export default function LoginForm() {
   // const [errorMessage, dispatch] = useFormState(authenticate, undefined);
 
   return (
-    <div className="rounded-lg bg-primaryCard px-6 pb-4 pt-8 w-[400px]">
+    <section className="rounded-lg bg-primaryCard px-6 pb-4 pt-8 mx-4 lg:mx-0 lg:w-[400px]">
       <div className="mb-4 flex justify-center">
         <Link href="/">
           <Logo />
@@ -56,7 +56,7 @@ export default function LoginForm() {
                 className="mb-3 mt-5 block text-xs font-medium text-blackColor"
                 htmlFor="password"
               >
-                Password
+                Kata Sandi
               </label>
               <div className="relative">
                 <input
@@ -64,12 +64,36 @@ export default function LoginForm() {
                   id="password"
                   type="password"
                   name="password"
-                  placeholder="Masukan Password"
+                  placeholder="Masukan Kata Sandi"
                   // required
                   minLength={6}
                 />
                 <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor" />
               </div>
+            </div>
+            <div className="flex items-center justify-between mt-4">
+              <div className="flex items-start">
+                <div className="flex items-center h-5">
+                  <input
+                    id="remember"
+                    aria-describedby="remember"
+                    type="checkbox"
+                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primaryColor"
+                    required
+                  />
+                </div>
+                <div className="ml-3 text-sm">
+                  <label htmlFor="remember" className="text-sm font-light">
+                    Ingatkan Saya
+                  </label>
+                </div>
+              </div>
+              <Link
+                href="/lupa-password"
+                className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+              >
+                Lupa Kata Sandi?
+              </Link>
             </div>
           </div>
           <LoginButton />
@@ -86,13 +110,19 @@ export default function LoginForm() {
             )} */}
           </div>
         </div>
+        <div className="">
+          <p className="text-sm font-light">
+            Belum punya akun?{" "}
+            <Link
+              href="/register"
+              className="font-medium text-primary-600 hover:underline"
+            >
+              Daftar Sekarang
+            </Link>
+          </p>
+        </div>
       </form>
-      {/* regis when dont have account */}
-      <div className="">
-        <p className="text-sm text-disableColor">Tidak Punya Akun?</p>
-        <RegisButton />
-      </div>
-    </div>
+    </section>
   );
 }
 

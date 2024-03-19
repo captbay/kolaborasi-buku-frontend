@@ -38,9 +38,9 @@ export default async function Page({
           deskripsi="Kolaborasi dengan kami untuk membuat buku yang bermanfaat bagi banyak orang. Dengan kolaborasi, Anda dapat memperoleh banyak keuntungan dari kolaborasi buku yang Anda buat."
         />
       </section>
-      <section className="px-14 md:px-20 py-16">
-        <div className="flex flex-col md:flex-row gap-8 justify-between">
-          <div className="md:ml-8">
+      <section className="px-14 lg:px-20 py-16">
+        <div className="flex flex-col lg:flex-row gap-8 justify-between">
+          <div className="lg:ml-8">
             <Suspense fallback={<FilterBukuSkeleton />}>
               <FilterBoxKolaborasi dataKategori={dataKategori} />
             </Suspense>

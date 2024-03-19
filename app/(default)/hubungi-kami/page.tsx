@@ -17,7 +17,7 @@ export default async function Page() {
           deskripsi="Kami siap membantu Anda dalam menyelesaikan masalah yang Anda hadapi. Silahkan isi form di bawah ini untuk menghubungi kami"
         />
       </section>
-      <section className="flex flex-col md:flex-row md:justify-between px-14 md:px-28 py-16">
+      <section className="flex flex-col lg:flex-row lg:justify-between px-14 lg:px-28 py-16">
         <div className="py-8 lg:py-16 px-4 w-full max-w-screen-md">
           <form action="#" className="space-y-8">
             <div>

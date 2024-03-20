@@ -26,3 +26,17 @@ export const register = (
 export const sendEmailForgotPassword = (email: string) => {
   return axios.post("/auth/forgotPassword", { email });
 };
+
+export const resetPassword = (
+  token: string,
+  email: string,
+  password: string,
+  confirm_password: string
+) => {
+  return axios.post("/auth/resetPassword", {
+    token,
+    email,
+    password,
+    confirm_password,
+  });
+};

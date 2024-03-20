@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { lusitana } from "@/app/ui/fonts";
 import {
   AtSymbolIcon,
@@ -18,13 +18,35 @@ import { FormEvent } from "react";
 import { toast } from "react-toastify";
 
 export default function LoginForm() {
+  // ref
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const rememberRef = useRef<HTMLInputElement>(null);
+
+  // route
   const router = useRouter();
+
+  // state
+  const [emailRememberState, setEmailRememberState] = useState<string>("");
+  const [passwordRememberState, setPasswordRememberState] =
+    useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [errorMessageMail, setErrorMessageMail] = useState<string>("");
   const [errorMessagePassword, setErrorMessagePassword] = useState<string>("");
 
+  // get remember me from local storage
+  useEffect(() => {
+    const remember = localStorage.getItem("remember");
+    if (remember === "true") {
+      setEmailRememberState(localStorage.getItem("email") as string);
+
+      // decrpt password
+      const password = atob(localStorage.getItem("password") as string);
+      setPasswordRememberState(password);
+    }
+  }, []);
+
+  // handle login
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     // reset error message
     setErrorMessage("");
@@ -47,6 +69,16 @@ export default function LoginForm() {
           closeButton: true,
           isLoading: false,
         });
+
+        // if remember me checked
+        if (rememberRef.current?.checked) {
+          localStorage.setItem("remember", "true");
+          localStorage.setItem("email", email);
+
+          // encrypt password
+          const encryptPassword = btoa(password);
+          localStorage.setItem("password", encryptPassword);
+        }
 
         setCookie(
           "token",
@@ -119,6 +151,7 @@ export default function LoginForm() {
                   name="email"
                   placeholder="Masukan Email Anda"
                   ref={emailRef}
+                  defaultValue={emailRememberState || ""}
                   required
                 />
                 <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor" />
@@ -150,6 +183,7 @@ export default function LoginForm() {
                   placeholder="Masukan Kata Sandi"
                   minLength={6}
                   ref={passwordRef}
+                  defaultValue={passwordRememberState || ""}
                   required
                 />
                 <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor" />
@@ -174,6 +208,8 @@ export default function LoginForm() {
                     id="remember"
                     aria-describedby="remember"
                     type="checkbox"
+                    ref={rememberRef}
+                    defaultChecked={true}
                     className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primaryColor"
                   />
                 </div>

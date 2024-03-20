@@ -8,14 +8,10 @@ import {
 } from "@heroicons/react/24/outline";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "@/app/ui/button";
-import { useFormState, useFormStatus } from "react-dom";
-import { authenticate } from "@/app/lib/data";
 import Link from "next/link";
 import Logo from "@/app/ui/penerbitan-buku-logo";
 
 export default function LupaPassword() {
-  // const [errorMessage, dispatch] = useFormState(authenticate, undefined);
-
   return (
     <section className="rounded-lg bg-primaryCard px-6 pb-4 pt-8 mx-4 lg:mx-0 lg:w-[400px]">
       <div className="mb-4 flex justify-center">
@@ -72,10 +68,8 @@ export default function LupaPassword() {
 }
 
 function SendButton() {
-  const { pending } = useFormStatus();
-
   return (
-    <Button className="mt-4 w-full" aria-disabled={pending}>
+    <Button className="mt-4 w-full" type="submit">
       Kirim <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
     </Button>
   );

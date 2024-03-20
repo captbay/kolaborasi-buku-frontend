@@ -1,20 +1,113 @@
 "use client";
 
+import React, { useRef, useState } from "react";
+import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
+import { FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import { lusitana } from "@/app/ui/fonts";
-import {
-  AtSymbolIcon,
-  KeyIcon,
-  ExclamationCircleIcon,
-} from "@heroicons/react/24/outline";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "../button";
-import { useFormState, useFormStatus } from "react-dom";
-import { authenticate } from "@/app/lib/data";
 import Logo from "../penerbitan-buku-logo";
 import Link from "next/link";
+import { register } from "@/app/lib/actions";
+import { toast } from "react-toastify";
 
 export default function RegisterForm() {
-  // const [errorMessage, dispatch] = useFormState(authenticate, undefined);
+  const router = useRouter();
+
+  // ref form
+  const firstNameRef = useRef<HTMLInputElement>(null);
+  const lastNameRef = useRef<HTMLInputElement>(null);
+  const noTelpRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  // error state
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [errorMessageFirstName, setErrorMessageFirstName] =
+    useState<string>("");
+  const [errorMessageLastName, setErrorMessageLastName] = useState<string>("");
+  const [errorMessageNoTelp, setErrorMessageNoTelp] = useState<string>("");
+  const [errorMessageMail, setErrorMessageMail] = useState<string>("");
+  const [errorMessagePassword, setErrorMessagePassword] = useState<string>("");
+
+  // handle register
+  const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
+    // reset error message
+    setErrorMessageFirstName("");
+    setErrorMessageLastName("");
+    setErrorMessageNoTelp("");
+    setErrorMessageMail("");
+    setErrorMessagePassword("");
+
+    // toast loading register
+    const loading = toast.loading("Silahkan tunggu sebentar...");
+
+    e.preventDefault();
+    const nama_depan: string = firstNameRef.current?.value as string;
+    const nama_belakang: string = lastNameRef.current?.value as string;
+    const no_telepon: string = noTelpRef.current?.value as string;
+    const email: string = emailRef.current?.value as string;
+    const password = passwordRef.current?.value as string;
+    try {
+      const res = await register(
+        nama_depan,
+        nama_belakang,
+        no_telepon,
+        email,
+        password
+      );
+      if (res.status === 200 || res.status === 201) {
+        toast.update(loading, {
+          render:
+            "Pendaftaran Akun Berhasil! Silahkan cek email Anda untuk verifikasi akun Anda.",
+          type: "success",
+          autoClose: 10000,
+          closeButton: true,
+          isLoading: false,
+        });
+        router.push("/login");
+      }
+    } catch (error: any) {
+      toast.update(loading, {
+        render: "Terjadi Kesalahan!",
+        type: "error",
+        autoClose: 5000,
+        closeButton: true,
+        isLoading: false,
+      });
+
+      if (error?.response?.data?.message.nama_depan !== undefined) {
+        setErrorMessageFirstName(
+          error?.response?.data?.message.nama_depan[0] || "An error occurred."
+        );
+      }
+      if (error?.response?.data?.message.nama_belakang !== undefined) {
+        setErrorMessageLastName(
+          error?.response?.data?.message.nama_belakang[0] ||
+            "An error occurred."
+        );
+      }
+      if (error?.response?.data?.message.no_telepon !== undefined) {
+        setErrorMessageNoTelp(
+          error?.response?.data?.message.no_telepon[0] || "An error occurred."
+        );
+      }
+      if (error?.response?.data?.message.email !== undefined) {
+        setErrorMessageMail(
+          error?.response?.data?.message.email[0] || "An error occurred."
+        );
+      }
+      if (error?.response?.data?.message.password !== undefined) {
+        setErrorMessagePassword(
+          error?.response?.data?.message.password[0] || "An error occurred."
+        );
+      }
+      if (error?.response?.data?.success === false) {
+        setErrorMessage(error?.response?.data?.message || "An error occurred.");
+      }
+    }
+  };
 
   return (
     <div className="rounded-lg bg-primaryCard px-6 pb-4 pt-8 mx-4 lg:mx-0 lg:w-[400px]">
@@ -23,15 +116,13 @@ export default function RegisterForm() {
           <Logo />
         </Link>
       </div>
-      <form
-        //  action={dispatch}
-        className="space-y-3"
-      >
+      <form onSubmit={handleRegister} className="space-y-3">
         <div>
           <h1 className={`${lusitana.className} mb-3 text-2xl`}>
             Silahkan Mendaftar Untuk Mendapatkan Akun
           </h1>
           <div className="w-full">
+            {/* firstname */}
             <div>
               <label
                 className="mb-3 mt-5 block text-xs font-medium text-blackColor"
@@ -46,11 +137,25 @@ export default function RegisterForm() {
                   type="text"
                   name="firstName"
                   placeholder="Masukan Nama Depan Anda"
-                  // required
+                  ref={firstNameRef}
+                  required
                 />
               </div>
+              {errorMessageFirstName && (
+                <div
+                  className="flex h-8 items-end space-x-1"
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
+                  <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
+                  <p className="text-sm text-dangerColor">
+                    {errorMessageFirstName}
+                  </p>
+                </div>
+              )}
             </div>
 
+            {/* lastname */}
             <div>
               <label
                 className="mb-3 mt-5 block text-xs font-medium text-blackColor"
@@ -65,11 +170,25 @@ export default function RegisterForm() {
                   type="text"
                   name="lastName"
                   placeholder="Masukan Nama Belakang Anda"
-                  // required
+                  ref={lastNameRef}
+                  required
                 />
               </div>
+              {errorMessageLastName && (
+                <div
+                  className="flex h-8 items-end space-x-1"
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
+                  <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
+                  <p className="text-sm text-dangerColor">
+                    {errorMessageLastName}
+                  </p>
+                </div>
+              )}
             </div>
 
+            {/* no phone */}
             <div>
               <label
                 className="mb-3 mt-5 block text-xs font-medium text-blackColor"
@@ -84,11 +203,25 @@ export default function RegisterForm() {
                   type="number"
                   name="noPhone"
                   placeholder="Masukan Nomor Telepon Anda"
-                  // required
+                  ref={noTelpRef}
+                  required
                 />
               </div>
+              {errorMessageNoTelp && (
+                <div
+                  className="flex h-8 items-end space-x-1"
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
+                  <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
+                  <p className="text-sm text-dangerColor">
+                    {errorMessageNoTelp}
+                  </p>
+                </div>
+              )}
             </div>
 
+            {/* email */}
             <div>
               <label
                 className="mb-3 mt-5 block text-xs font-medium text-blackColor"
@@ -103,9 +236,20 @@ export default function RegisterForm() {
                   type="email"
                   name="email"
                   placeholder="Masukan Email Anda"
-                  // required
+                  ref={emailRef}
+                  required
                 />
               </div>
+              {errorMessageMail && (
+                <div
+                  className="flex h-8 items-end space-x-1"
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
+                  <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
+                  <p className="text-sm text-dangerColor">{errorMessageMail}</p>
+                </div>
+              )}
             </div>
             <div className="mt-4">
               <label
@@ -121,10 +265,23 @@ export default function RegisterForm() {
                   type="password"
                   name="password"
                   placeholder="Masukan Kata Sandi"
-                  // required
+                  ref={passwordRef}
+                  required
                   minLength={6}
                 />
               </div>
+              {errorMessagePassword && (
+                <div
+                  className="flex h-8 items-end space-x-1"
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
+                  <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
+                  <p className="text-sm text-dangerColor">
+                    {errorMessagePassword}
+                  </p>
+                </div>
+              )}
             </div>
             <div className="flex items-start mt-4">
               <div className="flex items-center h-5">
@@ -141,7 +298,7 @@ export default function RegisterForm() {
                   Saya menerima{" "}
                   <Link
                     className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                    href="/syarat-ketentuan"
+                    href="#"
                   >
                     Syarat dan Ketentuan
                   </Link>
@@ -149,19 +306,20 @@ export default function RegisterForm() {
               </div>
             </div>
           </div>
-          <LoginButton />
-          <div
-            className="flex h-8 items-end space-x-1"
-            aria-live="polite"
-            aria-atomic="true"
-          >
-            {/* {errorMessage && (
-              <>
-                <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
-                <p className="text-sm text-dangerColor">{errorMessage}</p>
-              </>
-            )} */}
-          </div>
+          <Button className="mt-4 w-full" type="submit">
+            Registrasi
+            <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+          </Button>
+          {errorMessage && (
+            <div
+              className="flex h-8 items-end space-x-1"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
+              <p className="text-sm text-dangerColor">{errorMessage}</p>
+            </div>
+          )}
         </div>
         <div className="">
           <p className="text-sm font-light">
@@ -176,16 +334,5 @@ export default function RegisterForm() {
         </div>
       </form>
     </div>
-  );
-}
-
-function LoginButton() {
-  const { pending } = useFormStatus();
-
-  return (
-    <Button className="mt-4 w-full" aria-disabled={pending}>
-      Registrasi
-      <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
-    </Button>
   );
 }

@@ -15,6 +15,7 @@ import { login } from "@/app/lib/actions";
 import Link from "next/link";
 import Logo from "../penerbitan-buku-logo";
 import { FormEvent } from "react";
+import { toast } from "react-toastify";
 
 export default function LoginForm() {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -29,12 +30,23 @@ export default function LoginForm() {
     setErrorMessageMail("");
     setErrorMessagePassword("");
 
+    // toast loading register
+    const loading = toast.loading("Silahkan tunggu sebentar...");
+
     e.preventDefault();
     const email: string = emailRef.current?.value as string;
     const password = passwordRef.current?.value as string;
     try {
       const res = await login(email, password);
       if (res.status === 200 || res.status === 201) {
+        toast.update(loading, {
+          render: "Login Berhasil!",
+          type: "success",
+          autoClose: 5000,
+          closeButton: true,
+          isLoading: false,
+        });
+
         setCookie(
           "token",
           {
@@ -52,6 +64,14 @@ export default function LoginForm() {
         router.push("/");
       }
     } catch (error: any) {
+      toast.update(loading, {
+        render: "Terjadi Kesalahan!",
+        type: "error",
+        autoClose: 5000,
+        closeButton: true,
+        isLoading: false,
+      });
+
       if (error?.response?.data?.message.email !== undefined) {
         setErrorMessageMail(
           error?.response?.data?.message.email[0] || "An error occurred."
@@ -63,7 +83,9 @@ export default function LoginForm() {
         );
       }
       if (error?.response?.data?.success === false) {
-        setErrorMessage("Invalid credentials");
+        setErrorMessage(
+          error?.response?.data?.message || "Invalid credentials"
+        );
       }
     }
   };
@@ -96,6 +118,7 @@ export default function LoginForm() {
                   name="email"
                   placeholder="Masukan Email Anda"
                   ref={emailRef}
+                  required
                 />
                 <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor" />
               </div>
@@ -126,6 +149,7 @@ export default function LoginForm() {
                   placeholder="Masukan Kata Sandi"
                   minLength={6}
                   ref={passwordRef}
+                  required
                 />
                 <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor" />
               </div>

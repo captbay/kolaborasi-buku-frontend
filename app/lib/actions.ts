@@ -7,6 +7,14 @@ export const login = (email: string, password: string) => {
   return axios.post("/auth/login", { email, password });
 };
 
+export const logout = (token: string, token_type: string) => {
+  return axios.get("/auth/logout", {
+    headers: {
+      Authorization: `${token_type} ${token}`,
+    },
+  });
+};
+
 export const register = (
   nama_depan: string,
   nama_belakang: string,

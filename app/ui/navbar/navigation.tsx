@@ -1,19 +1,18 @@
 import Link from "next/link";
 import NavLinks from "@/app/ui/navbar/nav-links";
 import Logo from "@/app/ui/penerbitan-buku-logo";
-import {
-  ShoppingCartIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/outline";
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { Button } from "@/app/ui/button";
 import ProfileCircle from "@/app/ui/navbar/profile-cirlce";
 import Notification from "@/app/ui/navbar/notification";
 import Search from "../search";
 import { Suspense } from "react";
-
-// import { signOut } from '@/auth';
+import { cookies } from "next/headers";
 
 export default function TopNav() {
+  const cookieStore = cookies();
+  const token = cookieStore.get("token");
+
   return (
     <div className="sticky top-0 w-full bg-whiteColor px-14 lg:px-28 z-20">
       <div className="flex flex-col">
@@ -29,19 +28,29 @@ export default function TopNav() {
           </div>
           <div className="flex items-center">
             {/* logo cart */}
-            <Link className="hidden px-1 lg:flex" href="/keranjang">
-              <ShoppingCartIcon className="text-primaryColor w-auto h-6" />
-            </Link>
-            <div className="hidden px-1 ml-4 lg:inline-flex">
-              <Notification />
-            </div>
+            {token && (
+              <Link className="hidden px-1 lg:flex" href="/keranjang">
+                <ShoppingCartIcon className="text-primaryColor w-auto h-6 m-1" />
+              </Link>
+            )}
+            {/* notification */}
+            {token && (
+              <div className="hidden px-1 ml-4 lg:inline-flex">
+                <Notification />
+              </div>
+            )}
             {/* login */}
-            <Link className="hidden ml-4 lg:flex" href="/login">
-              <LoginButton />
-            </Link>
-            <div className="ml-4">
-              <ProfileCircle />
-            </div>
+            {!token && (
+              <Link className="hidden ml-4 lg:flex" href="/login">
+                <LoginButton />
+              </Link>
+            )}
+            {/* profile */}
+            {token && (
+              <div className="ml-4">
+                <ProfileCircle />
+              </div>
+            )}
             {/* hamburger */}
             <button
               data-collapse-toggle="navbar-user"
@@ -82,5 +91,5 @@ export default function TopNav() {
 }
 
 function LoginButton() {
-  return <Button className="w-full h-8">Masuk</Button>;
+  return <Button className="w-full">Masuk</Button>;
 }

@@ -22,3 +22,7 @@ export const register = (
     password: password,
   });
 };
+
+export const sendEmailForgotPassword = (email: string) => {
+  return axios.post("/auth/forgotPassword", { email });
+};

@@ -27,6 +27,7 @@ export default function LoginForm() {
 
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     // reset error message
+    setErrorMessage("");
     setErrorMessageMail("");
     setErrorMessagePassword("");
 

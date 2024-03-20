@@ -34,6 +34,7 @@ export default function RegisterForm() {
   // handle register
   const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
     // reset error message
+    setErrorMessage("");
     setErrorMessageFirstName("");
     setErrorMessageLastName("");
     setErrorMessageNoTelp("");

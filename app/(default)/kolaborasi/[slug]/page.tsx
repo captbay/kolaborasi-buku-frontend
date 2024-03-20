@@ -9,7 +9,7 @@ import CardBabBuku from "@/app/ui/kolaborasi/cardBabBuku";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { getDetailBukuKolaborasiResponse } from "@/app/lib/definitions";
-import { getDetailBukuKolaborasi } from "@/app/lib/actions";
+import { getDetailBukuKolaborasi } from "@/app/lib/data";
 
 type Props = {
   params: { slug: string };
@@ -61,7 +61,7 @@ export default async function Page({ params }: Props) {
                   <Image
                     className="h-auto w-full max-w-full rounded-lg object-cover object-center lg:h-[480px]"
                     src={
-                      process.env.NEXT_PUBLIC_STORAGE_FILE +
+                      "http://kolaborasi-buku-backend.test/storage/" +
                       detailBuku.cover_buku
                     }
                     alt="hero_image"

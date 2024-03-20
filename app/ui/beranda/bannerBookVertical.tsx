@@ -13,7 +13,7 @@ import { Mousewheel, Pagination, Autoplay } from "swiper/modules";
 
 import CardAdsLandscape from "@/app/ui/cardAdsLandscape";
 
-import { getAds } from "@/app/lib/actions";
+import { getAds } from "@/app/lib/data";
 import { BookAds } from "@/app/lib/definitions";
 import EmptyData from "../emptyData";
 

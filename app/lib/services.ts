@@ -1,5 +1,6 @@
 import ax from "axios";
 
 export const axios = ax.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: "http://kolaborasi-buku-backend.test/api",
+  headers: { "Content-Type": "application/json" },
 });

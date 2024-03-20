@@ -24,7 +24,9 @@ export default function DashboardSkeleton() {
 //CardKoleksiBukuSkeleton
 export function CardKoleksiBukuSkeleton() {
   return (
-    <section className="flex w-full h-full flex-col bg-white border border-gray-200 rounded-lg shadow">
+    <section
+      className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm w-full h-[375px]`}
+    >
       <div className="flex justify-center">
         <div className="p-4 w-48 h-48 bg-gray-200" />
       </div>
@@ -55,5 +57,9 @@ export function KoleksiBukuSkeleton() {
 
 // FilterBoxBuku
 export function FilterBukuSkeleton() {
-  return <div className={`animate-pulse w-72 h-72 rounded-md bg-white`} />;
+  return (
+    <div
+      className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm w-full h-[375px]`}
+    />
+  );
 }

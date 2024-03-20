@@ -3,7 +3,7 @@ import React, { Suspense } from "react";
 import Image from "next/image";
 import { Carousel } from "flowbite-react";
 
-import { getEvent } from "@/app/lib/actions";
+import { getEvent } from "@/app/lib/data";
 import { Event } from "@/app/lib/definitions";
 
 import type { CustomFlowbiteTheme } from "flowbite-react";
@@ -36,7 +36,7 @@ export default async function Coursell() {
           {data?.map((event, index) => (
             <Image
               key={index}
-              src={process.env.NEXT_PUBLIC_STORAGE_FILE + event.file}
+              src={"http://kolaborasi-buku-backend.test/storage/" + event.file}
               alt="Picture of the event"
               width={500}
               height={500}

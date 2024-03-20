@@ -6,7 +6,7 @@ import ProdukTerlaris from "@/app/ui/beranda/produkTerlaris";
 import ThumbSlider from "@/app/ui/koleksi-buku/detail/thumbSlider";
 import TestimoniPembeliBuku from "@/app/ui/koleksi-buku/detail/testimoniPembeliBuku";
 
-import { getDetailBuku } from "@/app/lib/actions";
+import { getDetailBuku } from "@/app/lib/data";
 
 import { notFound } from "next/navigation";
 

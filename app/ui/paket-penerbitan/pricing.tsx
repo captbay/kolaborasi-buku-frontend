@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 
 import PriceCards from "@/app/ui/price-cards";
 import { paketData } from "@/app/lib/definitions";
-import { getPaket } from "@/app/lib/actions";
+import { getPaket } from "@/app/lib/data";
 import EmptyData from "../emptyData";
 
 export default async function pricing() {

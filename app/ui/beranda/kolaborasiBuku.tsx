@@ -5,7 +5,7 @@ import { Button } from "@/app/ui/button";
 
 import Link from "next/link";
 
-import { getKolaborasi } from "@/app/lib/actions";
+import { getKolaborasi } from "@/app/lib/data";
 import { getKolaborasiBukuAllResponse } from "@/app/lib/definitions";
 import EmptyData from "../emptyData";
 

@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import Image from "next/image";
 
-import { getTestimoni } from "@/app/lib/actions";
+import { getTestimoni } from "@/app/lib/data";
 import { Testimoni } from "@/app/lib/definitions";
 
 import { Rating, RatingStar } from "flowbite-react";
@@ -40,7 +40,8 @@ export default async function testimoni() {
                 width={500}
                 height={500}
                 src={
-                  process.env.NEXT_PUBLIC_STORAGE_FILE + testimoni.foto_profil
+                  "http://kolaborasi-buku-backend.test/storage/" +
+                  testimoni.foto_profil
                 }
                 alt="profile picture"
               />

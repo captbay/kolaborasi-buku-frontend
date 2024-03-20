@@ -2,7 +2,7 @@ import React from "react";
 
 import CardBooks from "@/app/ui/cards";
 import { getBukuAllResponse } from "@/app/lib/definitions";
-import { getBuku } from "@/app/lib/actions";
+import { getBuku } from "@/app/lib/data";
 import Pagination from "@/app/ui/pagination";
 import EmptyData from "../emptyData";
 

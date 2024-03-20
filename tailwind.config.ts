@@ -29,6 +29,13 @@ const config: Config = {
         primaryBorder: "#e5e7eb",
       },
     },
+    keyframes: {
+      shimmer: {
+        "100%": {
+          transform: "translateX(100%)",
+        },
+      },
+    },
   },
   plugins: [require("flowbite/plugin")],
 };

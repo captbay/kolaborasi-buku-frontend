@@ -6,7 +6,7 @@ import {
   AccordionTitle,
 } from "flowbite-react";
 
-import { getFaq } from "@/app/lib/actions";
+import { getFaq } from "@/app/lib/data";
 import { faqData } from "@/app/lib/definitions";
 import EmptyData from "../emptyData";
 

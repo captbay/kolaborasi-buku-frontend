@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 import ListBukuKolaborasi from "@/app/ui/kolaborasi/listBukuKolaborasi";
 import Jumbotron from "@/app/ui/jumbotron";
-import { getKategori } from "@/app/lib/actions";
+import { getKategori } from "@/app/lib/data";
 import { kategoriData } from "@/app/lib/definitions";
 import { Suspense } from "react";
 import { KoleksiBukuSkeleton, FilterBukuSkeleton } from "@/app/ui/skeletons";

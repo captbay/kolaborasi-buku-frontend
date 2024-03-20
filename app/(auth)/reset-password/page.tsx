@@ -9,7 +9,7 @@ import {
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "@/app/ui/button";
 import { useFormState, useFormStatus } from "react-dom";
-import { authenticate } from "@/app/lib/actions";
+import { authenticate } from "@/app/lib/data";
 import Link from "next/link";
 import Logo from "@/app/ui/penerbitan-buku-logo";
 

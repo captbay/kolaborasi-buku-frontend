@@ -6,7 +6,7 @@ import FilterBox from "@/app/ui/filter-box";
 import { KoleksiBukuSkeleton, FilterBukuSkeleton } from "@/app/ui/skeletons";
 
 import { kategoriData } from "@/app/lib/definitions";
-import { getKategori } from "@/app/lib/actions";
+import { getKategori } from "@/app/lib/data";
 
 export const metadata: Metadata = {
   title: "Koleksi Buku",

@@ -19,7 +19,7 @@ import "swiper/css/navigation";
 
 import CardBooks from "@/app/ui/cards";
 
-import { getBestSeller } from "@/app/lib/actions";
+import { getBestSeller } from "@/app/lib/data";
 import { CardData } from "@/app/lib/definitions";
 import EmptyData from "../emptyData";
 

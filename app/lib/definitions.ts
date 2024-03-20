@@ -1,3 +1,5 @@
+// definisi var yang masuk
+
 // event
 export type Event = {
   id: string;

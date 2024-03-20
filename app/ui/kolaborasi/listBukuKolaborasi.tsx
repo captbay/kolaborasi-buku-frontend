@@ -4,7 +4,7 @@ import CardKolaborasiBooks from "@/app/ui/cards-kolaborasi";
 import Pagination from "@/app/ui/pagination";
 import EmptyData from "../emptyData";
 import { getKolaborasiBukuAllResponse } from "@/app/lib/definitions";
-import { getKolaborasi } from "@/app/lib/actions";
+import { getKolaborasi } from "@/app/lib/data";
 
 export default async function listBukuKolaborasi({
   search,

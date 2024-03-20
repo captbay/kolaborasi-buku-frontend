@@ -8,8 +8,6 @@ import {
 } from "@heroicons/react/24/outline";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "@/app/ui/button";
-import { useFormState, useFormStatus } from "react-dom";
-import { authenticate } from "@/app/lib/data";
 import Link from "next/link";
 import Logo from "@/app/ui/penerbitan-buku-logo";
 
@@ -134,10 +132,8 @@ export default function ResetPassword() {
 }
 
 function ResetButton() {
-  const { pending } = useFormStatus();
-
   return (
-    <Button className="mt-4 w-full" aria-disabled={pending}>
+    <Button className="mt-4 w-full" type="submit">
       Reset Kata Sandi{" "}
       <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
     </Button>

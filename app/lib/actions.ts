@@ -1,4 +1,3 @@
-import { User } from "./definitions";
 import { axios } from "./services";
 
 /*

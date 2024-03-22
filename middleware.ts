@@ -1,4 +1,3 @@
-import { getCookie } from "cookies-next";
 import { NextResponse } from "next/server";
 
 export function middleware(req: {
@@ -16,7 +15,20 @@ export function middleware(req: {
       };
   const pathname = new URL(req.url).pathname;
 
-  const isNotPublicRoutes = ["/keranjang"];
+  const isPublicRoute = [
+    "/login",
+    "/register",
+    "/lupa-password",
+    "/reset-password",
+    "/",
+    "/bantuan",
+    "/hubungi-kami",
+    "/kolaborasi",
+    `/kolaborasi/:slug`, // Dynamic route with template literal
+    "/koleksi-buku",
+    `/koleksi-buku/:slug`, // Dynamic route with template literal
+    "/paket-penerbitan",
+  ];
   const islogin = ["/login"];
 
   if (islogin.includes(pathname) && token) {
@@ -24,7 +36,13 @@ export function middleware(req: {
     return NextResponse.redirect(dashboardUrl);
   }
 
-  if (isNotPublicRoutes.includes(pathname) && !token) {
+  if (
+    !isPublicRoute.some((route) => {
+      const regex = new RegExp(`^${route.replace(/\/:[^/]+/g, "/[^/]+")}$`);
+      return regex.test(pathname);
+    }) &&
+    !token
+  ) {
     const loginUrl = new URL("/login", req.nextUrl).href;
     return NextResponse.redirect(loginUrl);
   }

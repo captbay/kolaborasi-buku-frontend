@@ -1,5 +1,14 @@
 // definisi var yang masuk
 
+// user
+export type User = {
+  id: string;
+  nama_lengkap: string;
+  email: string;
+  foto_profil: string;
+  role: string;
+};
+
 // event
 export type Event = {
   id: string;

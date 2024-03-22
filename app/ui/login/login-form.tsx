@@ -84,9 +84,6 @@ export default function LoginForm() {
           "token",
           {
             id: res.data.data.id,
-            nama_lengkap: res.data.data.nama_lengkap,
-            email: res.data.data.email,
-            role: res.data.data.role,
             token_type: res.data.data.token_type,
             token: res.data.data.token,
           },

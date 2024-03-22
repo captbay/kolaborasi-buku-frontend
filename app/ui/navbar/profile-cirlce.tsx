@@ -1,16 +1,26 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { Avatar, Dropdown } from "flowbite-react";
 import useGetCookie from "@/app/lib/useGetCookies";
 import { logout } from "@/app/lib/actions";
 import { toast } from "react-toastify";
-import router from "next/router";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
+import Image from "next/image";
 
-export default function ProfileCircle() {
-  const { token, nama_lengkap, token_type, email, clearCookie } =
-    useGetCookie();
+export default function ProfileCircle({
+  fotoProfil,
+  namaLengkap,
+  email,
+}: {
+  fotoProfil: string;
+  namaLengkap: string;
+  email: string;
+}) {
+  const { token, token_type, clearCookie } = useGetCookie();
+  const pathname = usePathname();
 
   const handleLogout = () => {
     if (token && token_type) {
@@ -18,7 +28,7 @@ export default function ProfileCircle() {
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
             clearCookie();
-            setTimeout(() => window.location.reload(), 5000);
+            setTimeout(() => window.location.reload(), 2000);
             toast.success("Berhasil Keluar");
           }
         })
@@ -30,20 +40,54 @@ export default function ProfileCircle() {
 
   return (
     <Dropdown
-      label={<Avatar alt="User settings" img="/coursell/1.jpg" rounded />}
+      label={
+        <Image
+          alt="Gambar Profil"
+          height="500"
+          src={"http://kolaborasi-buku-backend.test/storage/" + fotoProfil}
+          width="500"
+          className="w-10 h-10 rounded-full shadow-lg"
+        />
+      }
       arrowIcon={false}
       placement="bottom"
       inline
     >
       <Dropdown.Header>
-        <span className="block text-sm">{nama_lengkap}</span>
-        <span className="block truncate text-sm font-medium">{email}</span>
+        <span className="block text-base">{namaLengkap}</span>
+        <span className="block truncate text-sm font-bold">{email}</span>
       </Dropdown.Header>
-      <Dropdown.Item>Akun</Dropdown.Item>
-      <Dropdown.Item>Transaksi</Dropdown.Item>
-      <Dropdown.Item>Koleksi Buku Saya</Dropdown.Item>
+      <Dropdown.Item
+        className={clsx("text-sm font-medium hover:text-primaryColor", {
+          "text-primaryColor": pathname === "/profil/akun",
+        })}
+        href="/profil/akun"
+      >
+        Akun
+      </Dropdown.Item>
+      <Dropdown.Item
+        className={clsx("text-sm font-medium hover:text-primaryColor", {
+          "text-primaryColor": pathname === "/profil/transaksi",
+        })}
+        href="/profil/transaksi"
+      >
+        Transaksi
+      </Dropdown.Item>
+      <Dropdown.Item
+        className={clsx("text-sm font-medium hover:text-primaryColor", {
+          "text-primaryColor": pathname === "/profil/koleksi-buku-saya",
+        })}
+        href="/profil/koleksi-buku-saya"
+      >
+        Koleksi Buku Saya
+      </Dropdown.Item>
       <Dropdown.Divider />
-      <Dropdown.Item onClick={handleLogout}>Keluar</Dropdown.Item>
+      <Dropdown.Item
+        className="text-sm font-medium hover:text-primaryColor hover:cursor-pointer"
+        onClick={handleLogout}
+      >
+        Keluar
+      </Dropdown.Item>
     </Dropdown>
   );
 }

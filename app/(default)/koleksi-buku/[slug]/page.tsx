@@ -6,12 +6,12 @@ import ProdukTerlaris from "@/app/ui/beranda/produkTerlaris";
 import ThumbSlider from "@/app/ui/koleksi-buku/detail/thumbSlider";
 import TestimoniPembeliBuku from "@/app/ui/koleksi-buku/detail/testimoniPembeliBuku";
 
-import { getDetailBuku } from "@/app/lib/data";
+import { getBestSeller, getDetailBuku } from "@/app/lib/data";
 
 import { notFound } from "next/navigation";
 
 import { Button } from "@/app/ui/button";
-import { getDetailBukuResponse } from "@/app/lib/definitions";
+import { CardData, getDetailBukuResponse } from "@/app/lib/definitions";
 import { formatCurrency } from "../../../lib/utils";
 import { Suspense } from "react";
 
@@ -32,6 +32,7 @@ export default async function Page({ params }: Props) {
   const slug = params.slug;
 
   const detailBuku: getDetailBukuResponse = await getDetailBuku(slug);
+  const bestSeller: CardData[] = await getBestSeller();
 
   if (!detailBuku) {
     notFound();
@@ -156,7 +157,9 @@ export default async function Page({ params }: Props) {
           </div>
         </section>
         <section className="px-14 lg:px-20 py-12">
-          <ProdukTerlaris />
+          <Suspense fallback={<p>Loading feed...</p>}>
+            <ProdukTerlaris data={bestSeller} />
+          </Suspense>
         </section>
       </Suspense>
     </main>

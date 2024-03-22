@@ -8,26 +8,31 @@ import TestimoniBeranda from "@/app/ui/beranda/testimoniBeranda";
 import BannerBookVertical from "@/app/ui/beranda/bannerBookVertical";
 
 import { Suspense } from "react";
-// import { CoursellSkeleton } from "@/app/ui/skeletons";
+import { getBestSeller, getAds } from "@/app/lib/data";
+import { BookAds, CardData } from "@/app/lib/definitions";
+import { ProdukTerlarisSkeleton } from "@/app/ui/skeletons";
 
 export const metadata: Metadata = {
   title: "Beranda",
 };
 
 export default async function Page() {
+  const bestSeller: CardData[] = await getBestSeller();
+  const adsBooks: BookAds[] = await getBestSeller();
+
   return (
     <main id="content">
       <section>
         <Coursell />
       </section>
       <section className="px-14 lg:px-20 py-16">
-        <Suspense fallback={<p>Loading feed...</p>}>
-          <ProdukTerlaris />
+        <Suspense fallback={<ProdukTerlarisSkeleton />}>
+          <ProdukTerlaris data={bestSeller} />
         </Suspense>
       </section>
       <section className="px-28 py-8">
         <Suspense fallback={<p>Loading feed...</p>}>
-          <BannerBookVertical />
+          <BannerBookVertical data={adsBooks} />
         </Suspense>
       </section>
       <section className="px-14 lg:px-20 py-16">

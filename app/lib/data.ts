@@ -110,19 +110,37 @@ export async function getDetailBuku(slug: string) {
     });
 }
 
-export async function getAds() {
-  noStore();
-  return await axios.get("/buku/all", {
-    params: {
-      limit: 5,
-      bookAds: true,
-    },
-  });
-}
-
 export async function getBestSeller() {
   noStore();
-  return await axios.get("/buku/best-seller");
+  return await axios
+    .get("/buku/best-seller")
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+export async function getAds() {
+  noStore();
+  return await axios
+    .get("/buku/all", {
+      params: {
+        limit: 5,
+        bookAds: true,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 /*

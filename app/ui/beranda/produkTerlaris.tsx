@@ -19,33 +19,30 @@ import "swiper/css/navigation";
 
 import CardBooks from "@/app/ui/cards";
 
-import { getBestSeller } from "@/app/lib/data";
 import { CardData } from "@/app/lib/definitions";
 import EmptyData from "../emptyData";
+import { ProdukTerlarisSkeleton } from "../skeletons";
 
-export default () => {
-  const [data, setData] = useState<CardData[]>([]);
+export default function ProdukTerlaris({ data }: { data: CardData[] }) {
   const swiperRef = useRef<SwiperCore>();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchProjects = () => {
-      getBestSeller()
-        .then((res) => {
-          if (res.status === 200 || res.status === 201) {
-            setData(res.data.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-
-    fetchProjects();
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 0.1);
   }, []);
+
+  if (isLoading) {
+    return <ProdukTerlarisSkeleton />;
+  }
 
   if (data.length < 1) {
     return (
       <section className="p-4">
+        <h2 className={`${lusitana.className} text-lg font-semibold lg:px-4`}>
+          Produk Terlaris
+        </h2>
         <EmptyData title="Belum ada Data" value="Tunggu Data nya ya!" />
       </section>
     );
@@ -103,4 +100,4 @@ export default () => {
       </div>
     </section>
   );
-};
+}

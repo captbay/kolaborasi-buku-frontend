@@ -13,29 +13,10 @@ import { Mousewheel, Pagination, Autoplay } from "swiper/modules";
 
 import CardAdsLandscape from "@/app/ui/cardAdsLandscape";
 
-import { getAds } from "@/app/lib/data";
 import { BookAds } from "@/app/lib/definitions";
 import EmptyData from "../emptyData";
 
-export default () => {
-  const [data, setData] = useState<BookAds[]>([]);
-
-  useEffect(() => {
-    const fetchProjects = () => {
-      getAds()
-        .then((res) => {
-          if (res.status === 200 || res.status === 201) {
-            setData(res.data.data.data);
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-
-    fetchProjects();
-  }, []);
-
+export default ({ data }: { data: BookAds[] }) => {
   if (data.length < 1) {
     return (
       <section className="p-4">

@@ -4,19 +4,52 @@ const shimmer =
 
 export function CoursellSkeleton() {
   return (
-    <section
-      className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm w-full h-[375px]`}
-    ></section>
+    <section className="w-full h-56 sm:h-64 xl:h-80 2xl:h-96 bg-gray-200"></section>
   );
 }
 
-export default function DashboardSkeleton() {
+export function KoleksiBukuBerandaSkeleton() {
+  return (
+    <section className="flex w-full gap-8 lg:px-8">
+      {Array.from({ length: 4 }).map((_, index) => (
+        <CardKoleksiBukuSkeleton key={index} />
+      ))}
+    </section>
+  );
+}
+
+export function ProdukTerlarisSkeleton() {
+  return (
+    <section className="flex flex-col justify-center items-center">
+      <div className="flex w-full justify-between items-center mb-4 lg:px-8">
+        <div className="bg-gray-200 h-5 w-full"></div>
+        <div className="flex space-x-2">
+          <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
+          <div className="w-8 h-8 bg-gray-200 rounded-full"></div>
+        </div>
+      </div>
+      <KoleksiBukuBerandaSkeleton />
+    </section>
+  );
+}
+
+export function DashboardSkeleton() {
   return (
     <>
       <section
-        className={`${shimmer} relative overflow-hidden rounded-md bg-gray-100 w-screen h-screen`}
-      />
-      <CoursellSkeleton />
+        className={`${shimmer} relative overflow-hidden rounded-md bg-gray-100 w-screen h-full`}
+      >
+        <CoursellSkeleton />
+        <div className="px-14 lg:px-20 py-16">
+          <ProdukTerlarisSkeleton />
+        </div>
+        <div className="px-14 lg:px-20 py-16">
+          <ProdukTerlarisSkeleton />
+        </div>
+        <div className="px-14 lg:px-20 py-16">
+          <ProdukTerlarisSkeleton />
+        </div>
+      </section>
     </>
   );
 }
@@ -58,8 +91,13 @@ export function KoleksiBukuSkeleton() {
 // FilterBoxBuku
 export function FilterBukuSkeleton() {
   return (
-    <div
-      className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm w-full h-[375px]`}
-    />
+    <section
+      className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm w-[200px] h-[375px] flex flex-col gap-8`}
+    >
+      <div className="w-full h-10 bg-gray-200" />
+      <div className="w-full h-10 bg-gray-200" />
+      <div className="w-full h-10 bg-gray-200" />
+      <div className="w-full h-10 bg-gray-200" />
+    </section>
   );
 }

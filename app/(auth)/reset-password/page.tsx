@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { Suspense, useRef, useState } from "react";
 import { lusitana } from "@/app/ui/fonts";
 import { KeyIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
@@ -22,22 +22,24 @@ export default function ResetPassword() {
   // if dont have token or email
   if (!token || !email) {
     return (
-      <section className="rounded-lg bg-primaryCard px-6 pb-4 pt-8 mx-4 lg:mx-0 lg:w-[400px] flex flex-col gap-2 items-center">
-        <div className="mb-4 flex justify-center">
+      <Suspense fallback={<p>Loading feed...</p>}>
+        <section className="rounded-lg bg-primaryCard px-6 pb-4 pt-8 mx-4 lg:mx-0 lg:w-[400px] flex flex-col gap-2 items-center">
+          <div className="mb-4 flex justify-center">
+            <Link href="/">
+              <Logo />
+            </Link>
+          </div>
+          <h1 className={`${lusitana.className} self-start mb-3 text-2xl`}>
+            Terjadi Kesalahan
+          </h1>
+          <p className="text-sm text-blackColor">
+            Terjadi kesalahan saat mengakses halaman ini, silahkan coba lagi
+          </p>
           <Link href="/">
-            <Logo />
+            <Button>Kembali</Button>
           </Link>
-        </div>
-        <h1 className={`${lusitana.className} self-start mb-3 text-2xl`}>
-          Terjadi Kesalahan
-        </h1>
-        <p className="text-sm text-blackColor">
-          Terjadi kesalahan saat mengakses halaman ini, silahkan coba lagi
-        </p>
-        <Link href="/">
-          <Button>Kembali</Button>
-        </Link>
-      </section>
+        </section>
+      </Suspense>
     );
   }
 

@@ -39,9 +39,9 @@ export default function ProfileCircle() {
         <span className="block text-sm">{nama_lengkap}</span>
         <span className="block truncate text-sm font-medium">{email}</span>
       </Dropdown.Header>
-      <Dropdown.Item>Dashboard</Dropdown.Item>
-      <Dropdown.Item>Settings</Dropdown.Item>
-      <Dropdown.Item>Earnings</Dropdown.Item>
+      <Dropdown.Item>Akun</Dropdown.Item>
+      <Dropdown.Item>Transaksi</Dropdown.Item>
+      <Dropdown.Item>Koleksi Buku Saya</Dropdown.Item>
       <Dropdown.Divider />
       <Dropdown.Item onClick={handleLogout}>Keluar</Dropdown.Item>
     </Dropdown>

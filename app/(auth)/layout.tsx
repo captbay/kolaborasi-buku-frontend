@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: {
@@ -45,7 +46,7 @@ export default function AuthLayout({
           </section>
           <section className="lg:mx-28 my-16 lg:flex lg:items-center lg:justify-center lg:align-middle">
             <div className="w-full h-fit top-0 bottom-0 absolute lg:static z-20 my-auto">
-              {children}
+              <Suspense fallback={<p>Loading feed...</p>}>{children}</Suspense>
             </div>
           </section>
         </main>

@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body className={`${inter.className} antialiased`}>
-        <ToastContainer />
+        <ToastContainer position="bottom-right" />
         <NavBar />
         <div className="bg-primaryCard">{children}</div>
         <Footer />

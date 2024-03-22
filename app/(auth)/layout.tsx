@@ -30,7 +30,7 @@ export default function AuthLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
-        <ToastContainer />
+        <ToastContainer position="bottom-right" />
         <main className="min-w-screen min-h-screen lg:static lg:flex overflow-y-auto">
           <section className="w-full">
             <figure className="w-full h-full items-center justify-center lg:static absolute z-10">

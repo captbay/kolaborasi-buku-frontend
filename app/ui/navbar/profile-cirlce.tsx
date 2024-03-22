@@ -9,7 +9,8 @@ import { toast } from "react-toastify";
 import router from "next/router";
 
 export default function ProfileCircle() {
-  const { token, nama_lengkap, token_type, clearCookie } = useGetCookie();
+  const { token, nama_lengkap, token_type, email, clearCookie } =
+    useGetCookie();
 
   const handleLogout = () => {
     if (token && token_type) {
@@ -36,6 +37,7 @@ export default function ProfileCircle() {
     >
       <Dropdown.Header>
         <span className="block text-sm">{nama_lengkap}</span>
+        <span className="block truncate text-sm font-medium">{email}</span>
       </Dropdown.Header>
       <Dropdown.Item>Dashboard</Dropdown.Item>
       <Dropdown.Item>Settings</Dropdown.Item>

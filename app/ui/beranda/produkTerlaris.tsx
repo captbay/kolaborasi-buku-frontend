@@ -30,7 +30,7 @@ export default function ProdukTerlaris({ data }: { data: CardData[] }) {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 0.1);
+    }, 1000);
   }, []);
 
   if (isLoading) {

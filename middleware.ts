@@ -31,6 +31,8 @@ export function middleware(req: {
   ];
   const islogin = ["/login"];
 
+  const isProfile = ["/profil"];
+
   if (islogin.includes(pathname) && token) {
     const dashboardUrl = new URL("/", req.nextUrl).href;
     return NextResponse.redirect(dashboardUrl);
@@ -45,6 +47,11 @@ export function middleware(req: {
   ) {
     const loginUrl = new URL("/login", req.nextUrl).href;
     return NextResponse.redirect(loginUrl);
+  }
+
+  if (isProfile.includes(pathname) && token) {
+    const akunUrl = new URL("/profil/akun", req.nextUrl).href;
+    return NextResponse.redirect(akunUrl);
   }
 }
 

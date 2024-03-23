@@ -48,3 +48,25 @@ export const resetPassword = (
     confirm_password,
   });
 };
+
+export const gantiPassword = (
+  password: string,
+  new_password: string,
+  confirm_password: string,
+  token: string,
+  token_type: string
+) => {
+  return axios.put(
+    "/auth/changePassword",
+    {
+      password,
+      new_password,
+      confirm_password,
+    },
+    {
+      headers: {
+        Authorization: `${token_type} ${token}`,
+      },
+    }
+  );
+};

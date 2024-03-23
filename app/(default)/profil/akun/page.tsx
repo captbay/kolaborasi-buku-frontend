@@ -1,10 +1,10 @@
-import LoginForm from "@/app/ui/login/login-form";
+import UserForm from "@/app/ui/profile/crud-user-form";
 
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Akun",
+  title: "Edit Profile",
 };
 export default function LoginPage() {
-  return <LoginForm />;
+  return <UserForm />;
 }

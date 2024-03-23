@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 
 const useGetCookie = () => {
   const [cookie, setCookie] = useState({
-    token: null,
-    id: null,
-    token_type: null,
+    token: "",
+    id: "",
+    token_type: "",
   });
   const cookieData = getCookie("token");
 

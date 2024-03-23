@@ -1,10 +1,10 @@
-import LoginForm from "@/app/ui/login/login-form";
+import KoleksiBuku from "@/app/ui/profile/koleksi-buku-user";
 
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Login",
+  title: "Koleksi Buku Saya",
 };
 export default function LoginPage() {
-  return <LoginForm />;
+  return <KoleksiBuku />;
 }

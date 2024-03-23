@@ -1,13 +1,10 @@
+import TransaksiUser from "@/app/ui/profile/transaksi-user";
+
 import { Metadata } from "next";
-import Faq from "@/app/ui/bantuan/faq";
 
 export const metadata: Metadata = {
-  title: "Login",
+  title: "Transaksi Saya",
 };
 export default function LoginPage() {
-  return (
-    <div className="flex justify-center items-center h-screen">
-      <Faq />
-    </div>
-  );
+  return <TransaksiUser />;
 }

@@ -7,7 +7,7 @@ import { User } from "@/app/lib/definitions";
 
 export const metadata: Metadata = {
   title: {
-    template: "Profil | %s | Penerbitan Buku",
+    template: "%s | Penerbitan Buku",
     default: "Profil Penerbitan Buku",
   },
   description: "Website Penerbitan Buku",
@@ -42,7 +42,7 @@ export default async function ProfileLayout({
           />
         </Suspense>
       </section>
-      <section>{children}</section>
+      <section className="w-full rounded-md bg-whiteColor">{children}</section>
     </section>
   );
 }

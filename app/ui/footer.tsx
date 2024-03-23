@@ -9,7 +9,7 @@ import { Button } from "./button";
 
 export default function Footer() {
   return (
-    <footer className="flex h-full flex-col py-16 px-14 lg:px-28 bottom-0">
+    <footer className="flex h-full flex-col py-16 px-14 lg:px-28 bottom-0 bg-whiteColor">
       <div className="flex flex-col lg:flex-row justify-between mb-12">
         <div className="w-full lg:w-1/3">
           <Link href="/">

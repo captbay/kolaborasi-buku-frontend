@@ -40,17 +40,29 @@ export default function SidebarProfile({
   };
 
   return (
-    <Sidebar aria-label="Sidebar Profil" className="h-fit">
-      <Sidebar.Items>
+    <Sidebar aria-label="Sidebar Profil" className="h-fit bg-whiteColor">
+      <Sidebar.Items className="bg-whiteColor">
         <section className="max-w-sm">
           <div className="flex flex-col items-center">
-            <Image
-              alt="Gambar Profil"
-              height="500"
-              src={"http://kolaborasi-buku-backend.test/storage/" + fotoProfil}
-              width="500"
-              className="mb-3 w-28 h-28 rounded-full shadow-lg"
-            />
+            {fotoProfil == null ? (
+              <Image
+                alt="Gambar Profil"
+                height="500"
+                src="/default_profile.jpg"
+                width="500"
+                className="mb-3 w-28 h-28 rounded-full shadow-lg"
+              />
+            ) : (
+              <Image
+                alt="Gambar Profil"
+                height="500"
+                src={
+                  "http://kolaborasi-buku-backend.test/storage/" + fotoProfil
+                }
+                width="500"
+                className="mb-3 w-28 h-28 rounded-full shadow-lg"
+              />
+            )}
             <h1 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">
               {namaLengkap}
             </h1>

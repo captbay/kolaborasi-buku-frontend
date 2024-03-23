@@ -41,13 +41,23 @@ export default function ProfileCircle({
   return (
     <Dropdown
       label={
-        <Image
-          alt="Gambar Profil"
-          height="500"
-          src={"http://kolaborasi-buku-backend.test/storage/" + fotoProfil}
-          width="500"
-          className="w-10 h-10 rounded-full shadow-lg"
-        />
+        fotoProfil == null ? (
+          <Image
+            alt="Gambar Profil"
+            height="500"
+            src="/default_profile.jpg"
+            width="500"
+            className="w-10 h-10 rounded-full shadow-lg"
+          />
+        ) : (
+          <Image
+            alt="Gambar Profil"
+            height="500"
+            src={"http://kolaborasi-buku-backend.test/storage/" + fotoProfil}
+            width="500"
+            className="w-10 h-10 rounded-full shadow-lg"
+          />
+        )
       }
       arrowIcon={false}
       placement="bottom"

@@ -31,6 +31,10 @@ export const register = (
   });
 };
 
+export const resendEmailVerification = (email: string) => {
+  return axios.post("/auth/email/resend", { email });
+};
+
 export const sendEmailForgotPassword = (email: string) => {
   return axios.post("/auth/forgotPassword", { email });
 };
@@ -69,4 +73,69 @@ export const gantiPassword = (
       },
     }
   );
+};
+
+// update User
+export const updateUser = (
+  nama_depan: string,
+  nama_belakang: string,
+  no_telepon: string,
+  email: string,
+  tgl_lahir: string,
+  gender: string,
+  alamat: string,
+  provinsi: string,
+  kecamatan: string,
+  kota: string,
+  kode_pos: number,
+  token: string,
+  token_type: string
+) => {
+  return axios.put(
+    `user/update`,
+    {
+      nama_depan,
+      nama_belakang,
+      no_telepon,
+      email,
+      tgl_lahir,
+      gender,
+      alamat,
+      provinsi,
+      kecamatan,
+      kota,
+      kode_pos,
+    },
+    {
+      headers: {
+        Authorization: `${token_type} ${token}`,
+      },
+    }
+  );
+};
+
+export const uploadFotoProfil = (
+  foto_profil: FormData,
+  token: string,
+  token_type: string
+) => {
+  return axios.post("/user/uploadFotoProfil", foto_profil, {
+    headers: {
+      Authorization: `${token_type} ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+export const uploadFileMember = (
+  form: FormData,
+  token: string,
+  token_type: string
+) => {
+  return axios.post("/user/uploadFileMember", form, {
+    headers: {
+      Authorization: `${token_type} ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };

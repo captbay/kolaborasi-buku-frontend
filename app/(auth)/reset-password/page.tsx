@@ -152,7 +152,7 @@ export default function ResetPassword() {
               </div>
               {errorMessagePassword && (
                 <div
-                  className="flex h-8 items-end space-x-1"
+                  className="flex h-8 items-center space-x-1 mt-2"
                   aria-live="polite"
                   aria-atomic="true"
                 >
@@ -184,7 +184,7 @@ export default function ResetPassword() {
               </div>
               {errorMessagePasswordConfirm && (
                 <div
-                  className="flex h-8 items-end space-x-1"
+                  className="flex h-8 items-center space-x-1 mt-2"
                   aria-live="polite"
                   aria-atomic="true"
                 >
@@ -202,7 +202,7 @@ export default function ResetPassword() {
           </Button>
           {errorMessage && (
             <div
-              className="flex h-8 items-end space-x-1"
+              className="flex h-8 items-center space-x-1 mt-2"
               aria-live="polite"
               aria-atomic="true"
             >

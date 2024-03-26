@@ -11,7 +11,7 @@ import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "../button";
 import { useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
-import { login } from "@/app/lib/actions";
+import { login, resendEmailVerification } from "@/app/lib/actions";
 import Link from "next/link";
 import Logo from "../penerbitan-buku-logo";
 import { FormEvent } from "react";
@@ -121,6 +121,35 @@ export default function LoginForm() {
     }
   };
 
+  // handle resend email verification
+  const handleResendEmailVerification = async () => {
+    // toast loading
+    const loading = toast.loading("Mengirim ulang email verifikasi...");
+
+    const email: string = emailRef.current?.value as string;
+    try {
+      // send email verification
+      const res = await resendEmailVerification(email);
+      if (res.status === 200 || res.status === 201) {
+        toast.update(loading, {
+          render: "Email verifikasi berhasil dikirim!",
+          type: "success",
+          autoClose: 5000,
+          closeButton: true,
+          isLoading: false,
+        });
+      }
+    } catch (error: any) {
+      toast.update(loading, {
+        render: "Terjadi Kesalahan!",
+        type: "error",
+        autoClose: 5000,
+        closeButton: true,
+        isLoading: false,
+      });
+    }
+  };
+
   return (
     <section className="rounded-lg bg-primaryCard px-6 pb-4 pt-8 mx-4 lg:mx-0 lg:w-[400px]">
       <div className="mb-4 flex justify-center">
@@ -156,7 +185,7 @@ export default function LoginForm() {
               </div>
               {errorMessageMail && (
                 <div
-                  className="flex h-8 items-end space-x-1"
+                  className="flex h-8 items-center space-x-1 mt-2"
                   aria-live="polite"
                   aria-atomic="true"
                 >
@@ -188,7 +217,7 @@ export default function LoginForm() {
               </div>
               {errorMessagePassword && (
                 <div
-                  className="flex h-8 items-end space-x-1"
+                  className="flex h-8 items-center space-x-1 mt-2"
                   aria-live="polite"
                   aria-atomic="true"
                 >
@@ -219,7 +248,7 @@ export default function LoginForm() {
               </div>
               <Link
                 href="/lupa-password"
-                className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                className="text-sm font-medium text-primary-600 hover:underline"
               >
                 Lupa Kata Sandi?
               </Link>
@@ -230,12 +259,22 @@ export default function LoginForm() {
           </Button>
           {errorMessage && (
             <div
-              className="flex h-8 items-end space-x-1"
+              className="flex h-8 items-center space-x-1 mt-2"
               aria-live="polite"
               aria-atomic="true"
             >
               <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
               <p className="text-sm text-dangerColor">{errorMessage}</p>
+            </div>
+          )}
+          {errorMessage === "Email Anda Belum Terverifikasi!" && (
+            <div
+              className="flex items-center justify-center my-2 hover:cursor-pointer"
+              onClick={handleResendEmailVerification}
+            >
+              <p className="text-sm text-dangerColor font-medium text-primary-600 hover:underline">
+                Kirim Ulang Email Verifikasi
+              </p>
             </div>
           )}
         </div>

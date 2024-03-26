@@ -4,9 +4,23 @@
 export type User = {
   id: string;
   nama_lengkap: string;
+  nama_depan: string;
+  nama_belakang: string;
   email: string;
+  no_telepon: string;
+  tgl_lahir: string;
+  gender: string;
+  alamat: string;
+  provinsi: string;
+  kecamatan: string;
+  kota: string;
+  kode_pos: string;
   foto_profil: string;
+  file_cv: string;
+  file_ktp: string;
+  file_ttd: string;
   role: string;
+  status_verif_email: boolean;
 };
 
 // event

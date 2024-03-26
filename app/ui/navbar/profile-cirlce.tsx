@@ -28,7 +28,7 @@ export default function ProfileCircle({
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
             clearCookie();
-            setTimeout(() => window.location.reload(), 2000);
+            window.location.reload();
             toast.success("Berhasil Keluar");
           }
         })

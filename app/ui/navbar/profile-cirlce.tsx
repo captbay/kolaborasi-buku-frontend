@@ -6,7 +6,7 @@ import { Avatar, Dropdown } from "flowbite-react";
 import useGetCookie from "@/app/lib/useGetCookies";
 import { logout } from "@/app/lib/actions";
 import { toast } from "react-toastify";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
 import Image from "next/image";
 
@@ -20,6 +20,7 @@ export default function ProfileCircle({
   email: string;
 }) {
   const { token, token_type, clearCookie } = useGetCookie();
+  const router = useRouter();
   const pathname = usePathname();
 
   const handleLogout = () => {
@@ -28,7 +29,7 @@ export default function ProfileCircle({
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
             clearCookie();
-            window.location.reload();
+            router.refresh();
             toast.success("Berhasil Keluar");
           }
         })

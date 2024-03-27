@@ -23,6 +23,27 @@ export async function getUser(id: string, token: string, token_type: string) {
 }
 
 /*
+  Notifikasi
+  */
+export async function getNotifikasi(token: string, token_type: string) {
+  noStore();
+  return await axios
+    .get("user/notifikasi", {
+      headers: {
+        Authorization: token_type + " " + token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+/*
  event
  */
 export async function getEvent() {

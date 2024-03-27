@@ -4,7 +4,7 @@ import { Sidebar } from "flowbite-react";
 import useGetCookie from "@/app/lib/useGetCookies";
 import { logout, uploadFotoProfil } from "@/app/lib/actions";
 import { toast } from "react-toastify";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import clsx from "clsx";
 import { PencilIcon } from "@heroicons/react/20/solid";
 import Image from "next/image";
@@ -23,6 +23,7 @@ export default function SidebarProfile({
 }) {
   const { token, token_type, clearCookie } = useGetCookie();
   const pathname = usePathname();
+  const router = useRouter();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
@@ -70,7 +71,7 @@ export default function SidebarProfile({
             autoClose: 5000,
             isLoading: false,
           });
-          setTimeout(() => window.location.reload(), 3000);
+          router.refresh();
         }
       } catch (error: any) {
         toast.update(loading, {
@@ -93,7 +94,7 @@ export default function SidebarProfile({
         .then((res) => {
           if (res.status === 200 || res.status === 201) {
             clearCookie();
-            window.location.reload();
+            router.refresh();
             toast.success("Berhasil Keluar");
           }
         })

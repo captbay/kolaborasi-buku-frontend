@@ -42,7 +42,9 @@ export default async function ProfileLayout({
           />
         </Suspense>
       </section>
-      <section className="w-full rounded-md bg-whiteColor">{children}</section>
+      <section className="w-full rounded-md bg-whiteColor h-fit">
+        {children}
+      </section>
     </section>
   );
 }

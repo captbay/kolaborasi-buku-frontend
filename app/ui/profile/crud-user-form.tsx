@@ -9,6 +9,8 @@ import { KeyIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { gantiPassword, updateUser, uploadFileMember } from "@/app/lib/actions";
 import useGetCookie from "@/app/lib/useGetCookies";
 import { User } from "@/app/lib/definitions";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const customTheme: CustomFlowbiteTheme = {
   tabs: {
@@ -41,12 +43,13 @@ const customTheme: CustomFlowbiteTheme = {
         fullWidth: "",
       },
     },
-    tabpanel: "py-3",
+    tabpanel: "py-4",
   },
 };
 
 export default function CrudUserForm({ data }: { data: User }) {
-  const { token, token_type, id, clearCookie } = useGetCookie();
+  const { token, token_type, clearCookie } = useGetCookie();
+  const router = useRouter();
 
   return (
     <Flowbite theme={{ theme: customTheme }}>
@@ -57,6 +60,7 @@ export default function CrudUserForm({ data }: { data: User }) {
             token_type={token_type}
             data={data}
             clearCookie={clearCookie}
+            router={router}
           />
         </Tabs.Item>
         {data.role === "CUSTOMER" ? (
@@ -73,6 +77,7 @@ export default function CrudUserForm({ data }: { data: User }) {
             token={token}
             token_type={token_type}
             clearCookie={clearCookie}
+            router={router}
           />
         </Tabs.Item>
         {/* <Tabs.Item disabled title="Disabled">
@@ -89,11 +94,13 @@ function FormEdit({
   token_type,
   data,
   clearCookie,
+  router,
 }: {
   token: string;
   token_type: string;
   data: User;
   clearCookie: () => void;
+  router: any;
 }) {
   // ref form
   const firstNameRef = useRef<HTMLInputElement>(null);
@@ -187,7 +194,7 @@ function FormEdit({
 
           // clear cookie
           clearCookie();
-          window.location.reload();
+          router.refresh();
         } else {
           toast.update(loading, {
             render: "Data Berhasil Diubah!",
@@ -682,10 +689,12 @@ function FormGantiPassword({
   token,
   token_type,
   clearCookie,
+  router,
 }: {
   token: string;
   token_type: string;
   clearCookie: () => void;
+  router: any;
 }) {
   // refs
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -734,7 +743,7 @@ function FormGantiPassword({
 
         // clear cookie
         clearCookie();
-        window.location.reload();
+        router.refresh();
       }
     } catch (error: any) {
       toast.update(loading, {
@@ -989,117 +998,189 @@ function FormMember({
 
   return (
     <section className="px-8">
-      <form onSubmit={handleUploadFile} className="space-y-3">
-        <div className="w-full">
-          <div>
-            <label
-              className="mb-3 mt-5 block text-xs font-medium text-blackColor"
-              htmlFor="filecv"
+      {data.role === "CUSTOMER" &&
+      data.file_cv != null &&
+      data.file_ktp != null &&
+      data.file_ttd != null ? (
+        <div className="flex flex-col items-center justify-center">
+          <p className="text-lg font-semibold text-blackColor">
+            Anda Telah Mengunggah File Verifikasi Member, Silahkan Tunggu
+          </p>
+          <div className="flex flex-col items-center justify-center mt-4">
+            <Link
+              href={`http://kolaborasi-buku-backend.test/storage/${data.file_cv}`}
+              target="_blank"
+              rel="noreferrer"
             >
-              File CV
-            </label>
-            <div className="relative">
-              <input
-                id="filecv"
-                type="file"
-                accept=".pdf , .doc , .docx"
-                name="filecv"
-                placeholder="Masukan File CV anda"
-                onChange={(e) => {
-                  setFileCv(e.target.files?.[0]);
-                }}
-              />
-            </div>
-            {errorMessageFileCv && (
-              <div
-                className="flex h-8 items-center space-x-1 mt-2"
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
-                <p className="text-sm text-dangerColor">{errorMessageFileCv}</p>
-              </div>
-            )}
-          </div>
-          <div className="mt-4">
-            <label
-              className="mb-3 mt-5 block text-xs font-medium text-blackColor"
-              htmlFor="filektp"
+              <Button className="w-full">Lihat File CV</Button>
+            </Link>
+            <Link
+              href={`http://kolaborasi-buku-backend.test/storage/${data.file_ktp}`}
+              target="_blank"
+              rel="noreferrer"
             >
-              File KTP
-            </label>
-            <div className="relative">
-              <input
-                id="filektp"
-                type="file"
-                accept="image/jpeg, image/png, image/jpg, .pdf , .doc , .docx"
-                name="filektp"
-                placeholder="Masukan File KTP anda"
-                onChange={(e) => {
-                  setFileKtp(e.target.files?.[0]);
-                }}
-              />
-            </div>
-            {errorMessageFileKtp && (
-              <div
-                className="flex h-8 items-center space-x-1 mt-2"
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
-                <p className="text-sm text-dangerColor">
-                  {errorMessageFileKtp}
-                </p>
-              </div>
-            )}
-          </div>
-          <div className="mt-4">
-            <label
-              className="mb-3 mt-5 block text-xs font-medium text-blackColor"
-              htmlFor="filettd"
+              <Button className="w-full mt-4">Lihat File KTP</Button>
+            </Link>
+            <Link
+              href={`http://kolaborasi-buku-backend.test/storage/${data.file_ttd}`}
+              target="_blank"
+              rel="noreferrer"
             >
-              File Tanda Tangan Anda
-            </label>
-            <div className="relative">
-              <input
-                id="filettd"
-                type="file"
-                accept="image/png"
-                name="filettd"
-                placeholder="Masukan File Tanda Tangan anda"
-                onChange={(e) => {
-                  setFileTtd(e.target.files?.[0]);
-                }}
-              />
-            </div>
-            {errorMessageFileTtd && (
-              <div
-                className="flex h-8 items-center space-x-1 mt-2"
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
-                <p className="text-sm text-dangerColor">
-                  {errorMessageFileTtd}
-                </p>
-              </div>
-            )}
+              <Button className="w-full mt-4">Lihat File Tanda Tangan</Button>
+            </Link>
           </div>
         </div>
-        <Button className="mt-4 w-full" type="submit">
-          Simpan
-        </Button>
-        {errorMessage && (
-          <div
-            className="flex h-8 items-center space-x-1 mt-2"
-            aria-live="polite"
-            aria-atomic="true"
-          >
-            <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
-            <p className="text-sm text-dangerColor">{errorMessage}</p>
+      ) : data.role === "MEMBER" ? (
+        <div className="flex flex-col items-center justify-center">
+          <p className="text-lg font-semibold text-blackColor">
+            Anda Telah Menjadi Member, Ayo Berkolaborasi Bersama Kami
+          </p>
+          <div className="flex flex-col items-center justify-center mt-4">
+            <Link
+              href={`http://kolaborasi-buku-backend.test/storage/${data.file_cv}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Button className="w-full">Lihat File CV</Button>
+            </Link>
+            <Link
+              href={`http://kolaborasi-buku-backend.test/storage/${data.file_ktp}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Button className="w-full mt-4">Lihat File KTP</Button>
+            </Link>
+            <Link
+              href={`http://kolaborasi-buku-backend.test/storage/${data.file_ttd}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Button className="w-full mt-4">Lihat File Tanda Tangan</Button>
+            </Link>
           </div>
-        )}
-      </form>
+        </div>
+      ) : (
+        <section>
+          <div className="flex flex-col items-center justify-center">
+            <p className="text-lg font-semibold text-blackColor">
+              Silahkan Mengunggah File Untuk Verifikasi
+            </p>
+          </div>
+          <form onSubmit={handleUploadFile} className="space-y-3">
+            <div className="w-full">
+              <div>
+                <label
+                  className="mb-3 mt-5 block text-xs font-medium text-blackColor"
+                  htmlFor="filecv"
+                >
+                  File CV
+                </label>
+                <div className="relative">
+                  <input
+                    id="filecv"
+                    type="file"
+                    accept=".pdf , .doc , .docx"
+                    name="filecv"
+                    placeholder="Masukan File CV anda"
+                    onChange={(e) => {
+                      setFileCv(e.target.files?.[0]);
+                    }}
+                  />
+                </div>
+                {errorMessageFileCv && (
+                  <div
+                    className="flex h-8 items-center space-x-1 mt-2"
+                    aria-live="polite"
+                    aria-atomic="true"
+                  >
+                    <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
+                    <p className="text-sm text-dangerColor">
+                      {errorMessageFileCv}
+                    </p>
+                  </div>
+                )}
+              </div>
+              <div className="mt-4">
+                <label
+                  className="mb-3 mt-5 block text-xs font-medium text-blackColor"
+                  htmlFor="filektp"
+                >
+                  File KTP
+                </label>
+                <div className="relative">
+                  <input
+                    id="filektp"
+                    type="file"
+                    accept="image/jpeg, image/png, image/jpg, .pdf , .doc , .docx"
+                    name="filektp"
+                    placeholder="Masukan File KTP anda"
+                    onChange={(e) => {
+                      setFileKtp(e.target.files?.[0]);
+                    }}
+                  />
+                </div>
+                {errorMessageFileKtp && (
+                  <div
+                    className="flex h-8 items-center space-x-1 mt-2"
+                    aria-live="polite"
+                    aria-atomic="true"
+                  >
+                    <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
+                    <p className="text-sm text-dangerColor">
+                      {errorMessageFileKtp}
+                    </p>
+                  </div>
+                )}
+              </div>
+              <div className="mt-4">
+                <label
+                  className="mb-3 mt-5 block text-xs font-medium text-blackColor"
+                  htmlFor="filettd"
+                >
+                  File Tanda Tangan Anda
+                </label>
+                <div className="relative">
+                  <input
+                    id="filettd"
+                    type="file"
+                    accept="image/png"
+                    name="filettd"
+                    placeholder="Masukan File Tanda Tangan anda"
+                    onChange={(e) => {
+                      setFileTtd(e.target.files?.[0]);
+                    }}
+                  />
+                </div>
+                {errorMessageFileTtd && (
+                  <div
+                    className="flex h-8 items-center space-x-1 mt-2"
+                    aria-live="polite"
+                    aria-atomic="true"
+                  >
+                    <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
+                    <p className="text-sm text-dangerColor">
+                      {errorMessageFileTtd}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+            <Button className="mt-4 w-full" type="submit">
+              Simpan
+            </Button>
+            {errorMessage && (
+              <div
+                className="flex h-8 items-center space-x-1 mt-2"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
+                <p className="text-sm text-dangerColor">{errorMessage}</p>
+              </div>
+            )}
+          </form>
+        </section>
+      )}
     </section>
   );
 }

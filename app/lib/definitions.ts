@@ -1,5 +1,21 @@
 // definisi var yang masuk
 
+// NotifikasiResponse
+export type NotifikasiResponse = {
+  count_not_read: number;
+  data: Notifikasi[];
+};
+
+// Notifikasi
+export type Notifikasi = {
+  notif_id: string;
+  actions: string;
+  title: string;
+  body: string;
+  is_read: boolean;
+  created_at: string;
+};
+
 // user
 export type User = {
   id: string;

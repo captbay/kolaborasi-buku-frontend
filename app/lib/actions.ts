@@ -139,3 +139,21 @@ export const uploadFileMember = (
     },
   });
 };
+
+// delete notifikasi
+export const deleteNotifikasi = (token: string, token_type: string) => {
+  return axios.delete("user/notifikasi/delete", {
+    headers: {
+      Authorization: `${token_type} ${token}`,
+    },
+  });
+};
+
+// read notifikasi
+export const readNotifikasi = (token: string, token_type: string) => {
+  return axios.put("user/notifikasi/read", null, {
+    headers: {
+      Authorization: `${token_type} ${token}`,
+    },
+  });
+};

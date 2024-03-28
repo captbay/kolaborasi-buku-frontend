@@ -157,3 +157,22 @@ export const readNotifikasi = (token: string, token_type: string) => {
     },
   });
 };
+
+// add keranjang
+export const addKeranjang = (
+  buku_dijual_id: string,
+  token: string,
+  token_type: string
+) => {
+  return axios.post(
+    "keranjang/add",
+    {
+      buku_dijual_id,
+    },
+    {
+      headers: {
+        Authorization: `${token_type} ${token}`,
+      },
+    }
+  );
+};

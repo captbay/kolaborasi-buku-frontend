@@ -14,6 +14,8 @@ import { Button } from "@/app/ui/button";
 import { CardData, getDetailBukuResponse } from "@/app/lib/definitions";
 import { formatCurrency } from "../../../lib/utils";
 import { Suspense } from "react";
+import { toast } from "react-toastify";
+import CardBuy from "@/app/ui/koleksi-buku/detail/transaksi/cardBuy";
 
 type Props = {
   params: { slug: string };
@@ -139,20 +141,10 @@ export default async function Page({ params }: Props) {
               </div>
             </div>
             <div className="lg:ml-8 lg:w-1/4 h-fit lg:sticky lg:top-[182px]">
-              <div className="bg-white border border-gray-200 rounded-lg min-w-full">
-                <div className="flex flex-col m-6">
-                  <h2 className="text-2xl font-semibold tracking-tight text-blackColor">
-                    Harga
-                  </h2>
-                  <div className="flex justify-between mt-4">
-                    <h3 className="text-base font-semibold tracking-tight text-blackColor">
-                      {formatCurrency(detailBuku.harga)}
-                    </h3>
-                  </div>
-                  <Button className="mt-4">Tambah ke Keranjang</Button>
-                  <Button className="mt-4">Beli Sekarang</Button>
-                </div>
-              </div>
+              <CardBuy
+                harga={formatCurrency(detailBuku.harga)}
+                buku_dijual_id={detailBuku.id}
+              />
             </div>
           </div>
         </section>

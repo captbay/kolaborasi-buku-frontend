@@ -72,6 +72,7 @@ export type CardData = {
 
 // Get Detail Buku Dijual
 export type getDetailBukuResponse = {
+  id: string;
   isbn: string;
   slug: string;
   judul: string;
@@ -118,6 +119,7 @@ export type CardKolaborasiData = {
 
 // Get Detail Buku Kolaborasi
 export type getDetailBukuKolaborasiResponse = {
+  id: string;
   slug: string;
   judul: string;
   deskripsi: string;

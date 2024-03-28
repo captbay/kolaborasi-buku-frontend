@@ -8,9 +8,8 @@ import Notification from "@/app/ui/navbar/notification";
 import Search from "../search";
 import { Suspense } from "react";
 import { cookies } from "next/headers";
-import { User, NotifikasiResponse } from "@/app/lib/definitions";
-import { getUser, getNotifikasi } from "@/app/lib/data";
-import { revalidateTag } from "next/cache";
+import { User } from "@/app/lib/definitions";
+import { getUser } from "@/app/lib/data";
 
 export default async function TopNav() {
   const cookieStore = cookies();
@@ -24,7 +23,6 @@ export default async function TopNav() {
       };
 
   const user: User = await getUser(id, token, token_type);
-  const notifikasi: NotifikasiResponse = await getNotifikasi(token, token_type);
 
   return (
     <div className="sticky top-0 w-full bg-whiteColor px-14 lg:px-28 z-20">
@@ -72,11 +70,7 @@ export default async function TopNav() {
             {/* notification */}
             {cookie && (
               <div className="hidden px-1 ml-4 lg:inline-flex">
-                <Notification
-                  data={notifikasi}
-                  token={token}
-                  token_type={token_type}
-                />
+                <Notification />
               </div>
             )}
             {/* login */}

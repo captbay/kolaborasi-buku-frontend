@@ -30,9 +30,10 @@ const useGetCookie = () => {
   };
 
   return {
-    id: cookie?.id,
+    id: cookie?.id || (cookieData && JSON.parse(cookieData)?.id),
     token: cookie?.token || (cookieData && JSON.parse(cookieData)?.token),
-    token_type: cookie?.token_type,
+    token_type:
+      cookie?.token_type || (cookieData && JSON.parse(cookieData)?.token_type),
     clearCookie,
   };
 };

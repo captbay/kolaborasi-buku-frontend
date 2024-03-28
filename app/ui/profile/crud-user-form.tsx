@@ -65,11 +65,21 @@ export default function CrudUserForm({ data }: { data: User }) {
         </Tabs.Item>
         {data.role === "CUSTOMER" ? (
           <Tabs.Item active title="Daftar Member">
-            <FormMember token={token} token_type={token_type} data={data} />
+            <FormMember
+              token={token}
+              token_type={token_type}
+              data={data}
+              router={router}
+            />
           </Tabs.Item>
         ) : (
           <Tabs.Item active title="Data Member">
-            <FormMember token={token} token_type={token_type} data={data} />
+            <FormMember
+              token={token}
+              token_type={token_type}
+              data={data}
+              router={router}
+            />
           </Tabs.Item>
         )}
         <Tabs.Item title="Ganti Kata Sandi">
@@ -905,10 +915,12 @@ function FormMember({
   token,
   token_type,
   data,
+  router,
 }: {
   token: string;
   token_type: string;
   data: User;
+  router: any;
 }) {
   // refs
   const [fileCv, setFileCv] = useState<File | undefined>();
@@ -949,6 +961,7 @@ function FormMember({
             autoClose: 5000,
             isLoading: false,
           });
+          router.refresh();
         }
       } catch (error: any) {
         toast.update(loading, {

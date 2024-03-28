@@ -31,7 +31,6 @@ export default function SidebarProfile({
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      console.log(file);
       // if file size is more than 2MB
       if (file.size > 2097152) {
         toast.error("Ukuran file terlalu besar, maksimal 2MB");

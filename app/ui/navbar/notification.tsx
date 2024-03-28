@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Dropdown } from "flowbite-react";
 import {
@@ -10,23 +10,50 @@ import {
   EyeSlashIcon,
 } from "@heroicons/react/24/outline";
 import { BellAlertIcon } from "@heroicons/react/24/solid";
-import { Notifikasi, NotifikasiResponse } from "@/app/lib/definitions";
+import { NotifikasiResponse } from "@/app/lib/definitions";
 import { deleteNotifikasi, readNotifikasi } from "@/app/lib/actions";
 import { toast } from "react-toastify";
+import { getNotifikasi } from "@/app/lib/data";
 import clsx from "clsx";
+import useGetCookie from "@/app/lib/useGetCookies";
+import { pusher } from "@/app/lib/pusher/clientEvent";
 
-export default function Notification({
-  data,
-  token,
-  token_type,
-}: {
-  data: NotifikasiResponse;
-  token: string;
-  token_type: string;
-}) {
-  // state for read notif
-  const [readNotif, setReadNotif] = useState<number>(data.count_not_read);
-  const [dataNotif, setDataNotif] = useState<Notifikasi[]>(data.data);
+export default function Notification() {
+  // initial
+  const [data, setData] = useState<NotifikasiResponse>({
+    count_not_read: 0,
+    data: [],
+  });
+  const { token, token_type, id } = useGetCookie();
+  const [isClient, setIsClient] = useState(false);
+
+  // get notifikasi
+  const getNotif = async () => {
+    const notifikasi: NotifikasiResponse = await getNotifikasi(
+      token,
+      token_type
+    );
+    setData(notifikasi);
+  };
+
+  // use effect
+  useEffect(() => {
+    setIsClient(true);
+
+    getNotif();
+
+    const channel = pusher(token, token_type).subscribe(
+      "private-App.Models.User." + id
+    );
+
+    channel.bind("database-notifications.sent", function (data: any) {
+      getNotif();
+    });
+
+    channel.bind("pusher:subscription_succeeded", function (members: any) {
+      // alert("successfully subscribed!");
+    });
+  }, [token, token_type, id]);
 
   const handleClearNotifications = async () => {
     // toast loading register
@@ -42,8 +69,7 @@ export default function Notification({
           closeButton: true,
           isLoading: false,
         });
-        setReadNotif(0);
-        setDataNotif([]);
+        getNotif();
       }
     } catch (error: any) {
       toast.update(loading, {
@@ -70,12 +96,7 @@ export default function Notification({
           closeButton: true,
           isLoading: false,
         });
-        setReadNotif(0);
-        // set all dataNotif.data.is_read to true
-        const newDataNotif = dataNotif.map((notif) => {
-          return { ...notif, is_read: true };
-        });
-        setDataNotif(newDataNotif);
+        getNotif();
       }
     } catch (error: any) {
       toast.update(loading, {
@@ -88,10 +109,10 @@ export default function Notification({
     }
   };
 
-  return (
+  return isClient && token && token_type ? (
     <Dropdown
       label={
-        readNotif > 0 ? (
+        data.count_not_read > 0 ? (
           <div className="relative inline-block">
             <BellAlertIcon className="text-primaryColor w-auto h-6 m-1" />
             <span className="absolute top-0 right-0 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-medium leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
@@ -111,8 +132,8 @@ export default function Notification({
         <h1 className="text-base font-medium text-center">Notifikasi</h1>
       </Dropdown.Header>
       <div className="max-h-60 overflow-y-auto">
-        {dataNotif.length > 0 ? (
-          dataNotif.map((notification, index) => (
+        {data.data.length > 0 ? (
+          data.data.map((notification, index) => (
             <Dropdown.Item
               key={index}
               className={clsx("bg-blue-100", {
@@ -143,7 +164,7 @@ export default function Notification({
           </Dropdown.Item>
         )}
       </div>
-      {dataNotif.length > 0 && (
+      {data.data.length > 0 && (
         <>
           <Dropdown.Divider />
           <Dropdown.Item
@@ -164,5 +185,7 @@ export default function Notification({
         </>
       )}
     </Dropdown>
+  ) : (
+    <BellIcon className="text-primaryColor w-auto h-6" />
   );
 }

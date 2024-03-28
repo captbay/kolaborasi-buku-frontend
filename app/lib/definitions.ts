@@ -9,7 +9,7 @@ export type NotifikasiResponse = {
 // Notifikasi
 export type Notifikasi = {
   notif_id: string;
-  actions: string;
+  actions: [];
   title: string;
   body: string;
   is_read: boolean;

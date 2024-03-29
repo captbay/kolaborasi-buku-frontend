@@ -1,7 +1,7 @@
 import Link from "next/link";
 import NavLinks from "@/app/ui/navbar/nav-links";
 import Logo from "@/app/ui/penerbitan-buku-logo";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { Button } from "@/app/ui/button";
 import ProfileCircle from "@/app/ui/navbar/profile-cirlce";
 import Notification from "@/app/ui/navbar/notification";

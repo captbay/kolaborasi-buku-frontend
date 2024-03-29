@@ -20,7 +20,7 @@ export function KoleksiBukuBerandaSkeleton() {
 
 export function ProdukTerlarisSkeleton() {
   return (
-    <section className="flex flex-col justify-center items-center">
+    <section className={`${shimmer} flex flex-col justify-center items-center`}>
       <div className="flex w-full justify-between items-center mb-4 lg:px-8">
         <div className="bg-gray-200 h-5 w-full"></div>
         <div className="flex space-x-2">
@@ -98,6 +98,57 @@ export function FilterBukuSkeleton() {
       <div className="w-full h-10 bg-gray-200" />
       <div className="w-full h-10 bg-gray-200" />
       <div className="w-full h-10 bg-gray-200" />
+    </section>
+  );
+}
+
+// keranjang
+export function KeranjangSkeleton() {
+  return (
+    <section className="flex flex-col lg:flex-row justify-between gap-8">
+      <div className="flex-1 flex flex-col gap-4">
+        <div className="h-5 bg-gray-200 w-full"></div>
+        <div className="flex flex-col gap-4">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <ItemKeranjangSkeleton key={index} />
+          ))}
+        </div>
+      </div>
+      <div className="flex-[0.5]">
+        <section
+          className={`${shimmer} h-fit relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm w-full `}
+        >
+          <div className="flex flex-col m-6 gap-8">
+            <div className="h-5 w-20 bg-gray-200"></div>
+            <div className="h-5 w-20 bg-gray-200"></div>
+            <div className="h-5 w-20 bg-gray-200"></div>
+          </div>
+        </section>
+      </div>
+    </section>
+  );
+}
+
+// item keranjang
+export function ItemKeranjangSkeleton() {
+  return (
+    <section
+      className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm w-full h-[100px]`}
+    >
+      <div className="flex justify-between items-center">
+        <div className="flex space-x-4 items-center">
+          <div className="h-5 w-5 bg-gray-200"></div>
+          <div className="w-20 h-20 bg-gray-200"></div>
+          <div className="flex flex-col gap-2">
+            <div className="h-5 w-40 bg-gray-200"></div>
+            <div className="h-5 w-20 bg-gray-200"></div>
+            <div className="h-5 w-20 bg-gray-200"></div>
+          </div>
+        </div>
+        <div className="flex flex-col justify-end">
+          <div className="h-5 w-20 bg-gray-200"></div>
+        </div>
+      </div>
     </section>
   );
 }

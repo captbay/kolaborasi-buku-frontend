@@ -7,7 +7,7 @@ import { useDebouncedCallback } from "use-debounce";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { kategoriData } from "../lib/definitions";
 
-export default async function FilterBox({
+export default function FilterBox({
   dataKategori,
 }: {
   dataKategori: kategoriData[];

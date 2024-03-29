@@ -1,5 +1,15 @@
 // definisi var yang masuk
 
+// Keranjang
+export type Keranjang = {
+  keranjang_id: string;
+  buku_dijual_id: string;
+  judul: string;
+  harga: number;
+  kategori: string;
+  cover_buku: string;
+};
+
 // NotifikasiResponse
 export type NotifikasiResponse = {
   count_not_read: number;

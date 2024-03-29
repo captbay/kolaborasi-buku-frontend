@@ -176,3 +176,16 @@ export const addKeranjang = (
     }
   );
 };
+
+// delete keranjang
+export const deleteKeranjang = (
+  keranjang_id: string,
+  token: string,
+  token_type: string
+) => {
+  return axios.delete(`keranjang/delete/${keranjang_id}`, {
+    headers: {
+      Authorization: `${token_type} ${token}`,
+    },
+  });
+};

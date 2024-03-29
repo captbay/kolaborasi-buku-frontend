@@ -44,6 +44,18 @@ export async function getNotifikasi(token: string, token_type: string) {
 }
 
 /*
+  Keranjang
+  */
+export async function getKeranjang(token: string, token_type: string) {
+  noStore();
+  return await axios.get("keranjang/all", {
+    headers: {
+      Authorization: token_type + " " + token,
+    },
+  });
+}
+
+/*
  event
  */
 export async function getEvent() {

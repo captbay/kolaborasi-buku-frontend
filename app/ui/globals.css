@@ -23,6 +23,14 @@ input:focus {
   box-shadow: none !important;
 }
 
+input[type="checkbox"]:checked {
+  background-color: #18415f !important;
+}
+
+input[type="checkbox"] {
+  border-radius: 0.25rem;
+}
+
 select:focus {
   border-color: #18415f !important;
   box-shadow: none !important;

@@ -20,7 +20,7 @@ export function KoleksiBukuBerandaSkeleton() {
 
 export function ProdukTerlarisSkeleton() {
   return (
-    <section className={`${shimmer} flex flex-col justify-center items-center`}>
+    <section className={`flex flex-col justify-center items-center`}>
       <div className="flex w-full justify-between items-center mb-4 lg:px-8">
         <div className="bg-gray-200 h-5 w-full"></div>
         <div className="flex space-x-2">

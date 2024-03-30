@@ -3,8 +3,10 @@
 import { Button } from "@/app/ui/button";
 import React from "react";
 import { toast } from "react-toastify";
-import { addKeranjang } from "@/app/lib/actions";
+import { addKeranjang, addTransaksiBuku } from "@/app/lib/actions";
 import useGetCookie from "@/app/lib/useGetCookies";
+import { useRouter } from "next/navigation";
+import Router from "next/router";
 
 export default function cardBuy({
   harga,
@@ -14,6 +16,7 @@ export default function cardBuy({
   buku_dijual_id: string;
 }) {
   const { token, token_type } = useGetCookie();
+  const router = useRouter();
 
   const handleAddKeranjang = async () => {
     const loading = toast.loading("Sedang Menambahkan ke keranjang...");
@@ -40,7 +43,34 @@ export default function cardBuy({
   };
 
   const handleBeliBuku = async () => {
-    const loading = toast.loading("Mengarahkan ke pembayaran...");
+    const loading = toast.loading("Mengarahkan ke halaman pembayaran...");
+
+    try {
+      const res = await addTransaksiBuku([buku_dijual_id], token, token_type);
+      if (res.status === 200 || res.status === 201) {
+        toast.update(loading, {
+          render: res.data.message,
+          type: "success",
+          autoClose: 5000,
+          isLoading: false,
+        });
+
+        router.push("/summary-transaction");
+
+        // Router.push({
+        //   pathname: "/summary-transaction",
+        //   query: { trx_id: res.data.data },
+        // });
+      }
+    } catch (error: any) {
+      toast.update(loading, {
+        render: error.response.data.message,
+        type: "error",
+        autoClose: 5000,
+        closeButton: true,
+        isLoading: false,
+      });
+    }
   };
 
   return (

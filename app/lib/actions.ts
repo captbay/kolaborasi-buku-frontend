@@ -189,3 +189,22 @@ export const deleteKeranjang = (
     },
   });
 };
+
+// add transaksi buku
+export const addTransaksiBuku = (
+  buku_dijual: Array<string>,
+  token: string,
+  token_type: string
+) => {
+  return axios.post(
+    "transaksi-buku-dijual/add",
+    {
+      buku_dijual,
+    },
+    {
+      headers: {
+        Authorization: `${token_type} ${token}`,
+      },
+    }
+  );
+};

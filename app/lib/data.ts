@@ -19,6 +19,9 @@ export async function getUser(id: string, token: string, token_type: string) {
     })
     .catch((error) => {
       console.error(error);
+      if (error.response.data.message === "Unauthenticated.") {
+        return null;
+      }
     });
 }
 

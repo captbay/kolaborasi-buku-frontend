@@ -121,6 +121,7 @@ export type getDetailBukuResponse = {
   testimoni_pembeli: TestimoniDetail[];
   gallery_foto: GalleryFoto[];
   isDibeli: boolean;
+  isTransaksi: boolean;
 };
 
 export type TestimoniDetail = {

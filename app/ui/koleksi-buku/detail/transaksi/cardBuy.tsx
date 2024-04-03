@@ -12,10 +12,12 @@ export default function cardBuy({
   harga,
   buku_dijual_id,
   isDibeli,
+  isTransaksi,
 }: {
   harga: string;
   buku_dijual_id: string;
   isDibeli: boolean;
+  isTransaksi: boolean;
 }) {
   const { token, token_type } = useGetCookie();
   const router = useRouter();
@@ -90,10 +92,14 @@ export default function cardBuy({
             {harga}
           </h3>
         </div>
-        {isDibeli ? (
-          <Button className="mt-4">
-            <Link href="/profil/koleksi-buku-saya">
-              Buku sudah dibeli, menuju koleksi buku
+        {isDibeli && isTransaksi ? (
+          <Button className="mt-4 bg-yellow-500">
+            <Link href="/profil/koleksi-buku-saya">Buku sudah dibeli</Link>
+          </Button>
+        ) : isTransaksi ? (
+          <Button className="mt-4 bg-yellow-500">
+            <Link href="/profil/transaksi-pembelian-buku">
+              Buku sedang dalam transaksi
             </Link>
           </Button>
         ) : token != null ? (

@@ -159,6 +159,7 @@ export default async function Page({ params }: Props) {
                 harga={formatCurrency(detailBuku.harga)}
                 buku_dijual_id={detailBuku.id}
                 isDibeli={detailBuku.isDibeli}
+                isTransaksi={detailBuku.isTransaksi}
               />
             </div>
           </div>

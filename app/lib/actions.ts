@@ -75,6 +75,16 @@ export const gantiPassword = (
   );
 };
 
+// hubungi-kami
+export const hubungiKami = (
+  nama: string,
+  email: string,
+  subjek: string,
+  pesan: string
+) => {
+  return axios.post("/auth/hubungi-kami", { nama, email, subjek, pesan });
+};
+
 // update User
 export const updateUser = (
   nama_depan: string,

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Tabs } from "flowbite-react";
 import type { CustomFlowbiteTheme } from "flowbite-react";
 import { Flowbite } from "flowbite-react";
@@ -11,6 +11,8 @@ import Link from "next/link";
 import clsx from "clsx";
 import TimerOnly from "@/app/ui/profile/timerOnly";
 import { formatCurrency } from "../../lib/utils";
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
+import { generatePagination } from "@/app/lib/utils";
 
 const customTheme: CustomFlowbiteTheme = {
   tabs: {
@@ -118,9 +120,32 @@ export default function TransaksiPembelianBuku({
 }
 
 function ListTrxProgress({ data }: { data: getTrxPenjualanBukuResponse[] }) {
+  const itemsPerPage = 10;
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const allPages = generatePagination(currentPage, totalPages);
+
+  const paginatedData = data.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
     <section className="space-y-4">
-      {data.map((trx, index) => (
+      {paginatedData.map((trx, index) => (
         <Link href={"/pembelian-buku?token_trx=" + trx.trx_id} key={index}>
           <div className="bg-white p-4 m-4 rounded-lg shadow-md flex flex-col gap-8">
             <div className="flex flex-col lg:flex-row justify-between">
@@ -177,6 +202,110 @@ function ListTrxProgress({ data }: { data: getTrxPenjualanBukuResponse[] }) {
           </div>
         </Link>
       ))}
+      <div className="mt-5 flex w-full justify-center">
+        {totalPages > 1 && (
+          <div className="flex items-center">
+            <PaginationArrow
+              onClick={handlePrevPage}
+              direction="left"
+              isDisabled={currentPage === 1}
+            />
+            {allPages.map((page, index) => {
+              let position: "first" | "last" | "single" | "middle" | undefined;
+
+              if (index === 0) position = "first";
+              if (index === allPages.length - 1) position = "last";
+              if (allPages.length === 1) position = "single";
+              if (page === "...") position = "middle";
+
+              return (
+                <PaginationNumber
+                  key={page}
+                  onClick={() => {
+                    if (typeof page === "number") {
+                      handlePageChange(page);
+                    }
+                  }}
+                  page={page}
+                  position={position}
+                  isActive={currentPage === page}
+                />
+              );
+            })}
+            <PaginationArrow
+              onClick={handleNextPage}
+              direction="right"
+              isDisabled={currentPage === totalPages}
+            />
+          </div>
+        )}
+      </div>
     </section>
+  );
+}
+
+function PaginationNumber({
+  page,
+  onClick,
+  isActive,
+  position,
+}: {
+  page: number | string;
+  onClick: () => void;
+  position?: "first" | "last" | "middle" | "single";
+  isActive: boolean;
+}) {
+  const className = clsx(
+    "flex h-10 w-10 items-center justify-center text-sm border",
+    {
+      "rounded-l-md": position === "first" || position === "single",
+      "rounded-r-md": position === "last" || position === "single",
+      "z-10 bg-primaryColor border-primaryColor text-whiteColor": isActive,
+      "hover:bg-gray-100": !isActive && position !== "middle",
+      "text-gray-300": position === "middle",
+    }
+  );
+
+  return isActive || position === "middle" ? (
+    <div className={className}>{page}</div>
+  ) : (
+    <button onClick={onClick} className={className}>
+      {page}
+    </button>
+  );
+}
+
+function PaginationArrow({
+  onClick,
+  direction,
+  isDisabled,
+}: {
+  onClick: () => void;
+  direction: "left" | "right";
+  isDisabled?: boolean;
+}) {
+  const className = clsx(
+    "flex h-10 w-10 items-center justify-center rounded-md border",
+    {
+      "pointer-events-none text-gray-300": isDisabled,
+      "hover:bg-gray-100": !isDisabled,
+      "mr-2 lg:mr-4": direction === "left",
+      "ml-2 lg:ml-4": direction === "right",
+    }
+  );
+
+  const icon =
+    direction === "left" ? (
+      <ArrowLeftIcon className="w-4" />
+    ) : (
+      <ArrowRightIcon className="w-4" />
+    );
+
+  return isDisabled ? (
+    <div className={className}>{icon}</div>
+  ) : (
+    <button className={className} onClick={onClick}>
+      {icon}
+    </button>
   );
 }

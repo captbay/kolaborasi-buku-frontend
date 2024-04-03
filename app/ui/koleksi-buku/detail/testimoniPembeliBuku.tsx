@@ -13,7 +13,7 @@ export default function TestimoniPembeliBuku({
 }: {
   data: TestimoniDetail[];
 }) {
-  const itemsPerPage = 1;
+  const itemsPerPage = 10;
   const totalPages = Math.ceil(data.length / itemsPerPage);
   const [currentPage, setCurrentPage] = useState(1);
 

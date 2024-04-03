@@ -40,7 +40,7 @@ export default async function cardBabBuku({
           // disabled button
           <button
             className="flex w-full mt-2 h-10 items-center justify-center rounded-lg
-             bg-disableColor px-4 text-sm font-medium text-whiteColor"
+             bg-disableColor px-4 text-sm font-medium text-whiteColor cursor-not-allowed"
             disabled
           >
             Terjual

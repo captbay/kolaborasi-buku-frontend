@@ -208,3 +208,41 @@ export const addTransaksiBuku = (
     }
   );
 };
+
+// delete transaksi buku
+export const updateStatusTransaksiBuku = (
+  transaksi_buku_id: string,
+  token: string,
+  token_type: string
+) => {
+  return axios.put(
+    `transaksi-buku-dijual/gagal`,
+    {
+      transaksi_buku_id,
+    },
+    {
+      headers: {
+        Authorization: `${token_type} ${token}`,
+      },
+    }
+  );
+};
+
+// upload bukti bayar pembelian buku
+export const uploadBuktiBayarPembelianBuku = (
+  transaksi_buku_id: string,
+  form: FormData,
+  token: string,
+  token_type: string
+) => {
+  return axios.post(
+    `transaksi-buku-dijual/upload-bukti-pembayaran/${transaksi_buku_id}`,
+    form,
+    {
+      headers: {
+        Authorization: `${token_type} ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+};

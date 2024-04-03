@@ -64,7 +64,7 @@ export default function CrudUserForm({ data }: { data: User }) {
           />
         </Tabs.Item>
         {data.role === "CUSTOMER" ? (
-          <Tabs.Item active title="Daftar Member">
+          <Tabs.Item title="Daftar Member">
             <FormMember
               token={token}
               token_type={token_type}
@@ -73,7 +73,7 @@ export default function CrudUserForm({ data }: { data: User }) {
             />
           </Tabs.Item>
         ) : (
-          <Tabs.Item active title="Data Member">
+          <Tabs.Item title="Data Member">
             <FormMember
               token={token}
               token_type={token_type}

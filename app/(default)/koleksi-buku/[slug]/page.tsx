@@ -16,6 +16,7 @@ import { formatCurrency } from "../../../lib/utils";
 import { Suspense } from "react";
 import { toast } from "react-toastify";
 import CardBuy from "@/app/ui/koleksi-buku/detail/transaksi/cardBuy";
+import { cookies } from "next/headers";
 
 type Props = {
   params: { slug: string };
@@ -33,7 +34,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const slug = params.slug;
 
-  const detailBuku: getDetailBukuResponse = await getDetailBuku(slug);
+  const cookieStore = cookies();
+  const cookie = cookieStore.get("token");
+  const { token, token_type } = cookie
+    ? JSON.parse(cookie.value)
+    : {
+        token: null,
+        token_type: null,
+      };
+
+  const detailBuku: getDetailBukuResponse = await getDetailBuku(
+    slug,
+    token,
+    token_type
+  );
   const bestSeller: CardData[] = await getBestSeller();
 
   if (!detailBuku) {
@@ -144,6 +158,7 @@ export default async function Page({ params }: Props) {
               <CardBuy
                 harga={formatCurrency(detailBuku.harga)}
                 buku_dijual_id={detailBuku.id}
+                isDibeli={detailBuku.isDibeli}
               />
             </div>
           </div>

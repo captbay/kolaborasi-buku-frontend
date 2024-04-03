@@ -11,6 +11,8 @@ import { getKeranjang } from "@/app/lib/data";
 import { formatCurrency } from "@/app/lib/utils";
 import { ItemKeranjangSkeleton, KeranjangSkeleton } from "@/app/ui/skeletons";
 import { deleteKeranjang } from "@/app/lib/actions";
+import { FaceFrownIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 export default function bucketList() {
   const { token, token_type, id } = useGetCookie();
@@ -100,52 +102,63 @@ export default function bucketList() {
   }, [token, token_type]);
 
   return isClient && token && token_type ? (
-    <section className="flex flex-col lg:flex-row justify-between gap-8">
-      <div className="flex-1 flex flex-col gap-4">
-        <h2 className={`${lusitana.className} text-lg font-semibold`}>
-          Keranjang
-        </h2>
-        <div className="flex flex-col gap-4">
-          {data.length > 0 ? (
-            data.map((item, index) => (
-              <CardsLanscape
-                key={index}
-                cover={item.cover_buku}
-                judul={item.judul}
-                kategori={item.kategori}
-                harga={item.harga}
-                onDelete={() => {
-                  handleDeleteCart(item.keranjang_id);
-                }}
-                id={`custom-checkbox-${index}`}
-                checked={checkedState[index]}
-                onChoose={() => handleOnChange(index)}
-              />
-            ))
-          ) : (
-            <ItemKeranjangSkeleton />
-          )}
-        </div>
-      </div>
-      <div className="flex-[0.5]">
-        <div className="bg-white border border-gray-200 rounded-lg min-w-full sticky top-[182px]">
-          <div className="flex flex-col m-6">
-            <h2 className="text-2xl font-semibold tracking-tight text-blackColor">
-              Ringkasan Belanja
-            </h2>
-            <div className="flex justify-between mt-4">
-              <h3 className="text-base font-light tracking-tight text-blackColor">
-                Total Harga
-              </h3>
-              <h3 className="text-base font-semibold tracking-tight text-blackColor">
-                {formatCurrency(total)}
-              </h3>
-            </div>
-            <Button className="mt-4">Checkout</Button>
+    data.length > 0 ? (
+      <section className="flex flex-col lg:flex-row justify-between gap-8">
+        <div className="flex-1 flex flex-col gap-4">
+          <h2 className={`${lusitana.className} text-lg font-semibold`}>
+            Keranjang
+          </h2>
+          <div className="flex flex-col gap-4">
+            {data.length > 0 ? (
+              data.map((item, index) => (
+                <CardsLanscape
+                  key={index}
+                  cover={item.cover_buku}
+                  judul={item.judul}
+                  kategori={item.kategori}
+                  harga={item.harga}
+                  onDelete={() => {
+                    handleDeleteCart(item.keranjang_id);
+                  }}
+                  id={`custom-checkbox-${index}`}
+                  checked={checkedState[index]}
+                  onChoose={() => handleOnChange(index)}
+                />
+              ))
+            ) : (
+              <ItemKeranjangSkeleton />
+            )}
           </div>
         </div>
-      </div>
-    </section>
+        <div className="flex-[0.5]">
+          <div className="bg-white border border-gray-200 rounded-lg min-w-full sticky top-[182px]">
+            <div className="flex flex-col m-6">
+              <h2 className="text-2xl font-semibold tracking-tight text-blackColor">
+                Ringkasan Belanja
+              </h2>
+              <div className="flex justify-between mt-4">
+                <h3 className="text-base font-light tracking-tight text-blackColor">
+                  Total Harga
+                </h3>
+                <h3 className="text-base font-semibold tracking-tight text-blackColor">
+                  {formatCurrency(total)}
+                </h3>
+              </div>
+              <Button className="mt-4">Checkout</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+    ) : (
+      <section className="flex h-full flex-col items-center justify-center gap-2 py-16">
+        <FaceFrownIcon className="w-10 text-gray-400" />
+        <h2 className="text-xl font-semibold">Keranjang Kosong</h2>
+        <p>Silahkan Menambah Buku Ke Dalam Keranjang</p>
+        <Link href="/koleksi-buku">
+          <Button>Ayo Tambahkan!</Button>
+        </Link>
+      </section>
+    )
   ) : (
     <KeranjangSkeleton />
   );

@@ -88,7 +88,7 @@ export default function LoginForm() {
             token: res.data.data.token,
           },
           {
-            maxAge: 30 * 24 * 60 * 60,
+            maxAge: 60 * 60 * 24,
             path: "/",
           }
         );

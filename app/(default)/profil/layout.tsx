@@ -31,20 +31,22 @@ export default async function ProfileLayout({
   const user: User = await getUser(id, token, token_type);
 
   return (
-    <section className="flex flex-col lg:flex-row gap-8 px-14 lg:px-28 py-16">
-      <section>
-        <Suspense fallback={<div>Loading...</div>}>
-          <SidebarProfile
-            fotoProfil={user.foto_profil}
-            namaLengkap={user.nama_lengkap}
-            role={user.role}
-            email={user.email}
-          />
-        </Suspense>
+    <main id="content">
+      <section className="flex flex-col lg:flex-row gap-8 px-14 lg:px-28 py-16">
+        <section>
+          <Suspense fallback={<div>Loading...</div>}>
+            <SidebarProfile
+              fotoProfil={user.foto_profil}
+              namaLengkap={user.nama_lengkap}
+              role={user.role}
+              email={user.email}
+            />
+          </Suspense>
+        </section>
+        <section className="w-full rounded-md bg-whiteColor h-fit">
+          {children}
+        </section>
       </section>
-      <section className="w-full rounded-md bg-whiteColor h-fit">
-        {children}
-      </section>
-    </section>
+    </main>
   );
 }

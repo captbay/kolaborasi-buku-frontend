@@ -78,11 +78,28 @@ export default function ProfileCircle({
       </Dropdown.Item>
       <Dropdown.Item
         className={clsx("text-sm font-medium hover:text-primaryColor", {
-          "text-primaryColor": pathname === "/profil/transaksi",
+          "text-primaryColor": pathname === "/profil/transaksi-pembelian-buku",
         })}
-        href="/profil/transaksi"
+        href="/profil/transaksi-pembelian-buku"
       >
-        Transaksi
+        Transaksi Pembelian Buku
+      </Dropdown.Item>
+      <Dropdown.Item
+        className={clsx("text-sm font-medium hover:text-primaryColor", {
+          "text-primaryColor": pathname === "/profil/transaksi-kolaborasi-buku",
+        })}
+        href="/profil/transaksi-kolaborasi-buku"
+      >
+        Transaksi Kolaborasi Buku
+      </Dropdown.Item>
+      <Dropdown.Item
+        className={clsx("text-sm font-medium hover:text-primaryColor", {
+          "text-primaryColor":
+            pathname === "/profil/transaksi-paket-penerbitan",
+        })}
+        href="/profil/transaksi-paket-penerbitan"
+      >
+        Transaksi Paket Penerbitan
       </Dropdown.Item>
       <Dropdown.Item
         className={clsx("text-sm font-medium hover:text-primaryColor", {

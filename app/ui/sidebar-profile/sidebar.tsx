@@ -106,7 +106,7 @@ export default function SidebarProfile({
   return (
     <Sidebar
       aria-label="Sidebar Profil"
-      className="h-fit w-auto lg:w-max bg-whiteColor"
+      className="h-fit w-auto lg:min-w-72 lg:w-max bg-whiteColor"
     >
       <Sidebar.Items className="bg-whiteColor">
         <div className="flex flex-col items-center">
@@ -178,14 +178,41 @@ export default function SidebarProfile({
           >
             Akun
           </Sidebar.Item>
-          <Sidebar.Item
+          <Sidebar.Collapse
+            label="Transaksi"
             className={clsx("text-sm font-medium hover:text-primaryColor", {
               "text-primaryColor": pathname === "/profil/transaksi",
             })}
             href="/profil/transaksi"
           >
-            Transaksi
-          </Sidebar.Item>
+            <Sidebar.Item
+              className={clsx("text-sm font-medium hover:text-primaryColor", {
+                "text-primaryColor":
+                  pathname === "/profil/transaksi-pembelian-buku",
+              })}
+              href="/profil/transaksi-pembelian-buku"
+            >
+              Transaksi Pembelian Buku
+            </Sidebar.Item>
+            <Sidebar.Item
+              className={clsx("text-sm font-medium hover:text-primaryColor", {
+                "text-primaryColor":
+                  pathname === "/profil/transaksi-kolaborasi-buku",
+              })}
+              href="/profil/transaksi-kolaborasi-buku"
+            >
+              Transaksi Kolaborasi Buku
+            </Sidebar.Item>
+            <Sidebar.Item
+              className={clsx("text-sm font-medium hover:text-primaryColor", {
+                "text-primaryColor":
+                  pathname === "/profil/transaksi-paket-penerbitan",
+              })}
+              href="/profil/transaksi-paket-penerbitan"
+            >
+              Transaksi Paket Penerbitan
+            </Sidebar.Item>
+          </Sidebar.Collapse>
           <Sidebar.Item
             className={clsx("text-sm font-medium hover:text-primaryColor", {
               "text-primaryColor": pathname === "/profil/koleksi-buku-saya",

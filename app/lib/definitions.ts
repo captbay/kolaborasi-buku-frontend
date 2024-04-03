@@ -1,5 +1,29 @@
 // definisi var yang masuk
 
+// Trx Penjualan Buku
+export type getTrxPenjualanBukuResponse = {
+  trx_id: string;
+  no_transaksi: string;
+  status: string;
+  date_time_exp: string;
+  date_time_lunas: string;
+  total_harga: number;
+  created_at: string;
+  jumlah_buku: number;
+  list_transaksi_buku: TrxBuku[];
+};
+
+export type TrxBuku = {
+  buku_dijual_id: string;
+  kategori: string;
+  judul: string;
+  harga: number;
+  cover_buku: string;
+  jumlah_halaman: number;
+  bahasa: string;
+  isbn: string;
+};
+
 // Keranjang
 export type Keranjang = {
   keranjang_id: string;
@@ -96,6 +120,7 @@ export type getDetailBukuResponse = {
   list_penulis: string;
   testimoni_pembeli: TestimoniDetail[];
   gallery_foto: GalleryFoto[];
+  isDibeli: boolean;
 };
 
 export type TestimoniDetail = {

@@ -30,7 +30,7 @@ export default async function Page() {
           <ProdukTerlaris data={bestSeller} />
         </Suspense>
       </section>
-      <section className="px-28 py-8">
+      <section className="px-4 lg:px-28 py-8">
         <Suspense fallback={<p>Loading feed...</p>}>
           <BannerBookVertical data={adsBooks} />
         </Suspense>

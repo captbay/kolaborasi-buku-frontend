@@ -6,14 +6,16 @@ import { toast } from "react-toastify";
 import { addKeranjang, addTransaksiBuku } from "@/app/lib/actions";
 import useGetCookie from "@/app/lib/useGetCookies";
 import { useRouter } from "next/navigation";
-import Router from "next/router";
+import Link from "next/link";
 
 export default function cardBuy({
   harga,
   buku_dijual_id,
+  isDibeli,
 }: {
   harga: string;
   buku_dijual_id: string;
+  isDibeli: boolean;
 }) {
   const { token, token_type } = useGetCookie();
   const router = useRouter();
@@ -42,6 +44,13 @@ export default function cardBuy({
     }
   };
 
+  const createQueryString = (name: any, value: any) => {
+    const params = new URLSearchParams();
+    params.set(name, value);
+
+    return params.toString();
+  };
+
   const handleBeliBuku = async () => {
     const loading = toast.loading("Mengarahkan ke halaman pembayaran...");
 
@@ -55,12 +64,9 @@ export default function cardBuy({
           isLoading: false,
         });
 
-        router.push("/summary-transaction");
-
-        // Router.push({
-        //   pathname: "/summary-transaction",
-        //   query: { trx_id: res.data.data },
-        // });
+        router.push(
+          `/pembelian-buku?${createQueryString("token_trx", res.data.data)}`
+        );
       }
     } catch (error: any) {
       toast.update(loading, {
@@ -84,12 +90,31 @@ export default function cardBuy({
             {harga}
           </h3>
         </div>
-        <Button className="mt-4" onClick={handleAddKeranjang}>
-          Tambah ke Keranjang
-        </Button>
-        <Button className="mt-4" onClick={handleBeliBuku}>
-          Beli Sekarang
-        </Button>
+        {isDibeli ? (
+          <Button className="mt-4">
+            <Link href="/profil/koleksi-buku-saya">
+              Buku sudah dibeli, menuju koleksi buku
+            </Link>
+          </Button>
+        ) : token != null ? (
+          <>
+            <Button className="mt-4" onClick={handleAddKeranjang}>
+              Tambah ke Keranjang
+            </Button>
+            <Button className="mt-4" onClick={handleBeliBuku}>
+              Beli Sekarang
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button className="mt-4">
+              <Link href="/login">Tambah ke Keranjang</Link>
+            </Button>
+            <Button className="mt-4">
+              <Link href="/login">Beli Sekarang</Link>
+            </Button>
+          </>
+        )}
       </div>
     </section>
   );

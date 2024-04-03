@@ -2,6 +2,53 @@ import { axios } from "@/app/lib/services";
 import { unstable_noStore as noStore } from "next/cache";
 
 /*
+Transaksi Pembelian Buku
+*/
+export async function getPembelianBukuAll(
+  status: string,
+  token: string,
+  token_type: string
+) {
+  noStore();
+  return await axios
+    .get("/transaksi-buku-dijual/all/?status=" + status, {
+      headers: {
+        Authorization: token_type + " " + token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+export async function getTrxPenjualanBuku(
+  token_trx: string,
+  token: string,
+  token_type: string
+) {
+  noStore();
+  return await axios
+    .get("/transaksi-buku-dijual/detail/" + token_trx, {
+      headers: {
+        Authorization: token_type + " " + token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+/*
  User
  */
 export async function getUser(id: string, token: string, token_type: string) {
@@ -18,7 +65,6 @@ export async function getUser(id: string, token: string, token_type: string) {
       }
     })
     .catch((error) => {
-      console.error(error);
       if (error.response.data.message === "Unauthenticated.") {
         return null;
       }
@@ -153,18 +199,40 @@ export async function getBuku({
     });
 }
 
-export async function getDetailBuku(slug: string) {
+export async function getDetailBuku(
+  slug: string,
+  token: string,
+  token_type: string
+) {
   noStore();
-  return await axios
-    .get(`/buku/detail/${slug}`)
-    .then((response) => {
-      if (response.status === 200 || response.status === 201) {
-        return response.data.data;
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+
+  if (token != null && token_type != null) {
+    return await axios
+      .get(`/buku/detail/${slug}`, {
+        headers: {
+          Authorization: token_type + " " + token,
+        },
+      })
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          return response.data.data;
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } else {
+    return await axios
+      .get(`/buku/detail/${slug}`)
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          return response.data.data;
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 }
 
 export async function getBestSeller() {

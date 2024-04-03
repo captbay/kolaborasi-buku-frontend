@@ -10,23 +10,34 @@ import { Keranjang } from "@/app/lib/definitions";
 import { getKeranjang } from "@/app/lib/data";
 import { formatCurrency } from "@/app/lib/utils";
 import { ItemKeranjangSkeleton, KeranjangSkeleton } from "@/app/ui/skeletons";
-import { deleteKeranjang } from "@/app/lib/actions";
+import { addTransaksiBuku, deleteKeranjang } from "@/app/lib/actions";
 import { FaceFrownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function bucketList() {
+  const router = useRouter();
   const { token, token_type, id } = useGetCookie();
   const [data, setData] = useState<Keranjang[]>([]);
   const [isClient, setIsClient] = useState(false);
   const [total, setTotal] = useState(0);
   const [checkedState, setCheckedState] = useState<boolean[]>([]);
+  const [selectedBukuId, setSelectedBukuId] = useState<string[]>([]);
 
+  // handle state changes
   const handleOnChange = (position: number) => {
     const updatedCheckedState = checkedState.map((item, index) =>
       index === position ? !item : item
     );
 
     setCheckedState(updatedCheckedState);
+
+    // set selected buku id
+    const selectedBuku = data.filter((item, index) => {
+      return updatedCheckedState[index];
+    });
+
+    setSelectedBukuId(selectedBuku.map((item) => item.buku_dijual_id));
 
     const totalPrice = updatedCheckedState.reduce(
       (sum, currentState, index) => {
@@ -41,7 +52,7 @@ export default function bucketList() {
     setTotal(totalPrice);
   };
 
-  // handel delete
+  // handle delete
   const handleDeleteCart = async (id: string) => {
     const loading = toast.loading("Silahkan tunggu sebentar...");
 
@@ -81,14 +92,49 @@ export default function bucketList() {
     }
   };
 
+  // handle beli buku
+  const createQueryString = (name: any, value: any) => {
+    const params = new URLSearchParams();
+    params.set(name, value);
+
+    return params.toString();
+  };
+
+  const handleBeliBuku = async () => {
+    const loading = toast.loading("Mengarahkan ke halaman pembayaran...");
+
+    try {
+      const res = await addTransaksiBuku(selectedBukuId, token, token_type);
+      if (res.status === 200 || res.status === 201) {
+        toast.update(loading, {
+          render: res.data.message,
+          type: "success",
+          autoClose: 5000,
+          isLoading: false,
+        });
+
+        router.push(
+          `/pembelian-buku?${createQueryString("token_trx", res.data.data)}`
+        );
+      }
+    } catch (error: any) {
+      toast.update(loading, {
+        render: error.response.data.message,
+        type: "error",
+        autoClose: 5000,
+        closeButton: true,
+        isLoading: false,
+      });
+    }
+  };
+
   // use effect
   useEffect(() => {
-    setIsClient(true);
-
     getKeranjang(token, token_type)
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           setData(response.data.data);
+          setIsClient(true);
           setCheckedState(
             response.data.data.length !== 0
               ? new Array(response.data.data.length).fill(false)
@@ -144,7 +190,19 @@ export default function bucketList() {
                   {formatCurrency(total)}
                 </h3>
               </div>
-              <Button className="mt-4">Checkout</Button>
+              {selectedBukuId.length <= 0 ? (
+                <button
+                  className="flex w-full mt-4 h-10 items-center justify-center rounded-lg
+                 bg-disableColor px-4 text-sm font-medium text-whiteColor cursor-not-allowed"
+                  disabled
+                >
+                  Checkout
+                </button>
+              ) : (
+                <Button className="mt-4" onClick={handleBeliBuku}>
+                  Checkout
+                </Button>
+              )}
             </div>
           </div>
         </div>

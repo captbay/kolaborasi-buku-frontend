@@ -129,7 +129,7 @@ export default function ringkasanPembelianBuku({
         <h1 className={`${lusitana.className} text-2xl font-semibold`}>
           Detail Transaksi
         </h1>
-        <div className="flex gap-2">
+        <div className="flex flex-col lg:flex-row gap-2">
           <div className="p-2 bg-primaryColor text-whiteColor rounded-md flex items-center">
             <p className="text-xs font-semibold tracking-tight text-whiteColor">
               {data.no_transaksi}

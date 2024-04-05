@@ -256,3 +256,18 @@ export const uploadBuktiBayarPembelianBuku = (
     }
   );
 };
+
+// getDownloadBuku
+export const getDownloadBuku = (
+  buku_dijual_id: string,
+  token: string,
+  token_type: string
+) => {
+  return axios.get(`koleksi-buku-user/download/${buku_dijual_id}`, {
+    responseType: "blob",
+    headers: {
+      Authorization: `${token_type} ${token}`,
+      Accept: "application/pdf",
+    },
+  });
+};

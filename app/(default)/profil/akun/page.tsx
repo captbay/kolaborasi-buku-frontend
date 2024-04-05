@@ -8,7 +8,7 @@ import { getUser } from "@/app/lib/data";
 export const metadata: Metadata = {
   title: "Edit Profile",
 };
-export default async function LoginPage() {
+export default async function AkunPage() {
   const cookieStore = cookies();
   const cookie = cookieStore.get("token");
   const { token, id, token_type } = cookie

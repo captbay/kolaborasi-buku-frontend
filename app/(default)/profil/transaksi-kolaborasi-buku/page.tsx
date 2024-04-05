@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 export const metadata: Metadata = {
   title: "Transaksi Saya",
 };
-export default function LoginPage() {
+export default function TransaksiKolaborasiPage() {
   const cookieStore = cookies();
   const cookie = cookieStore.get("token");
   const { token, token_type } = cookie

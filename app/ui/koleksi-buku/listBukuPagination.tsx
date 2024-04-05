@@ -4,7 +4,7 @@ import CardBooks from "@/app/ui/cards";
 import { getBukuAllResponse } from "@/app/lib/definitions";
 import { getBuku } from "@/app/lib/data";
 import Pagination from "@/app/ui/pagination";
-import EmptyData from "../emptyData";
+import EmptyData from "@/app/ui/emptyData";
 
 export default async function listBukuPagination({
   search,

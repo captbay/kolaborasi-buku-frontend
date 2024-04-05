@@ -4,12 +4,12 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'http',
+        protocol: "http",
         hostname: "kolaborasi-buku-backend.test",
-        port: '',
-        pathname: '/**',
-      }
-      ],
+        port: "",
+        pathname: "/**",
+      },
+    ],
   },
 };
 

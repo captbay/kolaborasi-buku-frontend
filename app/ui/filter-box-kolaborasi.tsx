@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { lusitana } from "@/app/ui/fonts";
 
 import { useDebouncedCallback } from "use-debounce";
 
@@ -84,7 +85,9 @@ export default function FilterBox({
   return (
     <div className="bg-white border border-gray-200 rounded-lg min-w-fit sticky top-[190px]">
       <div className="flex flex-col m-4">
-        <h2 className="text-2xl font-semibold tracking-tight text-blackColor">
+        <h2
+          className={`${lusitana.className}text-2xl font-semibold tracking-tight text-blackColor`}
+        >
           Filter
         </h2>
         {/* urutkan berdasarkan */}

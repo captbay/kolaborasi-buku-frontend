@@ -93,7 +93,7 @@ export default function cardBuy({
           </h3>
         </div>
         {isDibeli && isTransaksi ? (
-          <Button className="mt-4 bg-yellow-500">
+          <Button className="mt-4 bg-green-500">
             <Link href="/profil/koleksi-buku-saya">Buku sudah dibeli</Link>
           </Button>
         ) : isTransaksi ? (

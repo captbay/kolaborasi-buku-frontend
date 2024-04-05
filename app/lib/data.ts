@@ -2,6 +2,44 @@ import { axios } from "@/app/lib/services";
 import { unstable_noStore as noStore } from "next/cache";
 
 /*
+  getKoleksiBukuUser
+  */
+export async function getKoleksiBukuUser({
+  limit = 10,
+  page,
+  search,
+  token,
+  token_type,
+}: {
+  limit: number;
+  page: number;
+  search?: string;
+  token: string;
+  token_type: string;
+}) {
+  noStore();
+  return await axios
+    .get("/koleksi-buku-user/all", {
+      params: {
+        limit: limit,
+        page: page,
+        search: search,
+      },
+      headers: {
+        Authorization: token_type + " " + token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+/*
 Transaksi Pembelian Buku
 */
 export async function getPembelianBukuAll(

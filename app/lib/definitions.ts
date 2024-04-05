@@ -1,5 +1,20 @@
 // definisi var yang masuk
 
+// response koleksi buku
+export type getKoleksiBukuResponse = {
+  current_page: number;
+  data: KoleksiBukuUser[];
+  last_page: number;
+  total: number;
+};
+
+export type KoleksiBukuUser = {
+  buku_dijual_id: string;
+  cover_buku: string;
+  judul: string;
+  kategori: string;
+};
+
 // Trx Penjualan Buku
 export type getTrxPenjualanBukuResponse = {
   trx_id: string;

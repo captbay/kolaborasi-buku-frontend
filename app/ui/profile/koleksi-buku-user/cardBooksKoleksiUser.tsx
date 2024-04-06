@@ -5,7 +5,6 @@ import clsx from "clsx";
 import { Button } from "@/app/ui/button";
 import DownloadBukuUser from "@/app/ui/profile/koleksi-buku-user/downloadBukuUser";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 interface CardBooksKoleksiUserProps {
   buku_dijual_id: string;
@@ -25,13 +24,13 @@ const CardBooksKoleksiUser: React.FC<CardBooksKoleksiUserProps> = ({
   coverBuku,
 }) => {
   return (
-    <Link href={`/koleksi-buku/${slug}`}>
-      <section
-        className={clsx(
-          "flex w-full h-full flex-col bg-white border border-gray-200 rounded-lg shadow",
-          className
-        )}
-      >
+    <section
+      className={clsx(
+        "flex w-full h-full flex-col justify-between bg-white border border-gray-200 rounded-lg shadow",
+        className
+      )}
+    >
+      <Link href={`/koleksi-buku/${slug}`}>
         <figure className="flex justify-center">
           <Image
             className="p-4 w-48 h-48"
@@ -41,17 +40,17 @@ const CardBooksKoleksiUser: React.FC<CardBooksKoleksiUserProps> = ({
             height={500}
           />
         </figure>
-        <div className="px-5 pb-5 h-full flex flex-col justify-between">
-          <div>
-            <h2 className="text-sm font-light">{kategori}</h2>
-            <h3 className="text-base font-semibold tracking-tight text-blackColor line-clamp-2">
-              {judul}
-            </h3>
-          </div>
-          <DownloadBukuUser buku_dijual_id={buku_dijual_id} judul={judul} />
+        <div className="px-5 flex flex-col">
+          <h2 className="text-sm font-light">{kategori}</h2>
+          <h3 className="text-base font-semibold tracking-tight text-blackColor line-clamp-2">
+            {judul}
+          </h3>
         </div>
-      </section>
-    </Link>
+      </Link>
+      <div className="px-5 pb-5">
+        <DownloadBukuUser buku_dijual_id={buku_dijual_id} judul={judul} />
+      </div>
+    </section>
   );
 };
 

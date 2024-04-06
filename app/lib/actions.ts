@@ -271,3 +271,25 @@ export const getDownloadBuku = (
     },
   });
 };
+
+// add testimoni
+export const addTestimoni = (
+  buku_dijual_id: string,
+  rating: number,
+  ulasan: string,
+  token: string,
+  token_type: string
+) => {
+  return axios.post(
+    `koleksi-buku-user/add-testimoni/${buku_dijual_id}`,
+    {
+      rating,
+      ulasan,
+    },
+    {
+      headers: {
+        Authorization: `${token_type} ${token}`,
+      },
+    }
+  );
+};

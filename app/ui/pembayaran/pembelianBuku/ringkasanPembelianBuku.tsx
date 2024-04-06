@@ -130,14 +130,14 @@ export default function ringkasanPembelianBuku({
           Detail Transaksi
         </h1>
         <div className="flex flex-col lg:flex-row gap-2">
-          <div className="p-2 bg-primaryColor text-whiteColor rounded-md flex items-center">
+          <div className="p-2 bg-primaryColor text-whiteColor rounded-full flex items-center">
             <p className="text-xs font-semibold tracking-tight text-whiteColor">
               {data.no_transaksi}
             </p>
           </div>
           <div
             className={clsx(
-              "p-2 text-whiteColor rounded-md flex items-center",
+              "p-2 text-whiteColor rounded-full flex items-center",
               {
                 "bg-red-600": data.status === "FAILED",
                 "bg-green-600": data.status === "DONE",
@@ -151,7 +151,7 @@ export default function ringkasanPembelianBuku({
             </p>
           </div>
           {data.date_time_lunas && (
-            <div className="p-2 bg-primaryColor text-whiteColor rounded-md flex items-center">
+            <div className="p-2 bg-primaryColor text-whiteColor rounded-full flex items-center">
               <p className="text-xs font-semibold tracking-tight text-whiteColor">
                 Lunas : {data.date_time_lunas}
               </p>

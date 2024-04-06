@@ -1,10 +1,6 @@
 "use client";
 import React from "react";
-import Countdown, {
-  zeroPad,
-  calcTimeDelta,
-  formatTimeDelta,
-} from "react-countdown";
+import Countdown, { zeroPad, calcTimeDelta } from "react-countdown";
 import { Button } from "@/app/ui/button";
 import { Modal } from "flowbite-react";
 import type { CustomFlowbiteTheme } from "flowbite-react";
@@ -34,7 +30,7 @@ const customTheme: CustomFlowbiteTheme = {
 const Completionist = () => (
   <>
     <section
-      className="p-2 bg-red-600 text-whiteColor rounded-md"
+      className="p-2 bg-red-600 text-whiteColor rounded-full"
       suppressHydrationWarning={true}
     >
       <span className="text-xl" suppressHydrationWarning={true}>
@@ -73,7 +69,7 @@ const renderer = ({
     // Render a countdown
     return (
       <section
-        className="p-2 bg-primaryColor text-whiteColor rounded-md flex items-center"
+        className="p-2 bg-primaryColor text-whiteColor rounded-full flex items-center"
         suppressHydrationWarning={true}
       >
         <span className="text-xl" suppressHydrationWarning={true}>

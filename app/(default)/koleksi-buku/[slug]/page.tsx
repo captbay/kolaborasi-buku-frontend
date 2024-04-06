@@ -158,8 +158,10 @@ export default async function Page({ params }: Props) {
               <CardBuy
                 harga={formatCurrency(detailBuku.harga)}
                 buku_dijual_id={detailBuku.id}
+                judul={detailBuku.judul}
                 isDibeli={detailBuku.isDibeli}
                 isTransaksi={detailBuku.isTransaksi}
+                isTestimoni={detailBuku.isTestimoni}
               />
             </div>
           </div>

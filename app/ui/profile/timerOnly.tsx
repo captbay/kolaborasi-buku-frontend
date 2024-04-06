@@ -33,7 +33,7 @@ const customTheme: CustomFlowbiteTheme = {
 // Random component
 const Completionist = () => (
   <section
-    className="p-2 bg-red-600 text-whiteColor rounded-md flex items-center"
+    className="p-2 bg-red-600 text-whiteColor rounded-full flex items-center"
     suppressHydrationWarning={true}
   >
     <span className="text-xs" suppressHydrationWarning={true}>
@@ -60,7 +60,7 @@ const renderer = ({
     // Render a countdown
     return (
       <section
-        className="p-2 bg-primaryColor text-whiteColor rounded-md flex items-center"
+        className="p-2 bg-primaryColor text-whiteColor rounded-full flex items-center"
         suppressHydrationWarning={true}
       >
         <span className="text-xs" suppressHydrationWarning={true}>

@@ -150,14 +150,14 @@ function ListTrxProgress({ data }: { data: getTrxPenjualanBukuResponse[] }) {
           <div className="bg-white p-4 m-4 rounded-lg shadow-md flex flex-col gap-8">
             <div className="flex flex-col lg:flex-row justify-between">
               <div className="flex flex-col lg:flex-row gap-2">
-                <div className="p-2 bg-primaryColor text-whiteColor rounded-md flex items-center">
+                <div className="p-2 bg-primaryColor text-whiteColor rounded-full flex items-center">
                   <p className="text-xs font-semibold tracking-tight text-whiteColor">
                     {trx.no_transaksi}
                   </p>
                 </div>
                 <div
                   className={clsx(
-                    "p-2 text-whiteColor rounded-md flex items-center",
+                    "p-2 text-whiteColor rounded-full flex items-center",
                     {
                       "bg-red-600": trx.status === "FAILED",
                       "bg-green-600": trx.status === "DONE",
@@ -171,7 +171,7 @@ function ListTrxProgress({ data }: { data: getTrxPenjualanBukuResponse[] }) {
                   </p>
                 </div>
                 {trx.date_time_lunas && (
-                  <div className="p-2 bg-primaryColor text-whiteColor rounded-md flex items-center">
+                  <div className="p-2 bg-primaryColor text-whiteColor rounded-full flex items-center">
                     <p className="text-xs font-semibold tracking-tight text-whiteColor">
                       Lunas : {trx.date_time_lunas}
                     </p>

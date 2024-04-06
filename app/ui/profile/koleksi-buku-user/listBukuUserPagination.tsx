@@ -48,6 +48,7 @@ export default async function ListBukuUserPagination({
           <CardBooksKoleksiUser
             key={index}
             buku_dijual_id={item.buku_dijual_id}
+            slug={item.slug}
             judul={item.judul}
             kategori={item.kategori}
             coverBuku={item.cover_buku}

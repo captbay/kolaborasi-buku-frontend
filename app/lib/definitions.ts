@@ -10,6 +10,7 @@ export type getKoleksiBukuResponse = {
 
 export type KoleksiBukuUser = {
   buku_dijual_id: string;
+  slug: string;
   cover_buku: string;
   judul: string;
   kategori: string;
@@ -137,6 +138,7 @@ export type getDetailBukuResponse = {
   gallery_foto: GalleryFoto[];
   isDibeli: boolean;
   isTransaksi: boolean;
+  isTestimoni: boolean;
 };
 
 export type TestimoniDetail = {

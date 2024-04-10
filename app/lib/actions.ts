@@ -102,7 +102,7 @@ export const updateUser = (
   token_type: string
 ) => {
   return axios.put(
-    `user/update`,
+    `/user/update`,
     {
       nama_depan,
       nama_belakang,
@@ -152,7 +152,7 @@ export const uploadFileMember = (
 
 // delete notifikasi
 export const deleteNotifikasi = (token: string, token_type: string) => {
-  return axios.delete("user/notifikasi/delete", {
+  return axios.delete("/user/notifikasi/delete", {
     headers: {
       Authorization: `${token_type} ${token}`,
     },
@@ -161,7 +161,7 @@ export const deleteNotifikasi = (token: string, token_type: string) => {
 
 // read notifikasi
 export const readNotifikasi = (token: string, token_type: string) => {
-  return axios.put("user/notifikasi/read", null, {
+  return axios.put("/user/notifikasi/read", null, {
     headers: {
       Authorization: `${token_type} ${token}`,
     },
@@ -175,7 +175,7 @@ export const addKeranjang = (
   token_type: string
 ) => {
   return axios.post(
-    "keranjang/add",
+    "/keranjang/add",
     {
       buku_dijual_id,
     },
@@ -193,7 +193,7 @@ export const deleteKeranjang = (
   token: string,
   token_type: string
 ) => {
-  return axios.delete(`keranjang/delete/${keranjang_id}`, {
+  return axios.delete(`/keranjang/delete/${keranjang_id}`, {
     headers: {
       Authorization: `${token_type} ${token}`,
     },
@@ -207,7 +207,7 @@ export const addTransaksiBuku = (
   token_type: string
 ) => {
   return axios.post(
-    "transaksi-buku-dijual/add",
+    "/transaksi-buku-dijual/add",
     {
       buku_dijual,
     },
@@ -219,14 +219,14 @@ export const addTransaksiBuku = (
   );
 };
 
-// delete transaksi buku
+// update status gagal transaksi buku
 export const updateStatusTransaksiBuku = (
   transaksi_buku_id: string,
   token: string,
   token_type: string
 ) => {
   return axios.put(
-    `transaksi-buku-dijual/gagal`,
+    `/transaksi-buku-dijual/gagal`,
     {
       transaksi_buku_id,
     },
@@ -246,7 +246,7 @@ export const uploadBuktiBayarPembelianBuku = (
   token_type: string
 ) => {
   return axios.post(
-    `transaksi-buku-dijual/upload-bukti-pembayaran/${transaksi_buku_id}`,
+    `/transaksi-buku-dijual/upload-bukti-pembayaran/${transaksi_buku_id}`,
     form,
     {
       headers: {
@@ -263,7 +263,7 @@ export const getDownloadBuku = (
   token: string,
   token_type: string
 ) => {
-  return axios.get(`koleksi-buku-user/download/${buku_dijual_id}`, {
+  return axios.get(`/koleksi-buku-user/download/${buku_dijual_id}`, {
     responseType: "blob",
     headers: {
       Authorization: `${token_type} ${token}`,
@@ -281,7 +281,7 @@ export const addTestimoni = (
   token_type: string
 ) => {
   return axios.post(
-    `koleksi-buku-user/add-testimoni/${buku_dijual_id}`,
+    `/koleksi-buku-user/add-testimoni/${buku_dijual_id}`,
     {
       rating,
       ulasan,
@@ -289,6 +289,63 @@ export const addTestimoni = (
     {
       headers: {
         Authorization: `${token_type} ${token}`,
+      },
+    }
+  );
+};
+
+// add transaksi kolaborasi
+export const addTransaksiKolaborasi = (
+  bab_buku_kolaborasi_id: string,
+  token: string,
+  token_type: string
+) => {
+  return axios.post(
+    "/transaksi-buku-kolaborasi/add",
+    {
+      bab_buku_kolaborasi_id,
+    },
+    {
+      headers: {
+        Authorization: `${token_type} ${token}`,
+      },
+    }
+  );
+};
+
+// update status gagal transaksi kolaborasi buku
+export const updateStatusTransaksiKolaborasiBuku = (
+  transaksi_kolaborasi_buku_id: string,
+  token: string,
+  token_type: string
+) => {
+  return axios.put(
+    `/transaksi-buku-kolaborasi/gagal`,
+    {
+      transaksi_kolaborasi_buku_id,
+    },
+    {
+      headers: {
+        Authorization: `${token_type} ${token}`,
+      },
+    }
+  );
+};
+
+// upload bukti bayar pembelian kolaborasi buku
+export const uploadBuktiBayarPembelianKolaborasiBuku = (
+  transaksi_kolaborasi_buku_id: string,
+  form: FormData,
+  token: string,
+  token_type: string
+) => {
+  return axios.post(
+    `/transaksi-buku-kolaborasi/upload-bukti-pembayaran/${transaksi_kolaborasi_buku_id}`,
+    form,
+    {
+      headers: {
+        Authorization: `${token_type} ${token}`,
+        "Content-Type": "multipart/form-data",
       },
     }
   );

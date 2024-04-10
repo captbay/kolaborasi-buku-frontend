@@ -2,6 +2,44 @@ import { axios } from "@/app/lib/services";
 import { unstable_noStore as noStore } from "next/cache";
 
 /*
+  getKoleksiBukuKolaborasiUser
+  */
+export async function getKoleksiBukuKolaborasiUser({
+  limit = 10,
+  page,
+  search,
+  token,
+  token_type,
+}: {
+  limit: number;
+  page: number;
+  search?: string;
+  token: string;
+  token_type: string;
+}) {
+  noStore();
+  return await axios
+    .get("/koleksi-buku-kolaborasi-user/all", {
+      params: {
+        limit: limit,
+        page: page,
+        search: search,
+      },
+      headers: {
+        Authorization: token_type + " " + token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+/*
   getKoleksiBukuUser
   */
 export async function getKoleksiBukuUser({
@@ -72,6 +110,56 @@ export async function getTrxPenjualanBuku(
   noStore();
   return await axios
     .get("/transaksi-buku-dijual/detail/" + token_trx, {
+      headers: {
+        Authorization: token_type + " " + token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+/*
+Transaksi Pembelian Kolaborasi Buku
+*/
+export async function getPembelianBukuKolaborasiAll(
+  status: string,
+  token: string,
+  token_type: string
+) {
+  noStore();
+  return await axios
+    .get("/transaksi-buku-kolaborasi/all/?status=" + status, {
+      headers: {
+        Authorization: token_type + " " + token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+/*
+ Bab Kolaborasi Buku
+ */
+export async function getTrxBabKolaborasi(
+  token_trx: string,
+  token: string,
+  token_type: string
+) {
+  noStore();
+  return await axios
+    .get("/transaksi-buku-kolaborasi/detail/" + token_trx, {
       headers: {
         Authorization: token_type + " " + token,
       },
@@ -343,18 +431,40 @@ export async function getKolaborasi({
     });
 }
 
-export async function getDetailBukuKolaborasi(slug: string) {
+export async function getDetailBukuKolaborasi(
+  slug: string,
+  token: string,
+  token_type: string
+) {
   noStore();
-  return await axios
-    .get(`/buku-kolaborasi/detail/${slug}`)
-    .then((response) => {
-      if (response.status === 200 || response.status === 201) {
-        return response.data.data;
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+
+  if (token != null && token_type != null) {
+    return await axios
+      .get(`/buku-kolaborasi/detail/${slug}`, {
+        headers: {
+          Authorization: token_type + " " + token,
+        },
+      })
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          return response.data.data;
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } else {
+    return await axios
+      .get(`/buku-kolaborasi/detail/${slug}`)
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          return response.data.data;
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 }
 
 /*

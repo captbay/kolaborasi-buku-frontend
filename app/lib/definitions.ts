@@ -1,5 +1,30 @@
 // definisi var yang masuk
 
+// response getKoleksiBukuKolaborasiResponse
+export type getKoleksiBukuKolaborasiResponse = {
+  current_page: number;
+  data: KoleksiBukuKolaborasiUser[];
+  last_page: number;
+  total: number;
+};
+
+export type KoleksiBukuKolaborasiUser = {
+  id: string;
+  bab_buku_kolaborasi_id: string;
+  status: string;
+  note: string;
+  file_bab: string;
+  datetime_deadline: string;
+  created_at: string;
+  no_bab: number;
+  judul_bab: string;
+  deskripsi_bab: string;
+  judul_buku: string;
+  cover_buku: string;
+  kategori_buku: string;
+  file_mou: string;
+};
+
 // response koleksi buku
 export type getKoleksiBukuResponse = {
   current_page: number;
@@ -193,6 +218,22 @@ export type BabKolaborasi = {
   durasi_pembuatan: number;
   deskripsi: string;
   is_terjual: boolean;
+  isDibeli: boolean;
+  isTransaksi: boolean;
+};
+
+// Trx Bab Kolaborasi Buku
+export type getTrxBabKolaborasiResponse = {
+  trx_id: string;
+  no_transaksi: string;
+  status: string;
+  date_time_exp: string;
+  date_time_lunas: string;
+  total_harga: number;
+  created_at: string;
+  // detail bab
+  bab_buku: BabKolaborasi;
+  buku_kolaborasi: CardKolaborasiData;
 };
 
 // TimelineKolaborasi

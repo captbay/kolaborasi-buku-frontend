@@ -15,11 +15,13 @@ const Completionist = () => (
 );
 
 const renderer = ({
+  days,
   hours,
   minutes,
   seconds,
   completed,
 }: {
+  days: number;
   hours: number;
   minutes: number;
   seconds: number;
@@ -32,18 +34,27 @@ const renderer = ({
     // Render a countdown
     return (
       <section
-        className="p-2 bg-primaryColor text-whiteColor rounded-full flex items-center"
+        className="p-2 bg-primaryColor text-whiteColor rounded-full flex flex-col md:flex-row items-center"
         suppressHydrationWarning={true}
       >
         <span className="text-xs" suppressHydrationWarning={true}>
-          {zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}
+          {zeroPad(days)} hari
+        </span>
+        <span className="text-xs" suppressHydrationWarning={true}>
+          : {zeroPad(hours)} jam
+        </span>
+        <span className="text-xs" suppressHydrationWarning={true}>
+          : {zeroPad(minutes)} menit
+        </span>
+        <span className="text-xs" suppressHydrationWarning={true}>
+          : {zeroPad(seconds)} detik
         </span>
       </section>
     );
   }
 };
 
-export default function TimerOnly({ msTime }: { msTime: number }) {
+export default function TimerKolaborasi({ msTime }: { msTime: number }) {
   const timer = calcTimeDelta(msTime);
 
   return <Countdown date={Date.now() + timer.total} renderer={renderer} />;

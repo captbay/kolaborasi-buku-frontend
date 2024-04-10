@@ -10,11 +10,9 @@ import { getBestSeller, getDetailBuku } from "@/app/lib/data";
 
 import { notFound } from "next/navigation";
 
-import { Button } from "@/app/ui/button";
 import { CardData, getDetailBukuResponse } from "@/app/lib/definitions";
 import { formatCurrency } from "../../../lib/utils";
 import { Suspense } from "react";
-import { toast } from "react-toastify";
 import CardBuy from "@/app/ui/koleksi-buku/detail/transaksi/cardBuy";
 import { cookies } from "next/headers";
 

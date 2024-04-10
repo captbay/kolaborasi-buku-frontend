@@ -189,7 +189,7 @@ function ListTrxProgress({ data }: { data: getTrxPenjualanBukuResponse[] }) {
             </div>
             <div className="flex flex-col lg:flex-row justify-between items-center">
               <div>
-                <p className="text-sm font-medium text-bl">
+                <p className="text-sm font-medium">
                   Jumlah Pembelian: {trx.jumlah_buku} Buku
                 </p>
               </div>

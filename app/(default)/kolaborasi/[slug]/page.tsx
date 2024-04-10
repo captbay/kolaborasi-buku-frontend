@@ -10,6 +10,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { getDetailBukuKolaborasiResponse } from "@/app/lib/definitions";
 import { getDetailBukuKolaborasi } from "@/app/lib/data";
+import { cookies } from "next/headers";
 
 type Props = {
   params: { slug: string };
@@ -27,8 +28,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const slug = params.slug;
 
+  const cookieStore = cookies();
+  const cookie = cookieStore.get("token");
+  const { token, token_type } = cookie
+    ? JSON.parse(cookie.value)
+    : {
+        token: null,
+        token_type: null,
+      };
+
   const detailBuku: getDetailBukuKolaborasiResponse =
-    await getDetailBukuKolaborasi(slug);
+    await getDetailBukuKolaborasi(slug, token, token_type);
 
   if (!detailBuku) {
     notFound();
@@ -124,6 +134,8 @@ export default async function Page({ params }: Props) {
                       durasi_pembuatan={item.durasi_pembuatan}
                       deskripsi={item.deskripsi}
                       is_terjual={item.is_terjual}
+                      isDibeli={item.isDibeli}
+                      isTransaksi={item.isTransaksi}
                     />
                   ))}
                 </div>

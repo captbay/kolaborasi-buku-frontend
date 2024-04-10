@@ -6,10 +6,10 @@ import { Button } from "@/app/ui/button";
 import { toast } from "react-toastify";
 import Image from "next/image";
 import TimerClock from "@/app/ui/pembayaran/timerClock";
-import { getTrxPenjualanBukuResponse } from "@/app/lib/definitions";
+import { getTrxBabKolaborasiResponse } from "@/app/lib/definitions";
 import {
-  updateStatusTransaksiBuku,
-  uploadBuktiBayarPembelianBuku,
+  updateStatusTransaksiKolaborasiBuku,
+  uploadBuktiBayarPembelianKolaborasiBuku,
 } from "@/app/lib/actions";
 import useGetCookie from "@/app/lib/useGetCookies";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
@@ -38,10 +38,10 @@ const customTheme: CustomFlowbiteTheme = {
   },
 };
 
-export default function ringkasanPembelianBuku({
+export default function ringkasanPembelianBabKolaborasi({
   data,
 }: {
-  data: getTrxPenjualanBukuResponse;
+  data: getTrxBabKolaborasiResponse;
 }) {
   const { token, token_type } = useGetCookie();
   const [timeExp, setTimeExp] = useState(false);
@@ -63,7 +63,7 @@ export default function ringkasanPembelianBuku({
       form.append("foto_bukti_bayar", file);
 
       try {
-        const res = await uploadBuktiBayarPembelianBuku(
+        const res = await uploadBuktiBayarPembelianKolaborasiBuku(
           data.trx_id,
           form,
           token,
@@ -72,7 +72,7 @@ export default function ringkasanPembelianBuku({
         if (res.status === 200 || res.status === 201) {
           toast.update(loading, {
             render:
-              "Bukti bayar berhasil diunggah, silahkan tunggu konfirmasi admin dan pantau notifikasi atau koleksi buku anda!",
+              "Bukti bayar berhasil diunggah, silahkan tunggu konfirmasi admin dan pantau notifikasi atau koleksi buku kolaborasi anda!",
             type: "success",
             autoClose: 5000,
             isLoading: false,
@@ -110,7 +110,7 @@ export default function ringkasanPembelianBuku({
   const handleCompleteTime = async () => {
     setTimeExp(true);
     try {
-      const res = await updateStatusTransaksiBuku(
+      const res = await updateStatusTransaksiKolaborasiBuku(
         data.trx_id,
         token,
         token_type
@@ -127,7 +127,7 @@ export default function ringkasanPembelianBuku({
     <section>
       <section className="flex flex-col lg:flex-row justify-between items-center mb-8">
         <h1 className={`${lusitana.className} text-2xl font-semibold`}>
-          Detail Transaksi Pembelian Buku
+          Detail Transaksi Kolaborasi
         </h1>
         <div className="flex flex-col lg:flex-row gap-2">
           <div className="p-2 bg-primaryColor text-whiteColor rounded-full flex items-center">
@@ -168,41 +168,43 @@ export default function ringkasanPembelianBuku({
       <section className="flex flex-col lg:flex-row justify-between gap-8">
         <section className="flex-1 flex flex-col gap-4">
           <div className="flex flex-col gap-4">
-            {data.list_transaksi_buku.map((item, index) => (
-              <div
-                key={index}
-                className="flex flex-col lg:flex-row justify-between bg-white border border-gray-200 rounded-lg min-w-full"
-              >
-                <Image
-                  className="p-2 w-full lg:w-32 h-full"
-                  src={
-                    "http://kolaborasi-buku-backend.test/storage/" +
-                    item.cover_buku
-                  }
-                  alt="Gambar Buku"
-                  width={500}
-                  height={500}
-                  priority
-                />
-                <div className="flex flex-1 flex-col p-4 gap-2">
-                  <h2 className="text-sm font-light">{item.kategori}</h2>
-                  <h3 className="text-lg font-semibold tracking-tight text-blackColor">
-                    {item.judul}
-                  </h3>
-                  <div className="flex flex-col lg:flex-row justify-between items-center">
-                    <div className="flex flex-col">
-                      <p className="text-sm font-light">ISBN : {item.isbn}</p>
-                      <p className="text-sm font-light">
-                        {item.jumlah_halaman} halaman - {item.bahasa}
-                      </p>
-                    </div>
-                    <p className="text-xl font-bold text-gray-900 ">
-                      {formatCurrency(item.harga)}
+            <div className="flex flex-col lg:flex-row justify-between bg-white border border-gray-200 rounded-lg min-w-full">
+              <Image
+                className="p-2 w-full lg:w-32 h-full"
+                src={
+                  "http://kolaborasi-buku-backend.test/storage/" +
+                  data.buku_kolaborasi.cover_buku
+                }
+                alt="Gambar Buku"
+                width={500}
+                height={500}
+                priority
+              />
+              <div className="flex flex-1 flex-col p-4 gap-2">
+                <h2 className="text-sm font-light">
+                  {data.buku_kolaborasi.kategori}
+                </h2>
+                <h3 className="text-lg font-semibold tracking-tight text-blackColor">
+                  {data.buku_kolaborasi.judul}
+                </h3>
+                <div className="flex flex-col lg:flex-row justify-between items-center">
+                  <div className="flex flex-col">
+                    <p className="text-sm font-light">
+                      Bab {data.bab_buku.no_bab}
+                    </p>
+                    <p className="text-sm font-light">
+                      Judul Bab: {data.bab_buku.judul}
+                    </p>
+                    <p className="text-sm font-light">
+                      Deadline {data.bab_buku.durasi_pembuatan} hari
                     </p>
                   </div>
+                  <p className="text-xl font-bold text-gray-900 ">
+                    {formatCurrency(data.bab_buku.harga)}
+                  </p>
                 </div>
               </div>
-            ))}
+            </div>
           </div>
         </section>
         {data.status == "PROGRESS" ? (
@@ -274,14 +276,6 @@ export default function ringkasanPembelianBuku({
                   </div>
                   <div className="flex flex-col lg:flex-row justify-between mt-4">
                     <h3 className="text-base font-light tracking-tight text-blackColor">
-                      Jumlah Buku
-                    </h3>
-                    <h3 className="text-base font-semibold tracking-tight text-blackColor">
-                      {data.jumlah_buku}
-                    </h3>
-                  </div>
-                  <div className="flex flex-col lg:flex-row justify-between mt-4">
-                    <h3 className="text-base font-light tracking-tight text-blackColor">
                       Total Harga
                     </h3>
                     <h3 className="text-base font-semibold tracking-tight text-blackColor">
@@ -322,14 +316,6 @@ export default function ringkasanPembelianBuku({
                 </div>
                 <div className="flex flex-col lg:flex-row justify-between mt-4">
                   <h3 className="text-base font-light tracking-tight text-blackColor">
-                    Jumlah Buku
-                  </h3>
-                  <h3 className="text-base font-semibold tracking-tight text-blackColor">
-                    {data.jumlah_buku}
-                  </h3>
-                </div>
-                <div className="flex flex-col lg:flex-row justify-between mt-4">
-                  <h3 className="text-base font-light tracking-tight text-blackColor">
                     Total Harga
                   </h3>
                   <h3 className="text-base font-semibold tracking-tight text-blackColor">
@@ -347,12 +333,12 @@ export default function ringkasanPembelianBuku({
             <Modal.Header>Bukti Bayar Berhasil Diunggah</Modal.Header>
             <Modal.Body>
               Bukti bayar anda berhasil diunggah, silahkan tunggu konfirmasi
-              admin dan pantau notifikasi atau koleksi buku anda!
+              admin dan pantau notifikasi atau koleksi buku kolaborasi anda!
             </Modal.Body>
             <Modal.Footer>
               <Button className="w-full">
-                <Link href="/profil/koleksi-buku-saya">
-                  Menuju Koleksi Buku
+                <Link href="/profil/koleksi-buku-kolaborasi-saya">
+                  Menuju Koleksi Buku Kolaborasi
                 </Link>
               </Button>
             </Modal.Footer>

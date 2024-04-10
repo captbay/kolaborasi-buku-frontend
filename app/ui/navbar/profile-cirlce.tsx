@@ -109,6 +109,15 @@ export default function ProfileCircle({
       >
         Koleksi Buku Saya
       </Dropdown.Item>
+      <Dropdown.Item
+        className={clsx("text-sm font-medium hover:text-primaryColor", {
+          "text-primaryColor":
+            pathname === "/profil/koleksi-buku-kolaborasi-saya",
+        })}
+        href="/profil/koleksi-buku-kolaborasi-saya"
+      >
+        Koleksi Buku Kolaborasi Saya
+      </Dropdown.Item>
       <Dropdown.Divider />
       <Dropdown.Item
         className="text-sm font-medium hover:text-primaryColor hover:cursor-pointer"

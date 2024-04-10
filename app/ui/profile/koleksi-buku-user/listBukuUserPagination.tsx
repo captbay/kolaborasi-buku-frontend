@@ -8,10 +8,10 @@ import { cookies } from "next/headers";
 import CardBooksKoleksiUser from "@/app/ui/profile/koleksi-buku-user/cardBooksKoleksiUser";
 
 export default async function ListBukuUserPagination({
-  search,
+  searchKoleksi,
   currentPage,
 }: {
-  search?: string;
+  searchKoleksi?: string;
   currentPage: number;
 }) {
   const cookieStore = cookies();
@@ -27,7 +27,7 @@ export default async function ListBukuUserPagination({
   const koleksiBuku: getKoleksiBukuResponse = await getKoleksiBukuUser({
     limit: 12,
     page: currentPage,
-    search: search,
+    search: searchKoleksi,
     token: token,
     token_type: token_type,
   });

@@ -6,7 +6,7 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 
 import { useDebouncedCallback } from "use-debounce";
 
-export default function SearchKoleksiBukuUser({
+export default function SearchKoleksiBukuKolaborasiUser({
   placeholder,
 }: {
   placeholder: string;
@@ -19,16 +19,16 @@ export default function SearchKoleksiBukuUser({
     const params = new URLSearchParams(searchParams);
     params.set("page", "1");
     if (term) {
-      params.set("searchKoleksi", term);
+      params.set("searchKolaborasi", term);
     } else {
-      params.delete("searchKoleksi");
+      params.delete("searchKolaborasi");
     }
-    replace(`/profil/koleksi-buku-saya?${params.toString()}`);
+    replace(`/profil/koleksi-buku-kolaborasi-saya?${params.toString()}`);
   }, 1000);
 
   return (
     <>
-      <label htmlFor="searchKoleksi" className="sr-only">
+      <label htmlFor="searchKolaborasi" className="sr-only">
         Search
       </label>
       <input
@@ -37,7 +37,7 @@ export default function SearchKoleksiBukuUser({
         onChange={(e) => {
           handleSearch(e.target.value);
         }}
-        defaultValue={searchParams.get("searchKoleksi")?.toString()}
+        defaultValue={searchParams.get("searchKolaborasi")?.toString()}
       />
       <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
     </>

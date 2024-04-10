@@ -3,21 +3,21 @@ import { lusitana } from "@/app/ui/fonts";
 
 import React, { Suspense } from "react";
 import { KoleksiBukuSkeleton } from "@/app/ui/skeletons";
-import ListBukuUserPagination from "@/app/ui/profile/koleksi-buku-user/listBukuUserPagination";
-import SearchKoleksiBukuUser from "@/app/ui/profile/koleksi-buku-user/searchKoleksiBukuUser";
+import ListBukuKolaborasiUserPagination from "@/app/ui/profile/koleksi-buku-kolaborasi-user/listBukuKolaborasiUserPagination";
+import SearchKoleksiBukuKolaborasiUser from "@/app/ui/profile/koleksi-buku-kolaborasi-user/searchKoleksiBukuKolaborasiUser";
 
 export const metadata: Metadata = {
   title: "Koleksi Buku Saya",
 };
-export default async function KoleksiBukuSaya({
+export default async function KoleksiBukuKolaborasiSaya({
   searchParams,
 }: {
   searchParams?: {
-    searchKoleksi?: string;
+    searchKolaborasi?: string;
     page?: string;
   };
 }) {
-  const searchKoleksi = searchParams?.searchKoleksi || "";
+  const searchKolaborasi = searchParams?.searchKolaborasi || "";
   const currentPage = Number(searchParams?.page) || 1;
 
   return (
@@ -25,19 +25,19 @@ export default async function KoleksiBukuSaya({
       <h1
         className={`${lusitana.className} text-2xl font-semibold tracking-tight text-blackColor text-center`}
       >
-        Koleksi Buku Saya
+        Koleksi Buku Kolaborasi Saya
       </h1>
       <div className="relative flex-1 flex-shrink-0">
         <Suspense fallback={<p>Loading feed...</p>}>
-          <SearchKoleksiBukuUser placeholder="Cari koleksi buku saya berdasarkan judul..." />
+          <SearchKoleksiBukuKolaborasiUser placeholder="Cari buku kolaborasi saya berdasarkan judul buku atau judul bab..." />
         </Suspense>
       </div>
       <Suspense
-        key={searchKoleksi + currentPage}
+        key={searchKolaborasi + currentPage}
         fallback={<KoleksiBukuSkeleton />}
       >
-        <ListBukuUserPagination
-          searchKoleksi={searchKoleksi}
+        <ListBukuKolaborasiUserPagination
+          searchKolaborasi={searchKolaborasi}
           currentPage={currentPage}
         />
       </Suspense>

@@ -20,9 +20,12 @@ export type KoleksiBukuKolaborasiUser = {
   judul_bab: string;
   deskripsi_bab: string;
   judul_buku: string;
+  deskripsi_buku: string;
   cover_buku: string;
   kategori_buku: string;
   file_mou: string;
+  timeline_kolaborasi: TimelineKolaborasi[];
+  buku_kolaborasi_id: string;
 };
 
 // response koleksi buku

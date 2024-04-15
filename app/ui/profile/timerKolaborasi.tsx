@@ -9,7 +9,7 @@ const Completionist = () => (
     suppressHydrationWarning={true}
   >
     <span className="text-xs" suppressHydrationWarning={true}>
-      Waktu Pembayaran Habis
+      Waktu Pembuatan Habis!
     </span>
   </section>
 );
@@ -54,8 +54,20 @@ const renderer = ({
   }
 };
 
-export default function TimerKolaborasi({ msTime }: { msTime: number }) {
+export default function TimerKolaborasi({
+  msTime,
+  onComplete,
+}: {
+  msTime: number;
+  onComplete?: () => void;
+}) {
   const timer = calcTimeDelta(msTime);
 
-  return <Countdown date={Date.now() + timer.total} renderer={renderer} />;
+  return (
+    <Countdown
+      date={Date.now() + timer.total}
+      renderer={renderer}
+      onComplete={onComplete}
+    />
+  );
 }

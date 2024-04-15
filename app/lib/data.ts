@@ -2,6 +2,31 @@ import { axios } from "@/app/lib/services";
 import { unstable_noStore as noStore } from "next/cache";
 
 /*
+ getDetailKolaborasiUser
+ */
+export async function getDetailKolaborasiUser(
+  id: string,
+  token: string,
+  token_type: string
+) {
+  noStore();
+  return await axios
+    .get("/koleksi-buku-kolaborasi-user/detail/" + id, {
+      headers: {
+        Authorization: token_type + " " + token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+/*
   getKoleksiBukuKolaborasiUser
   */
 export async function getKoleksiBukuKolaborasiUser({

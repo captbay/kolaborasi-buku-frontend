@@ -137,6 +137,34 @@ export const uploadFotoProfil = (
   });
 };
 
+export const uploadMouKolaborasi = (
+  id: string,
+  file_mou: FormData,
+  token: string,
+  token_type: string
+) => {
+  return axios.post("/koleksi-buku-kolaborasi-user/uploadMou/" + id, file_mou, {
+    headers: {
+      Authorization: `${token_type} ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
+export const uploadBabKolaborasi = (
+  id: string,
+  file_bab: FormData,
+  token: string,
+  token_type: string
+) => {
+  return axios.post("/koleksi-buku-kolaborasi-user/uploadBab/" + id, file_bab, {
+    headers: {
+      Authorization: `${token_type} ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
 export const uploadFileMember = (
   form: FormData,
   token: string,
@@ -272,6 +300,17 @@ export const getDownloadBuku = (
   });
 };
 
+// getDownloadMou
+export const getDownloadMou = (token: string, token_type: string) => {
+  return axios.get(`/mou/downloadMou`, {
+    responseType: "blob",
+    headers: {
+      Authorization: `${token_type} ${token}`,
+      Accept: "application/pdf",
+    },
+  });
+};
+
 // add testimoni
 export const addTestimoni = (
   buku_dijual_id: string,
@@ -324,6 +363,23 @@ export const updateStatusTransaksiKolaborasiBuku = (
     {
       transaksi_kolaborasi_buku_id,
     },
+    {
+      headers: {
+        Authorization: `${token_type} ${token}`,
+      },
+    }
+  );
+};
+
+// update failed for user kolaborasi
+export const updateTimeExpKolaborasiUser = (
+  id: string,
+  token: string,
+  token_type: string
+) => {
+  return axios.put(
+    `/koleksi-buku-kolaborasi-user/failedKolaborasi/${id}`,
+    {},
     {
       headers: {
         Authorization: `${token_type} ${token}`,

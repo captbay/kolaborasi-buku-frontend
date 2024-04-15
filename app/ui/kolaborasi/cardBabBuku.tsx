@@ -86,21 +86,21 @@ export default function cardBabBuku({
         <p className="text-sm font-medium text-blackColor text-end">
           Deadline {durasi_pembuatan} hari
         </p>
-        {isDibeli && isTransaksi ? (
-          <button
-            className="flex w-full mt-2 h-10 items-center justify-center rounded-lg
+        {isDibeli && isTransaksi && is_terjual ? (
+          <Link href="/profil/koleksi-buku-kolaborasi-saya">
+            <button
+              className="flex w-full mt-2 h-10 items-center justify-center rounded-lg
            bg-green-500 px-4 text-sm font-medium text-whiteColor"
-          >
-            <Link href="/profil/koleksi-buku-kolaborasi-saya">
+            >
               Sudah Dibeli
-            </Link>
-          </button>
+            </button>
+          </Link>
         ) : isTransaksi ? (
-          <Button className="w-full mt-2 bg-yellow-500 hover:bg-yellow-600">
-            <Link href="/profil/transaksi-kolaborasi-buku">
+          <Link href="/profil/transaksi-kolaborasi-buku">
+            <Button className="w-full mt-2 bg-yellow-500 hover:bg-yellow-600">
               Buku sedang dalam transaksi
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         ) : is_terjual ? (
           <button
             className="flex w-full mt-2 h-10 items-center justify-center rounded-lg

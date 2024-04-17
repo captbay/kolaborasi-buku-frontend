@@ -8,7 +8,7 @@ import { CardData } from "@/app/lib/definitions";
 import { getBestSeller } from "@/app/lib/data";
 
 export const metadata: Metadata = {
-  title: "Beranda",
+  title: "Keranjang",
 };
 
 export default async function keranjang() {

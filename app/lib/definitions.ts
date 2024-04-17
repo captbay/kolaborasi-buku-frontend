@@ -84,6 +84,11 @@ export type NotifikasiResponse = {
   data: Notifikasi[];
 };
 
+// countKeranjang
+export type CountKeranjang = {
+  count: number;
+};
+
 // Notifikasi
 export type Notifikasi = {
   notif_id: string;

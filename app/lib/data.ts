@@ -228,7 +228,28 @@ export async function getUser(id: string, token: string, token_type: string) {
 export async function getNotifikasi(token: string, token_type: string) {
   noStore();
   return await axios
-    .get("user/notifikasi", {
+    .get("/user/notifikasi", {
+      headers: {
+        Authorization: token_type + " " + token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+/*
+  Count Keranjang
+  */
+export async function getCountKeranjang(token: string, token_type: string) {
+  noStore();
+  return await axios
+    .get("/keranjang/count", {
       headers: {
         Authorization: token_type + " " + token,
       },

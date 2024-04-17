@@ -47,6 +47,7 @@ export default function cardBuy({
           autoClose: 5000,
           isLoading: false,
         });
+        router.refresh();
       }
     } catch (error: any) {
       toast.update(loading, {

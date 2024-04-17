@@ -178,41 +178,33 @@ export default function SidebarProfile({
           >
             Akun
           </Sidebar.Item>
-          <Sidebar.Collapse
-            label="Transaksi"
+          <Sidebar.Item
             className={clsx("text-sm font-medium hover:text-primaryColor", {
-              "text-primaryColor": pathname === "/profil/transaksi",
+              "text-primaryColor":
+                pathname === "/profil/transaksi-pembelian-buku",
             })}
-            href="/profil/transaksi"
+            href="/profil/transaksi-pembelian-buku"
           >
-            <Sidebar.Item
-              className={clsx("text-sm font-medium hover:text-primaryColor", {
-                "text-primaryColor":
-                  pathname === "/profil/transaksi-pembelian-buku",
-              })}
-              href="/profil/transaksi-pembelian-buku"
-            >
-              Transaksi Pembelian Buku
-            </Sidebar.Item>
-            <Sidebar.Item
-              className={clsx("text-sm font-medium hover:text-primaryColor", {
-                "text-primaryColor":
-                  pathname === "/profil/transaksi-kolaborasi-buku",
-              })}
-              href="/profil/transaksi-kolaborasi-buku"
-            >
-              Transaksi Kolaborasi Buku
-            </Sidebar.Item>
-            <Sidebar.Item
-              className={clsx("text-sm font-medium hover:text-primaryColor", {
-                "text-primaryColor":
-                  pathname === "/profil/transaksi-paket-penerbitan",
-              })}
-              href="/profil/transaksi-paket-penerbitan"
-            >
-              Transaksi Paket Penerbitan
-            </Sidebar.Item>
-          </Sidebar.Collapse>
+            Transaksi Pembelian Buku
+          </Sidebar.Item>
+          <Sidebar.Item
+            className={clsx("text-sm font-medium hover:text-primaryColor", {
+              "text-primaryColor":
+                pathname === "/profil/transaksi-kolaborasi-buku",
+            })}
+            href="/profil/transaksi-kolaborasi-buku"
+          >
+            Transaksi Kolaborasi Buku
+          </Sidebar.Item>
+          <Sidebar.Item
+            className={clsx("text-sm font-medium hover:text-primaryColor", {
+              "text-primaryColor":
+                pathname === "/profil/transaksi-paket-penerbitan",
+            })}
+            href="/profil/transaksi-paket-penerbitan"
+          >
+            Transaksi Paket Penerbitan
+          </Sidebar.Item>
           <Sidebar.Item
             className={clsx("text-sm font-medium hover:text-primaryColor", {
               "text-primaryColor": pathname === "/profil/koleksi-buku-saya",

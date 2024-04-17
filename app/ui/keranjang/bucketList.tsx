@@ -80,6 +80,7 @@ export default function bucketList() {
           .catch((error) => {
             console.error(error);
           });
+        router.refresh();
       }
     } catch (error: any) {
       toast.update(loading, {

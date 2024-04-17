@@ -1,15 +1,15 @@
 import Link from "next/link";
 import NavLinks from "@/app/ui/navbar/nav-links";
 import Logo from "@/app/ui/penerbitan-buku-logo";
-import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { Button } from "@/app/ui/button";
 import ProfileCircle from "@/app/ui/navbar/profile-cirlce";
 import Notification from "@/app/ui/navbar/notification";
+import Keranjang from "@/app/ui/navbar/keranjang";
 import Search from "../search";
 import { Suspense } from "react";
 import { cookies } from "next/headers";
-import { User } from "@/app/lib/definitions";
-import { getUser } from "@/app/lib/data";
+import { CountKeranjang, User } from "@/app/lib/definitions";
+import { getCountKeranjang, getUser } from "@/app/lib/data";
 
 export default async function TopNav() {
   const cookieStore = cookies();
@@ -23,6 +23,10 @@ export default async function TopNav() {
       };
 
   const user: User = await getUser(id, token, token_type);
+  const countKeranjang: CountKeranjang = await getCountKeranjang(
+    token,
+    token_type
+  );
 
   return (
     <div className="sticky top-0 w-full bg-whiteColor px-14 lg:px-28 z-20">
@@ -65,7 +69,7 @@ export default async function TopNav() {
           <div className="flex items-center">
             {/* logo cart */}
             <Link className="px-1 ml-4" href="/keranjang">
-              <ShoppingCartIcon className="text-primaryColor w-auto h-6 m-1" />
+              <Keranjang data={countKeranjang} />
             </Link>
             {/* notification */}
             {cookie && (

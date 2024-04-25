@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { BukuPenerbitanUserDetail } from "@/app/lib/definitions";
 import { getDetailBukuPenerbitanUser } from "@/app/lib/data";
 import ManagePenerbitanUser from "@/app/ui/buku-permohonan-terbit/managePenerbitanUser";
+import { DetailBukuSkeleton } from "@/app/ui/skeletons";
 
 type Props = {
   params: { id: string };
@@ -38,7 +39,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <main id="content">
-      <Suspense fallback={<p>Loading feed...</p>}>
+      <Suspense fallback={<DetailBukuSkeleton />}>
         <ManagePenerbitanUser data={data} />
       </Suspense>
     </main>

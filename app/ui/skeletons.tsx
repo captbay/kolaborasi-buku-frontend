@@ -10,7 +10,7 @@ export function CoursellSkeleton() {
 
 export function KoleksiBukuBerandaSkeleton() {
   return (
-    <section className="flex w-full gap-8 lg:px-8">
+    <section className="w-full grid grid-cols-1 lg:grid-cols-4 gap-8 lg:px-8">
       {Array.from({ length: 4 }).map((_, index) => (
         <CardKoleksiBukuSkeleton key={index} />
       ))}
@@ -80,7 +80,7 @@ export function CardKoleksiBukuSkeleton() {
 // KoleksiBukuSkeleton
 export function KoleksiBukuSkeleton() {
   return (
-    <section className="grid grid-cols-4 gap-4 mx-8">
+    <section className="w-full grid grid-cols-1 lg:grid-cols-4 gap-4 mx-8">
       {Array.from({ length: 8 }).map((_, index) => (
         <CardKoleksiBukuSkeleton key={index} />
       ))}
@@ -148,6 +148,109 @@ export function ItemKeranjangSkeleton() {
         <div className="flex flex-col justify-end">
           <div className="h-5 w-20 bg-gray-200"></div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+// detail buku skeleton
+export function DetailBukuSkeleton() {
+  return (
+    <section
+      className={`${shimmer} relative overflow-hidden rounded-xl bg-gray-100 p-2 shadow-sm w-full h-full`}
+    >
+      <section className="px-14 lg:px-28 py-12">
+        <div className="flex flex-col lg:flex-row justify-between">
+          <div className="flex flex-col lg:w-3/4">
+            <div className="flex flex-col lg:flex-row justify-between gap-8">
+              <div className="lg:w-1/2 flex flex-col lg:sticky lg:top-[182px] h-fit">
+                <div className="max-w-full rounded-lg object-cover object-center min-h-52 lg:h-[480px] bg-gray-200"></div>
+                <div className="grid grid-cols-5 gap-4">
+                  {Array.from({ length: 2 }).map((_, index) => (
+                    <div key={index}>
+                      <div className="mt-4 h-20 max-w-full cursor-pointer rounded-lg object-cover object-center bg-gray-200"></div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="w-full flex flex-col">
+                {/* head */}
+                <div>
+                  <div className="h-5 w-full mb-4 bg-gray-200"></div>
+
+                  <div className="h-5 w-full mb-4 bg-gray-200"></div>
+
+                  <div className="h-5 w-full mb-4 bg-gray-200"></div>
+                </div>
+                {/* deskripsi */}
+                <div>
+                  <div className="h-5 w-full mb-4 bg-gray-200"></div>
+                  <div className="h-5 w-full mb-4 bg-gray-200"></div>
+                </div>
+                {/* detail data */}
+                <div className="flex flex-col lg:flex-row gap-16 mt-8">
+                  <div className="flex flex-col gap-8">
+                    {/* isbn */}
+                    <div className="flex flex-col gap-2">
+                      <div className="h-5 w-full mb-4 bg-gray-200"></div>
+
+                      <div className="h-5 w-full mb-4 bg-gray-200"></div>
+                    </div>
+                    {/* tanggal terbit */}
+                    <div className="flex flex-col gap-2">
+                      <div className="h-5 w-full mb-4 bg-gray-200"></div>
+                      <div className="h-5 w-full mb-4 bg-gray-200"></div>
+                    </div>
+                    {/* jumlah halaman */}
+                    <div className="flex flex-col gap-2">
+                      <div className="h-5 w-full mb-4 bg-gray-200"></div>
+                      <div className="h-5 w-full mb-4 bg-gray-200"></div>
+                    </div>
+                  </div>
+                  <div className="flex flex-col gap-8">
+                    {/* bahasa */}
+                    <div className="flex flex-col gap-2">
+                      <div className="h-5 w-full mb-4 bg-gray-200"></div>
+                      <div className="h-5 w-full mb-4 bg-gray-200"></div>
+                    </div>
+                    {/* penerbit */}
+                    <div className="flex flex-col gap-2">
+                      <div className="h-5 w-full mb-4 bg-gray-200"></div>
+                      <div className="h-5 w-full mb-4 bg-gray-200"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col justify-center items-center px-8 mt-16">
+              <div className="h-5 w-full mb-4 bg-gray-200"></div>
+              <div className="h-5 w-full mb-4 bg-gray-200"></div>
+            </div>
+            <div className="mt-4">
+              <div className="w-full h-fit flex flex-col gap-2">
+                <div className="h-5 w-full mb-4 bg-gray-200"></div>
+                <div className="flex gap-4 items-center">
+                  <div className="h-5 w-full mb-4 bg-gray-200"></div>
+                  <div className="h-5 w-full mb-4 bg-gray-200"></div>
+                </div>
+                <div className="h-5 w-full mb-4 bg-gray-200"></div>
+                <div className="h-[1px] rounded-full w-full bg-gray-300 px-20"></div>
+              </div>
+            </div>
+          </div>
+          <div className="lg:ml-8 lg:w-1/4 h-fit">
+            <section className="bg-gray-200 border border-gray-200 rounded-lg min-w-full">
+              <div className="flex flex-col m-6">
+                <div className="h-5 w-full mb-4 bg-white"></div>
+                <div className="h-5 w-full mb-4 bg-white"></div>
+                <div className="h-5 w-full mb-4 bg-white"></div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+      <div className="px-14 lg:px-20 py-16">
+        <ProdukTerlarisSkeleton />
       </div>
     </section>
   );

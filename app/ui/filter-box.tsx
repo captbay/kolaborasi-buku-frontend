@@ -91,7 +91,7 @@ export default function FilterBox({
           Filter
         </h2>
         {/* urutkan berdasarkan */}
-        <div className="flex max-w-md flex-col gap-4 mt-8" id="checkbox">
+        <div className="flex w-full flex-col gap-4 mt-8" id="checkbox">
           <h3 className="text-base font-light tracking-tight text-blackColor">
             Urutkan Berdasarkan
           </h3>
@@ -114,7 +114,7 @@ export default function FilterBox({
             </select>
           </div>
         </div>
-        <div className="flex max-w-md flex-col gap-4 mt-8" id="checkbox">
+        <div className="flex w-full flex-col gap-4 mt-8" id="checkbox">
           <h3 className="text-base font-light tracking-tight text-blackColor">
             Kategori
           </h3>
@@ -139,7 +139,7 @@ export default function FilterBox({
             </select>
           </div>
         </div>
-        <div className="flex max-w-md flex-col gap-4 mt-8">
+        <div className="flex w-full flex-col gap-4 mt-8">
           <h3 className="text-base font-light tracking-tight text-blackColor">
             Harga
           </h3>

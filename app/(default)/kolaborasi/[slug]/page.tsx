@@ -11,6 +11,7 @@ import { Suspense } from "react";
 import { getDetailBukuKolaborasiResponse } from "@/app/lib/definitions";
 import { getDetailBukuKolaborasi } from "@/app/lib/data";
 import { cookies } from "next/headers";
+import { DetailBukuSkeleton } from "@/app/ui/skeletons";
 
 type Props = {
   params: { slug: string };
@@ -46,7 +47,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <main id="content">
-      <Suspense fallback={<p>Loading feed...</p>}>
+      <Suspense fallback={<DetailBukuSkeleton />}>
         <section className="hidden lg:block px-14 lg:px-28 py-4">
           <Breadcrumbs
             breadcrumbs={[

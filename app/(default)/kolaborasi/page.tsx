@@ -45,7 +45,7 @@ export default async function Page({
               <FilterBoxKolaborasi dataKategori={dataKategori} />
             </Suspense>
           </div>
-          <div className="w-fit flex-1">
+          <div className="w-full flex-1">
             <Suspense
               key={search + currentPage + order + kategori}
               fallback={<KoleksiBukuSkeleton />}

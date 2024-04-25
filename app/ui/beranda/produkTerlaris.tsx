@@ -73,7 +73,7 @@ export default function ProdukTerlaris({ data }: { data: CardData[] }) {
               slidesPerView: 1,
               spaceBetween: 16,
             },
-            768: {
+            769: {
               slidesPerView: 4,
               spaceBetween: 32,
             },

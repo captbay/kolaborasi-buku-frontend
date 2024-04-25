@@ -127,7 +127,7 @@ export default function Notification() {
       }
       arrowIcon={false}
       placement="bottom-end"
-      className="w-1/3"
+      className="w-2/3"
       inline
     >
       <Dropdown.Header>

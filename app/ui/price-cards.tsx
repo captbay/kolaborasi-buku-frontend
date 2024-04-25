@@ -32,8 +32,8 @@ export default async function priceCards({
         <h5 className="mb-4 text-xl font-medium text-gray-500 dark:text-gray-400">
           {nama}
         </h5>
-        <div className="w-fit flex items-baseline text-gray-900 dark:text-white">
-          <span className="text-3xl font-extrabold tracking-tight">
+        <div className="w-fit flex flex-col sm:flex-row items-baseline text-gray-900 dark:text-white">
+          <span className="text-xl md:text-3xl font-extrabold tracking-tight">
             {formatCurrency(harga)}
           </span>
           <span className="ms-1 text-xl font-normal text-gray-500 dark:text-gray-400">

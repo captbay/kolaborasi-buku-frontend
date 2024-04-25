@@ -5,8 +5,6 @@ import React, { useRef } from "react";
 import Image from "next/image";
 import { lusitana } from "@/app/ui/fonts";
 import clsx from "clsx";
-import TimerKolaborasi from "@/app/ui/profile/timerKolaborasi";
-import TimelinePenulisan from "@/app/ui/kolaborasi/timelinePenulisan";
 import { Button } from "@/app/ui/button";
 import { toast } from "react-toastify";
 import { saveAs } from "file-saver";
@@ -21,7 +19,6 @@ export default function ManagePenerbitanUser({
 }: {
   data: BukuPenerbitanUserDetail;
 }) {
-  const route = useRouter();
   const { token, token_type } = useGetCookie();
 
   const handleDownload = async () => {

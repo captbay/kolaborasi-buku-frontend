@@ -51,7 +51,7 @@ const CardBooks: React.FC<CardBooksProps> = ({
           <h3 className="text-base font-semibold tracking-tight text-blackColor line-clamp-2">
             {judul}
           </h3>
-          <p className="text-xl font-bold text-blackColor ">
+          <p className="text-xl font-bold text-blackColor line-clamp-2 ">
             {formatCurrency(harga)}
           </p>
           <div className="flex items-center mt-2.5 justify-between">

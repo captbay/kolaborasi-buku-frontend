@@ -8,7 +8,7 @@ export default function NotFound() {
       <FaceFrownIcon className="w-10 text-gray-400" />
       <h2 className="text-xl font-semibold">404 Tidak Ditemukan</h2>
       <p>Data yang Anda cari tidak ditemukan</p>
-      <Link href="/profil/koleksi-buku-kolaborasi-saya">
+      <Link href="/profil/koleksi-buku-penerbitan-saya">
         <Button>Kembali</Button>
       </Link>
     </main>

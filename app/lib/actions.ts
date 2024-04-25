@@ -266,6 +266,57 @@ export const updateStatusTransaksiBuku = (
   );
 };
 
+// update status gagal transaksi penerbitan
+export const updateTrxPenerbitanAgain = (
+  id: string,
+  token: string,
+  token_type: string
+) => {
+  return axios.get(`/transaksi-paket-penerbitan/transaction-again/${id}`, {
+    headers: {
+      Authorization: `${token_type} ${token}`,
+    },
+  });
+};
+
+// update status gagal transaksi penerbitan
+export const updateStatusTransaksiPenerbitan = (
+  trx_id: string,
+  token: string,
+  token_type: string
+) => {
+  return axios.put(
+    `/transaksi-paket-penerbitan/gagal`,
+    {
+      trx_id,
+    },
+    {
+      headers: {
+        Authorization: `${token_type} ${token}`,
+      },
+    }
+  );
+};
+
+// upload bukti bayar pembelian paket penerbitan
+export const uploadBuktiBayarPenerbitanBuku = (
+  id: string,
+  form: FormData,
+  token: string,
+  token_type: string
+) => {
+  return axios.post(
+    `/transaksi-paket-penerbitan/upload-bukti-pembayaran/${id}`,
+    form,
+    {
+      headers: {
+        Authorization: `${token_type} ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    }
+  );
+};
+
 // upload bukti bayar pembelian buku
 export const uploadBuktiBayarPembelianBuku = (
   transaksi_buku_id: string,
@@ -285,6 +336,20 @@ export const uploadBuktiBayarPembelianBuku = (
   );
 };
 
+// upload buku review
+export const uploadBukuReview = (
+  form: FormData,
+  token: string,
+  token_type: string
+) => {
+  return axios.post(`/transaksi-paket-penerbitan/add`, form, {
+    headers: {
+      Authorization: `${token_type} ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+};
+
 // getDownloadBuku
 export const getDownloadBuku = (
   buku_dijual_id: string,
@@ -300,9 +365,28 @@ export const getDownloadBuku = (
   });
 };
 
+// getDownloadBukuPermohonanTerbit
+export const getDownloadBukuPermohonanTerbit = (
+  id: string,
+  token: string,
+  token_type: string
+) => {
+  return axios.get(`/koleksi-buku-penerbitan-user/download/${id}`, {
+    responseType: "blob",
+    headers: {
+      Authorization: `${token_type} ${token}`,
+      Accept: "application/pdf",
+    },
+  });
+};
+
 // getDownloadMou
-export const getDownloadMou = (token: string, token_type: string) => {
-  return axios.get(`/mou/downloadMou`, {
+export const getDownloadMou = (
+  filter: string,
+  token: string,
+  token_type: string
+) => {
+  return axios.get(`/mou/downloadMou/${filter}`, {
     responseType: "blob",
     headers: {
       Authorization: `${token_type} ${token}`,

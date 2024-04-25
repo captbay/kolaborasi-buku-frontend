@@ -1,5 +1,72 @@
 // definisi var yang masuk
 
+export type BukuPenerbitanUserDetail = {
+  id: string;
+  judul: string;
+  deskripsi: string;
+  cover_buku: string;
+  file_buku: string;
+  file_mou: string;
+  dijual: boolean;
+  isbn: string;
+  created_at: string;
+  transaksi_paket_penerbitan: {
+    trx_id: string;
+    no_transaksi: string;
+    total_harga: number;
+    status: string;
+    date_time_exp: string;
+    note: string;
+  };
+  array_status: Array<string>;
+};
+
+// Trx Paket Penerbitan Buku
+export type getTrxPaketResponse = {
+  trx_id: string;
+  no_transaksi: string;
+  status: string;
+  date_time_exp: string;
+  date_time_dp_lunas: string;
+  date_time_lunas: string;
+  total_harga: number;
+  created_at: string;
+  // detail transaksi
+  jasa_tambahan: JasaTambahan[];
+  paket_penerbitan: PaketPenerbitan;
+  buku_permohonan_terbit: BukuPermohonanTerbit;
+};
+
+// buku permohonan terbit
+export type BukuPermohonanTerbit = {
+  id: string;
+  judul: string;
+  cover_buku: string;
+  deskripsi: string;
+};
+
+// paket penerbitan
+export type PaketPenerbitan = {
+  id: string;
+  nama: string;
+  harga: number;
+  deskripsi: string;
+  jasa_paket_penerbitan: JasaPaketPenerbitan[];
+};
+
+// jasa paket penerbitan
+export type JasaPaketPenerbitan = {
+  paket_penerbitan_id: string;
+  nama: string;
+};
+
+// jasa tambahan
+export type JasaTambahan = {
+  id: string;
+  nama: string;
+  harga: number;
+};
+
 // response getKoleksiBukuKolaborasiResponse
 export type getKoleksiBukuKolaborasiResponse = {
   current_page: number;
@@ -34,6 +101,14 @@ export type getKoleksiBukuResponse = {
   data: KoleksiBukuUser[];
   last_page: number;
   total: number;
+};
+
+// response koleksi buku penerbitan
+export type getKoleksiBukuPenerbitanResponse = {
+  current_page: number;
+  last_page: number;
+  total: number;
+  data: BukuPermohonanTerbit[];
 };
 
 export type KoleksiBukuUser = {

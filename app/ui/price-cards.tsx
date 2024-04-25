@@ -19,6 +19,13 @@ export default async function priceCards({
   deskripsi,
   jasaData,
 }: paketData) {
+  const createQueryString = (name: any, value: any) => {
+    const params = new URLSearchParams();
+    params.set(name, value);
+
+    return params.toString();
+  };
+
   return (
     <div className="w-full flex justify-between flex-col max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8">
       <div>
@@ -55,8 +62,15 @@ export default async function priceCards({
           ))}
         </ul>
       </div>
-      <Button className="">
-        <Link href={id}>Pilih Paket</Link>
+      <Button>
+        <Link
+          href={`/ringkasan-pembelian-paket-penerbitan?${createQueryString(
+            "paket_id",
+            id
+          )}`}
+        >
+          Pilih Paket
+        </Link>
       </Button>
     </div>
   );

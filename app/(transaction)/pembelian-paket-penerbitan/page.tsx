@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 
-import { getTrxBabKolaborasi } from "@/app/lib/data";
+import { getTrxPaketPenerbitanById } from "@/app/lib/data";
 
 import { redirect } from "next/navigation";
 
-import { getTrxBabKolaborasiResponse } from "@/app/lib/definitions";
+import { getTrxPaketResponse } from "@/app/lib/definitions";
 import { Suspense } from "react";
-import RingkasanPembelianBabKolaborasi from "@/app/ui/pembayaran/pembelianBabKolaborasi/ringkasanPembelianBabKolaborasi";
+import RingkasanPembelianPaketPenerbitan from "@/app/ui/pembayaran/pembelianPaketPenerbitan/ringkasanPembelianPaketPenerbitan";
 
 type Props = {
   searchParams: { token_trx: string };
 };
 
 export const metadata: Metadata = {
-  title: "Transaksi Bab Kolaborasi",
+  title: "Transaksi Paket Penerbitan",
 };
 
 export default async function Page({ searchParams }: Props) {
@@ -33,7 +33,7 @@ export default async function Page({ searchParams }: Props) {
     redirect("/");
   }
 
-  const data: getTrxBabKolaborasiResponse = await getTrxBabKolaborasi(
+  const data: getTrxPaketResponse = await getTrxPaketPenerbitanById(
     token_trx,
     token,
     token_type
@@ -45,7 +45,7 @@ export default async function Page({ searchParams }: Props) {
 
   return (
     <Suspense fallback={<p>Loading feed...</p>}>
-      <RingkasanPembelianBabKolaborasi data={data} />
+      <RingkasanPembelianPaketPenerbitan data={data} />
     </Suspense>
   );
 }

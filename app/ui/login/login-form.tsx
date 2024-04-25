@@ -88,7 +88,8 @@ export default function LoginForm() {
             token: res.data.data.token,
           },
           {
-            maxAge: 60 * 60 * 24,
+            // 1 day from now
+            maxAge: 86400,
             path: "/",
           }
         );

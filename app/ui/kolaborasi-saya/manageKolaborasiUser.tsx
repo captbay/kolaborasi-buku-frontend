@@ -104,7 +104,7 @@ export default function ManageKolaborasiUser({
       // Fetch API
       try {
         const res = await uploadMouKolaborasi(
-          data.buku_kolaborasi_id,
+          data.id,
           file_mou,
           token,
           token_type
@@ -116,6 +116,7 @@ export default function ManageKolaborasiUser({
             autoClose: 5000,
             isLoading: false,
           });
+          route.refresh();
         }
       } catch (error: any) {
         toast.update(loading, {
@@ -136,7 +137,7 @@ export default function ManageKolaborasiUser({
     const loading = toast.loading("Sedang Download File MOU...");
 
     try {
-      const res = await getDownloadMou(token, token_type);
+      const res = await getDownloadMou("kolaborasi", token, token_type);
       if (res.status === 200 || res.status === 201) {
         const blob = new Blob([res.data], { type: "application/pdf" });
         saveAs(blob, `filemou_${data.judul_buku}.pdf`);
@@ -147,10 +148,18 @@ export default function ManageKolaborasiUser({
           autoClose: 5000,
           isLoading: false,
         });
+      } else {
+        toast.update(loading, {
+          render: res.data.message,
+          type: "error",
+          autoClose: 5000,
+          closeButton: true,
+          isLoading: false,
+        });
       }
     } catch (error: any) {
       toast.update(loading, {
-        render: error.response.data,
+        render: "Terjadi Kesalahan",
         type: "error",
         autoClose: 5000,
         closeButton: true,
@@ -260,39 +269,42 @@ export default function ManageKolaborasiUser({
                         : data.note}
                     </p>
                   </div>
-                  <div>
-                    <div className="flex justify-between items-center">
-                      <h2 className="text-xl font-semibold">File MOU</h2>
-                      {/* download button file mou */}
-                      <Button onClick={handleDownload}>
-                        <ArrowDownTrayIcon className="w-5 h-5" />
+                  {data.file_mou == null && (
+                    <div>
+                      <div className="flex justify-between items-center">
+                        <h2 className="text-xl font-semibold">File MOU</h2>
+                        {/* download button file mou */}
+                        <Button onClick={handleDownload}>
+                          <ArrowDownTrayIcon className="w-5 h-5" />
+                        </Button>
+                      </div>
+                      <p className="mt-4 text-gray-500 text-wrap">
+                        File MOU diperlukan untuk kebutuhan administrasi
+                        pembuatan ISBN, silahkan download file MOU dengan
+                        menekan logo download lalu isikan data yang diperlukan
+                        dan tanda tangan Anda. Setelah itu tolong upload kembali
+                        :)
+                      </p>
+                      {/* upload file mou */}
+                      <Button
+                        className="mt-4 w-full"
+                        onClick={() => fileMouInputRef.current?.click()}
+                      >
+                        Upload
                       </Button>
-                    </div>
-                    <p className="mt-4 text-gray-500 text-wrap">
-                      File MOU diperlukan untuk kebutuhan administrasi pembuatan
-                      ISBN, silahkan download file MOU di bawah ini lalu isikan
-                      data yang diperlukan dan tanda tangan Anda. Setelah itu
-                      tolong upload kembali :)
-                    </p>
-                    {/* upload file mou */}
-                    <Button
-                      className="mt-4 w-full"
-                      onClick={() => fileMouInputRef.current?.click()}
-                    >
-                      Upload
-                    </Button>
 
-                    {/* File input */}
-                    <input
-                      name="file_mou"
-                      type="file"
-                      accept="application/pdf"
-                      onChange={handleFileChange}
-                      style={{ display: "none" }}
-                      max={2048}
-                      ref={fileMouInputRef}
-                    />
-                  </div>
+                      {/* File input */}
+                      <input
+                        name="file_mou"
+                        type="file"
+                        accept="application/pdf"
+                        onChange={handleFileChange}
+                        style={{ display: "none" }}
+                        max={2048}
+                        ref={fileMouInputRef}
+                      />
+                    </div>
+                  )}
                   <div>
                     <h2 className="text-xl font-semibold">
                       File Bab - {data.judul_bab} - {data.no_bab}
@@ -305,10 +317,20 @@ export default function ManageKolaborasiUser({
                       note.
                     </p>
                     {/* upload file mou */}
-                    {data.status == "UPLOADED" ? (
-                      <Button className="mt-4 w-full bg-yellow-400">
+                    {data.file_mou == null ? (
+                      <button
+                        className="flex w-full mt-4 h-10 items-center justify-center rounded-lg
+         bg-red-500 px-4 text-sm font-medium text-whiteColor"
+                      >
+                        Silahkan Upload Mou Terlebih Dahulu
+                      </button>
+                    ) : data.status == "UPLOADED" ? (
+                      <button
+                        className="flex w-full mt-4 h-10 items-center justify-center rounded-lg
+           bg-yellow-500 px-4 text-sm font-medium text-whiteColor"
+                      >
                         Sudah Upload, silahkan tunggu update dari admin
-                      </Button>
+                      </button>
                     ) : data.status == "EDITING" ? (
                       <button
                         className="flex w-full mt-4 h-10 items-center justify-center rounded-lg
@@ -334,7 +356,7 @@ export default function ManageKolaborasiUser({
                         </Button>
 
                         <input
-                          name="file_mou"
+                          name="file_bab"
                           type="file"
                           accept=".pdf , .doc , .docx"
                           onChange={handleFileBabChange}

@@ -222,6 +222,15 @@ export default function SidebarProfile({
           >
             Koleksi Buku Kolaborasi Saya
           </Sidebar.Item>
+          <Sidebar.Item
+            className={clsx("text-sm font-medium hover:text-primaryColor", {
+              "text-primaryColor":
+                pathname === "/profil/koleksi-buku-penerbitan-saya",
+            })}
+            href="/profil/koleksi-buku-penerbitan-saya"
+          >
+            Koleksi Buku Penerbitan Saya
+          </Sidebar.Item>
         </Sidebar.ItemGroup>
         <Sidebar.ItemGroup>
           <Sidebar.Item

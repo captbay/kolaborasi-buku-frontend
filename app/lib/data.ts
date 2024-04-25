@@ -2,6 +2,31 @@ import { axios } from "@/app/lib/services";
 import { unstable_noStore as noStore } from "next/cache";
 
 /*
+ getDetailBukuPenerbitanUser
+ */
+export async function getDetailBukuPenerbitanUser(
+  id: string,
+  token: string,
+  token_type: string
+) {
+  noStore();
+  return await axios
+    .get("/koleksi-buku-penerbitan-user/detail/" + id, {
+      headers: {
+        Authorization: token_type + " " + token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+/*
  getDetailKolaborasiUser
  */
 export async function getDetailKolaborasiUser(
@@ -45,6 +70,44 @@ export async function getKoleksiBukuKolaborasiUser({
   noStore();
   return await axios
     .get("/koleksi-buku-kolaborasi-user/all", {
+      params: {
+        limit: limit,
+        page: page,
+        search: search,
+      },
+      headers: {
+        Authorization: token_type + " " + token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+/*
+  getKoleksiBukuPenerbitanUser
+  */
+export async function getKoleksiBukuPenerbitanUser({
+  limit = 10,
+  page,
+  search,
+  token,
+  token_type,
+}: {
+  limit: number;
+  page: number;
+  search?: string;
+  token: string;
+  token_type: string;
+}) {
+  noStore();
+  return await axios
+    .get("/koleksi-buku-penerbitan-user/all", {
       params: {
         limit: limit,
         page: page,
@@ -149,6 +212,97 @@ export async function getTrxPenjualanBuku(
     });
 }
 
+export async function getPaketPenerbitanById(
+  id: string,
+  token: string,
+  token_type: string
+) {
+  noStore();
+  return await axios
+    .get("/transaksi-paket-penerbitan/detail-paket/" + id, {
+      headers: {
+        Authorization: token_type + " " + token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+export async function getJasaTambahan(
+  id: string,
+  token: string,
+  token_type: string
+) {
+  noStore();
+  return await axios
+    .get("/transaksi-paket-penerbitan/jasa-tambahan/" + id, {
+      headers: {
+        Authorization: token_type + " " + token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+/*
+Transaksi Pembelian Paket Penerbitan
+*/
+export async function getPembelianPaketPenerbitanAll(
+  status: string,
+  token: string,
+  token_type: string
+) {
+  noStore();
+  return await axios
+    .get("/transaksi-paket-penerbitan/all/?status=" + status, {
+      headers: {
+        Authorization: token_type + " " + token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+export async function getTrxPaketPenerbitanById(
+  token_trx: string,
+  token: string,
+  token_type: string
+) {
+  noStore();
+  return await axios
+    .get("/transaksi-paket-penerbitan/detail/" + token_trx, {
+      headers: {
+        Authorization: token_type + " " + token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 /*
 Transaksi Pembelian Kolaborasi Buku
 */
@@ -216,9 +370,7 @@ export async function getUser(id: string, token: string, token_type: string) {
       }
     })
     .catch((error) => {
-      if (error.response.data.message === "Unauthenticated.") {
-        return null;
-      }
+      console.error(error);
     });
 }
 

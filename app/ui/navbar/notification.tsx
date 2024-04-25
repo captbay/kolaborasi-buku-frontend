@@ -16,8 +16,10 @@ import { getNotifikasi } from "@/app/lib/data";
 import clsx from "clsx";
 import useGetCookie from "@/app/lib/useGetCookies";
 import { pusher } from "@/app/lib/pusher/clientEvent";
+import { useRouter } from "next/navigation";
 
 export default function Notification() {
+  const router = useRouter();
   // initial
   const [data, setData] = useState<NotifikasiResponse>({
     count_not_read: 0,
@@ -47,6 +49,7 @@ export default function Notification() {
 
     channel.bind("database-notifications.sent", function (data: any) {
       getNotif();
+      router.refresh();
     });
 
     channel.bind("pusher:subscription_succeeded", function (members: any) {

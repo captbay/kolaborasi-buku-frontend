@@ -14,7 +14,7 @@ type Props = {
 };
 
 export const metadata: Metadata = {
-  title: "Pembelian Buku",
+  title: "Transaksi Buku",
 };
 
 export default async function Page({ searchParams }: Props) {

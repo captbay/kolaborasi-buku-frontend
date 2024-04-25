@@ -22,11 +22,13 @@ export default async function TopNav() {
         token_type: null,
       };
 
-  const user: User = await getUser(id, token, token_type);
-  const countKeranjang: CountKeranjang = await getCountKeranjang(
-    token,
-    token_type
-  );
+  let user: User | null = null;
+  let countKeranjang: CountKeranjang | null = null;
+
+  if (token != null) {
+    user = await getUser(id, token, token_type);
+    countKeranjang = await getCountKeranjang(token, token_type);
+  }
 
   return (
     <div className="sticky top-0 w-full bg-whiteColor px-14 lg:px-28 z-20">
@@ -88,9 +90,9 @@ export default async function TopNav() {
               <Suspense fallback={<div>Loading...</div>}>
                 <div className="hidden ml-5 lg:inline-flex">
                   <ProfileCircle
-                    fotoProfil={user.foto_profil}
-                    namaLengkap={user.nama_lengkap}
-                    email={user.email}
+                    fotoProfil={user?.foto_profil}
+                    namaLengkap={user?.nama_lengkap}
+                    email={user?.email}
                   />
                 </div>
               </Suspense>

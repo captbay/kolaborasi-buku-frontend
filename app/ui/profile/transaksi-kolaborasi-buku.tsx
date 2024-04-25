@@ -59,9 +59,6 @@ export default function TransaksiKolaborasiBuku({
   dataFAILED: getTrxBabKolaborasiResponse[];
   dataDONE: getTrxBabKolaborasiResponse[];
 }) {
-  const { token, token_type, clearCookie } = useGetCookie();
-  const router = useRouter();
-
   return (
     <Flowbite theme={{ theme: customTheme }}>
       <Tabs aria-label="Tabs with underline" style="underline">
@@ -207,7 +204,7 @@ function ListTrxProgress({ data }: { data: getTrxBabKolaborasiResponse[] }) {
               </div>
               <div>
                 <p className="text-xl font-bold text-blackColor">
-                  Total Harga: {formatCurrency(trx.bab_buku.harga)}
+                  Total Harga: {formatCurrency(trx.total_harga)}
                 </p>
               </div>
             </div>

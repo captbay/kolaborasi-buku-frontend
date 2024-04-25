@@ -60,9 +60,6 @@ export default function TransaksiPembelianBuku({
   dataFAILED: getTrxPenjualanBukuResponse[];
   dataDONE: getTrxPenjualanBukuResponse[];
 }) {
-  const { token, token_type, clearCookie } = useGetCookie();
-  const router = useRouter();
-
   return (
     <Flowbite theme={{ theme: customTheme }}>
       <Tabs aria-label="Tabs with underline" style="underline">

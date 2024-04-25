@@ -141,11 +141,11 @@ export default async function Page({ params }: Props) {
                 </div>
               </div>
             </div>
-            <div className="w-full h-fit flex flex-col items-center sticky top-[182px]">
+            <div className="h-fit flex flex-col items-center sticky top-[182px]">
               <h2 className={`${lusitana.className} text-lg font-semibold`}>
                 Timeline
               </h2>
-              <div className="w-full mt-8 flex flex-col lg:flex-row justify-center">
+              <div className="mt-8 flex flex-col lg:flex-row justify-center">
                 <TimelinePenulisan data={detailBuku.timeline_kolaborasi} />
               </div>
             </div>

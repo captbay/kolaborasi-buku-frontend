@@ -15,9 +15,9 @@ export default function ProfileCircle({
   namaLengkap,
   email,
 }: {
-  fotoProfil: string;
-  namaLengkap: string;
-  email: string;
+  fotoProfil?: string;
+  namaLengkap?: string;
+  email?: string;
 }) {
   const { token, token_type, clearCookie } = useGetCookie();
   const router = useRouter();
@@ -117,6 +117,15 @@ export default function ProfileCircle({
         href="/profil/koleksi-buku-kolaborasi-saya"
       >
         Koleksi Buku Kolaborasi Saya
+      </Dropdown.Item>
+      <Dropdown.Item
+        className={clsx("text-sm font-medium hover:text-primaryColor", {
+          "text-primaryColor":
+            pathname === "/profil/koleksi-buku-penerbitan-saya",
+        })}
+        href="/profil/koleksi-buku-penerbitan-saya"
+      >
+        Koleksi Buku Penerbitan Saya
       </Dropdown.Item>
       <Dropdown.Divider />
       <Dropdown.Item

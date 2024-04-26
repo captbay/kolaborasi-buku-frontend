@@ -7,6 +7,18 @@ import Logo from "@/app/ui/penerbitan-buku-logo";
 import Image from "next/image";
 import { Button } from "./button";
 
+const links = [
+  { name: "Beranda", href: "/" },
+  { name: "Koleksi", href: "/koleksi-buku" },
+  { name: "Kolaborasi", href: "/kolaborasi" },
+  { name: "Paket Penerbitan", href: "/paket-penerbitan" },
+  { name: "Bantuan", href: "/bantuan" },
+  {
+    name: "Hubungi Kami",
+    href: "/hubungi-kami",
+  },
+];
+
 export default function Footer() {
   return (
     <footer className="flex h-full flex-col py-16 px-14 lg:px-28 bottom-0 bg-whiteColor">
@@ -23,36 +35,16 @@ export default function Footer() {
           </p>
         </div>
         <div className="mt-8 lg:mt-0">
-          <h1 className="text-sm font-medium">Fitur-Fitur</h1>
+          <h1 className="text-sm font-medium mb-2 lg:mb-4">Fitur-Fitur</h1>
           <nav>
-            <ul className="mt-2 lg:mt-4">
-              <li>
-                <Link href="/">
-                  <p className="text-wrap text-xs">Kolaborasi</p>
-                </Link>
-              </li>
-              <li>
-                <Link href="/">
-                  <p className="mt-2 text-wrap text-xs">Penerbitan</p>
-                </Link>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div className="mt-8 lg:mt-0">
-          <h1 className="text-sm font-medium">Fitur-Fitur</h1>
-          <nav>
-            <ul className="mt-2 lg:mt-4">
-              <li>
-                <Link href="/">
-                  <p className="text-wrap text-xs">Kolaborasi</p>
-                </Link>
-              </li>
-              <li>
-                <Link href="/">
-                  <p className="mt-2 text-wrap text-xs">Penerbitan</p>
-                </Link>
-              </li>
+            <ul>
+              {links.map((link) => (
+                <li key={link.name}>
+                  <Link key={link.name} href={link.href}>
+                    <p className=" mt-2 text-wrap text-xs">{link.name}</p>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </nav>
         </div>
@@ -60,7 +52,7 @@ export default function Footer() {
           <h1 className="text-sm font-medium">Memiliki Pertanyaan ?</h1>
           <p className="mt-2 lg:mt-4 text-wrap text-xs">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            tincidunt, nunc vitae.
+            tincidunt, nunc vitae. Nunc tincidunt, nunc vitae.
           </p>
           <Link href="/hubungi-kami">
             <Button className="w-full h-8 mt-2">Hubungi Kami</Button>
@@ -79,25 +71,15 @@ export default function Footer() {
             />
           </Link>
           <Link href="/">
-            <Image
-              src="/instagram.svg"
-              alt="instagram"
-              width={24}
-              height={24}
-            />
+            <Image src="/facebook.svg" alt="facebook" width={24} height={24} />
+          </Link>
+          <Link href="/">
+            <Image src="/tiktok.svg" alt="tiktok" width={24} height={24} />
           </Link>
           <Link href="/">
             <Image
-              src="/instagram.svg"
-              alt="instagram"
-              width={24}
-              height={24}
-            />
-          </Link>
-          <Link href="/">
-            <Image
-              src="/instagram.svg"
-              alt="instagram"
+              src="/x-twitter.svg"
+              alt="x-twitter"
               width={24}
               height={24}
             />

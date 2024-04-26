@@ -38,10 +38,10 @@ export default async function Coursell() {
               key={index}
               src={"http://kolaborasi-buku-backend.test/storage/" + event.file}
               alt="Picture of the event"
-              width={500}
-              height={500}
+              width={1000}
+              height={1000}
               priority
-              className="w-full h-full"
+              className="w-full h-full object-fill object-center"
             />
           ))}
         </Carousel>

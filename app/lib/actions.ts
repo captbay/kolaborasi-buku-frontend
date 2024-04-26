@@ -54,8 +54,8 @@ export const resetPassword = (
 };
 
 export const gantiPassword = (
+  old_password: string,
   password: string,
-  new_password: string,
   confirm_password: string,
   token: string,
   token_type: string
@@ -63,8 +63,8 @@ export const gantiPassword = (
   return axios.put(
     "/auth/changePassword",
     {
+      old_password,
       password,
-      new_password,
       confirm_password,
     },
     {

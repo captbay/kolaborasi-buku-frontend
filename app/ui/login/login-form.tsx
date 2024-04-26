@@ -6,6 +6,8 @@ import {
   AtSymbolIcon,
   KeyIcon,
   ExclamationCircleIcon,
+  EyeSlashIcon,
+  EyeIcon,
 } from "@heroicons/react/24/outline";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "../button";
@@ -18,6 +20,8 @@ import { FormEvent } from "react";
 import { toast } from "react-toastify";
 
 export default function LoginForm() {
+  const [type, setType] = useState<string>("password");
+
   // ref
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -151,6 +155,14 @@ export default function LoginForm() {
     }
   };
 
+  const handleToggleShowPassword = () => {
+    if (type === "password") {
+      setType("text");
+    } else {
+      setType("password");
+    }
+  };
+
   return (
     <section className="rounded-lg bg-primaryCard px-6 pb-4 pt-8 mx-4 lg:mx-0 lg:w-[400px]">
       <div className="mb-4 flex justify-center">
@@ -206,7 +218,7 @@ export default function LoginForm() {
                 <input
                   className="peer block w-full rounded-md border border-primaryBorder py-[9px] pl-10 text-sm outline-2 placeholder:text-disableColor"
                   id="password"
-                  type="password"
+                  type={type}
                   name="password"
                   placeholder="Masukan Kata Sandi"
                   minLength={6}
@@ -215,6 +227,18 @@ export default function LoginForm() {
                   required
                 />
                 <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor" />
+
+                {type === "password" ? (
+                  <EyeSlashIcon
+                    className="cursor-pointer absolute right-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor"
+                    onClick={handleToggleShowPassword}
+                  />
+                ) : (
+                  <EyeIcon
+                    className="cursor-pointer absolute right-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor"
+                    onClick={handleToggleShowPassword}
+                  />
+                )}
               </div>
               {errorMessagePassword && (
                 <div

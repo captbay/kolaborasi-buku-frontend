@@ -1,7 +1,11 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
+import {
+  ExclamationCircleIcon,
+  EyeIcon,
+  EyeSlashIcon,
+} from "@heroicons/react/24/outline";
 import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { lusitana } from "@/app/ui/fonts";
@@ -13,6 +17,7 @@ import { register } from "@/app/lib/actions";
 import { toast } from "react-toastify";
 
 export default function RegisterForm() {
+  const [type, setType] = useState<string>("password");
   const router = useRouter();
 
   // ref form
@@ -29,7 +34,9 @@ export default function RegisterForm() {
   const [errorMessageLastName, setErrorMessageLastName] = useState<string>("");
   const [errorMessageNoTelp, setErrorMessageNoTelp] = useState<string>("");
   const [errorMessageMail, setErrorMessageMail] = useState<string>("");
-  const [errorMessagePassword, setErrorMessagePassword] = useState<string>("");
+  const [errorMessagePassword, setErrorMessagePassword] = useState<string[]>(
+    []
+  );
 
   // handle register
   const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
@@ -39,7 +46,7 @@ export default function RegisterForm() {
     setErrorMessageLastName("");
     setErrorMessageNoTelp("");
     setErrorMessageMail("");
-    setErrorMessagePassword("");
+    setErrorMessagePassword([]);
 
     // toast loading register
     const loading = toast.loading("Silahkan tunggu sebentar...");
@@ -50,6 +57,7 @@ export default function RegisterForm() {
     const no_telepon: string = noTelpRef.current?.value as string;
     const email: string = emailRef.current?.value as string;
     const password = passwordRef.current?.value as string;
+
     try {
       const res = await register(
         nama_depan,
@@ -101,12 +109,20 @@ export default function RegisterForm() {
       }
       if (error?.response?.data?.message.password !== undefined) {
         setErrorMessagePassword(
-          error?.response?.data?.message.password[0] || "An error occurred."
+          error?.response?.data?.message.password || ["An error occurred."]
         );
       }
       if (error?.response?.data?.success === false) {
         setErrorMessage(error?.response?.data?.message || "An error occurred.");
       }
+    }
+  };
+
+  const handleToggleShowPassword = () => {
+    if (type === "password") {
+      setType("text");
+    } else {
+      setType("password");
     }
   };
 
@@ -263,24 +279,38 @@ export default function RegisterForm() {
                 <input
                   className="peer block w-full rounded-md border border-primaryBorder py-[9px] text-sm outline-2 placeholder:text-disableColor"
                   id="password"
-                  type="password"
+                  type={type}
                   name="password"
                   placeholder="Masukan Kata Sandi"
                   ref={passwordRef}
                   required
                   minLength={6}
                 />
+                {type === "password" ? (
+                  <EyeSlashIcon
+                    className="cursor-pointer absolute right-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor"
+                    onClick={handleToggleShowPassword}
+                  />
+                ) : (
+                  <EyeIcon
+                    className="cursor-pointer absolute right-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor"
+                    onClick={handleToggleShowPassword}
+                  />
+                )}
               </div>
-              {errorMessagePassword && (
-                <div
-                  className="flex h-8 items-center space-x-1 mt-2"
-                  aria-live="polite"
-                  aria-atomic="true"
-                >
-                  <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
-                  <p className="text-sm text-dangerColor">
-                    {errorMessagePassword}
-                  </p>
+              {errorMessagePassword.length > 0 && (
+                <div>
+                  {errorMessagePassword.map((error, index) => (
+                    <div
+                      className="flex h-8 items-center space-x-1 mt-2"
+                      aria-live="polite"
+                      aria-atomic="true"
+                      key={index}
+                    >
+                      <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
+                      <p className="text-sm text-dangerColor">{error}</p>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>

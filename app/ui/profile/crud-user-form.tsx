@@ -5,7 +5,12 @@ import type { CustomFlowbiteTheme } from "flowbite-react";
 import { Flowbite } from "flowbite-react";
 import { toast } from "react-toastify";
 import { Button } from "@/app/ui/button";
-import { KeyIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline";
+import {
+  KeyIcon,
+  ExclamationCircleIcon,
+  EyeSlashIcon,
+  EyeIcon,
+} from "@heroicons/react/24/outline";
 import { gantiPassword, updateUser, uploadFileMember } from "@/app/lib/actions";
 import useGetCookie from "@/app/lib/useGetCookies";
 import { User } from "@/app/lib/definitions";
@@ -706,6 +711,10 @@ function FormGantiPassword({
   clearCookie: () => void;
   router: any;
 }) {
+  const [type, setType] = useState<string>("password");
+  const [type2, setType2] = useState<string>("password");
+  const [type3, setType3] = useState<string>("password");
+
   // refs
   const passwordRef = useRef<HTMLInputElement>(null);
   const passwordNewRef = useRef<HTMLInputElement>(null);
@@ -714,8 +723,9 @@ function FormGantiPassword({
   // state
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [errorMessagePassword, setErrorMessagePassword] = useState<string>("");
-  const [errorMessagePasswordNew, setErrorMessagePasswordNew] =
-    useState<string>("");
+  const [errorMessagePasswordNew, setErrorMessagePasswordNew] = useState<
+    string[]
+  >([]);
   const [errorMessagePasswordConfirm, setErrorMessagePasswordConfirm] =
     useState<string>("");
 
@@ -724,7 +734,7 @@ function FormGantiPassword({
     // ganti error message
     setErrorMessage("");
     setErrorMessagePassword("");
-    setErrorMessagePasswordNew("");
+    setErrorMessagePasswordNew([]);
     setErrorMessagePasswordConfirm("");
 
     // toast loading register
@@ -764,15 +774,15 @@ function FormGantiPassword({
         isLoading: false,
       });
 
-      if (error?.response?.data?.message.password !== undefined) {
+      if (error?.response?.data?.message.old_password !== undefined) {
         setErrorMessagePassword(
-          error?.response?.data?.message.password[0] || "An error occurred."
+          error?.response?.data?.message.old_password[0] || "An error occurred."
         );
       }
 
-      if (error?.response?.data?.message.new_password !== undefined) {
+      if (error?.response?.data?.message.password !== undefined) {
         setErrorMessagePasswordNew(
-          error?.response?.data?.message.new_password[0] || "An error occurred."
+          error?.response?.data?.message.password || ["An error occurred."]
         );
       }
 
@@ -791,6 +801,30 @@ function FormGantiPassword({
     }
   };
 
+  const handleToggleShowPassword = () => {
+    if (type === "password") {
+      setType("text");
+    } else {
+      setType("password");
+    }
+  };
+
+  const handleToggleShowPassword2 = () => {
+    if (type2 === "password") {
+      setType2("text");
+    } else {
+      setType2("password");
+    }
+  };
+
+  const handleToggleShowPassword3 = () => {
+    if (type3 === "password") {
+      setType3("text");
+    } else {
+      setType3("password");
+    }
+  };
+
   return (
     <section className="px-8">
       <form onSubmit={handleGantiPassword} className="space-y-3">
@@ -806,13 +840,24 @@ function FormGantiPassword({
               <input
                 className="peer block w-full rounded-md border border-primaryBorder py-[9px] pl-10 text-sm outline-2 placeholder:text-disableColor"
                 id="password"
-                type="password"
+                type={type}
                 name="password"
                 placeholder="Masukan Kata Sandi"
                 ref={passwordRef}
                 required
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor" />
+              {type === "password" ? (
+                <EyeSlashIcon
+                  className="cursor-pointer absolute right-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor"
+                  onClick={handleToggleShowPassword}
+                />
+              ) : (
+                <EyeIcon
+                  className="cursor-pointer absolute right-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor"
+                  onClick={handleToggleShowPassword}
+                />
+              )}
             </div>
             {errorMessagePassword && (
               <div
@@ -838,24 +883,38 @@ function FormGantiPassword({
               <input
                 className="peer block w-full rounded-md border border-primaryBorder py-[9px] pl-10 text-sm outline-2 placeholder:text-disableColor"
                 id="newPassword"
-                type="password"
+                type={type2}
                 name="newPassword"
                 placeholder="Masukan Ulang Kata Sandi"
                 ref={passwordNewRef}
                 required
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor" />
+              {type2 === "password" ? (
+                <EyeSlashIcon
+                  className="cursor-pointer absolute right-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor"
+                  onClick={handleToggleShowPassword2}
+                />
+              ) : (
+                <EyeIcon
+                  className="cursor-pointer absolute right-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor"
+                  onClick={handleToggleShowPassword2}
+                />
+              )}
             </div>
-            {errorMessagePasswordNew && (
-              <div
-                className="flex h-8 items-center space-x-1 mt-2"
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
-                <p className="text-sm text-dangerColor">
-                  {errorMessagePasswordNew}
-                </p>
+            {errorMessagePasswordNew.length > 0 && (
+              <div>
+                {errorMessagePasswordNew.map((error, index) => (
+                  <div
+                    className="flex h-8 items-center space-x-1 mt-2"
+                    aria-live="polite"
+                    aria-atomic="true"
+                    key={index}
+                  >
+                    <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
+                    <p className="text-sm text-dangerColor">{error}</p>
+                  </div>
+                ))}
               </div>
             )}
           </div>
@@ -870,13 +929,24 @@ function FormGantiPassword({
               <input
                 className="peer block w-full rounded-md border border-primaryBorder py-[9px] pl-10 text-sm outline-2 placeholder:text-disableColor"
                 id="confirmPassword"
-                type="password"
+                type={type3}
                 name="confirmPassword"
                 placeholder="Masukan Ulang Kata Sandi"
                 ref={passwordConfirmRef}
                 required
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor" />
+              {type3 === "password" ? (
+                <EyeSlashIcon
+                  className="cursor-pointer absolute right-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor"
+                  onClick={handleToggleShowPassword3}
+                />
+              ) : (
+                <EyeIcon
+                  className="cursor-pointer absolute right-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor"
+                  onClick={handleToggleShowPassword3}
+                />
+              )}
             </div>
             {errorMessagePasswordConfirm && (
               <div

@@ -2,7 +2,12 @@
 
 import React, { useRef, useState } from "react";
 import { lusitana } from "@/app/ui/fonts";
-import { KeyIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline";
+import {
+  KeyIcon,
+  ExclamationCircleIcon,
+  EyeSlashIcon,
+  EyeIcon,
+} from "@heroicons/react/24/outline";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
 import { Button } from "@/app/ui/button";
 import Link from "next/link";
@@ -14,6 +19,9 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 export default function ResetPassword() {
+  const [type, setType] = useState<string>("password");
+  const [typeCP, setTypeCP] = useState<string>("password");
+
   // params
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
@@ -50,7 +58,9 @@ export default function ResetPassword() {
 
   // state
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [errorMessagePassword, setErrorMessagePassword] = useState<string>("");
+  const [errorMessagePassword, setErrorMessagePassword] = useState<string[]>(
+    []
+  );
   const [errorMessagePasswordConfirm, setErrorMessagePasswordConfirm] =
     useState<string>("");
 
@@ -58,7 +68,7 @@ export default function ResetPassword() {
   const handleResetPassword = async (e: FormEvent<HTMLFormElement>) => {
     // reset error message
     setErrorMessage("");
-    setErrorMessagePassword("");
+    setErrorMessagePassword([]);
     setErrorMessagePasswordConfirm("");
 
     // toast loading register
@@ -99,7 +109,7 @@ export default function ResetPassword() {
 
       if (error?.response?.data?.message.password !== undefined) {
         setErrorMessagePassword(
-          error?.response?.data?.message.password[0] || "An error occurred."
+          error?.response?.data?.message.password || ["An error occurred."]
         );
       }
 
@@ -115,6 +125,22 @@ export default function ResetPassword() {
           error?.response?.data?.message || "Invalid credentials"
         );
       }
+    }
+  };
+
+  const handleToggleShowPassword = () => {
+    if (type === "password") {
+      setType("text");
+    } else {
+      setType("password");
+    }
+  };
+
+  const handleToggleShowPasswordCP = () => {
+    if (typeCP === "password") {
+      setTypeCP("text");
+    } else {
+      setTypeCP("password");
     }
   };
 
@@ -142,24 +168,38 @@ export default function ResetPassword() {
                 <input
                   className="peer block w-full rounded-md border border-primaryBorder py-[9px] pl-10 text-sm outline-2 placeholder:text-disableColor"
                   id="password"
-                  type="password"
+                  type={type}
                   name="password"
-                  placeholder="Masukan Kata Sandi"
+                  placeholder="Masukan Kata Sandi Baru"
                   ref={passwordRef}
                   required
                 />
                 <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor" />
+                {type === "password" ? (
+                  <EyeSlashIcon
+                    className="cursor-pointer absolute right-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor"
+                    onClick={handleToggleShowPassword}
+                  />
+                ) : (
+                  <EyeIcon
+                    className="cursor-pointer absolute right-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor"
+                    onClick={handleToggleShowPassword}
+                  />
+                )}
               </div>
-              {errorMessagePassword && (
-                <div
-                  className="flex h-8 items-center space-x-1 mt-2"
-                  aria-live="polite"
-                  aria-atomic="true"
-                >
-                  <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
-                  <p className="text-sm text-dangerColor">
-                    {errorMessagePassword}
-                  </p>
+              {errorMessagePassword.length > 0 && (
+                <div>
+                  {errorMessagePassword.map((error, index) => (
+                    <div
+                      className="flex h-8 items-center space-x-1 mt-2"
+                      aria-live="polite"
+                      aria-atomic="true"
+                      key={index}
+                    >
+                      <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
+                      <p className="text-sm text-dangerColor">{error}</p>
+                    </div>
+                  ))}
                 </div>
               )}
             </div>
@@ -174,13 +214,24 @@ export default function ResetPassword() {
                 <input
                   className="peer block w-full rounded-md border border-primaryBorder py-[9px] pl-10 text-sm outline-2 placeholder:text-disableColor"
                   id="confirmPassword"
-                  type="password"
+                  type={typeCP}
                   name="confirmPassword"
                   placeholder="Masukan Ulang Kata Sandi"
                   ref={passwordConfirmRef}
                   required
                 />
                 <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor" />
+                {typeCP === "password" ? (
+                  <EyeSlashIcon
+                    className="cursor-pointer absolute right-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor"
+                    onClick={handleToggleShowPasswordCP}
+                  />
+                ) : (
+                  <EyeIcon
+                    className="cursor-pointer absolute right-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-disableColor peer-focus:text-blackColor"
+                    onClick={handleToggleShowPasswordCP}
+                  />
+                )}
               </div>
               {errorMessagePasswordConfirm && (
                 <div

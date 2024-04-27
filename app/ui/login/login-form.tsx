@@ -93,7 +93,7 @@ export default function LoginForm() {
           },
           {
             // 1 day from now
-            maxAge: 86400,
+            maxAge: 111600, // UTC +7
             path: "/",
           }
         );

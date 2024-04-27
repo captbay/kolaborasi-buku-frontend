@@ -9,7 +9,7 @@ export default async function jumbotron({
   deskripsi: string;
 }) {
   return (
-    <div className="bg-center bg-no-repeat bg-gray-700 bg-blend-multiply">
+    <div className="bg-center bg-no-repeat bg-gray-700 bg-blend-multiply h-96">
       <div className="px-4 mx-auto max-w-screen-xl text-center py-24">
         <header>
           <h1

@@ -31,7 +31,7 @@ export default async function Coursell() {
 
   return (
     <Suspense fallback={<p>Loading feed...</p>}>
-      <section className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+      <section className="h-56 sm:h-64 xl:h-96">
         <Carousel slideInterval={3000} pauseOnHover theme={customTheme}>
           {data?.map((event, index) => (
             <Image

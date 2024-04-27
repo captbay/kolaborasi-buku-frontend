@@ -4,7 +4,7 @@ const shimmer =
 
 export function CoursellSkeleton() {
   return (
-    <section className="w-full h-56 sm:h-64 xl:h-80 2xl:h-96 bg-gray-200"></section>
+    <section className="w-full h-56 sm:h-64 xl:h-96 bg-gray-200"></section>
   );
 }
 

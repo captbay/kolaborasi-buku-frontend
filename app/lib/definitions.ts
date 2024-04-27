@@ -217,6 +217,14 @@ export type getBukuAllResponse = {
   total: number;
 };
 
+// Ads
+export type getBukuAdsResponse = {
+  current_page: number;
+  data: BookAds[];
+  last_page: number;
+  total: number;
+};
+
 export type CardData = {
   id: string;
   slug: string;

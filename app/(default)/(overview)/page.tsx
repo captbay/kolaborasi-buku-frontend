@@ -9,7 +9,7 @@ import BannerBookVertical from "@/app/ui/beranda/bannerBookVertical";
 
 import { Suspense } from "react";
 import { getBestSeller, getAds } from "@/app/lib/data";
-import { BookAds, CardData } from "@/app/lib/definitions";
+import { getBukuAdsResponse, CardData } from "@/app/lib/definitions";
 import { ProdukTerlarisSkeleton } from "@/app/ui/skeletons";
 
 export const metadata: Metadata = {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
   const bestSeller: CardData[] = await getBestSeller();
-  const adsBooks: BookAds[] = await getBestSeller();
+  const adsBooks: getBukuAdsResponse = await getAds();
 
   return (
     <main id="content">
@@ -32,7 +32,7 @@ export default async function Page() {
       </section>
       <section className="px-4 lg:px-28 py-8">
         <Suspense fallback={<p>Loading feed...</p>}>
-          <BannerBookVertical data={adsBooks} />
+          <BannerBookVertical data={adsBooks.data} />
         </Suspense>
       </section>
       <section className="px-14 lg:px-20 py-16">

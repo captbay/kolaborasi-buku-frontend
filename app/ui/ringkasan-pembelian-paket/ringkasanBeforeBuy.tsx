@@ -130,7 +130,7 @@ export default function RingkasanBeforeBuyPaketPenerbitan({
         }
       } catch (error: any) {
         toast.update(loading, {
-          render: "Terjadi Kesalahan!",
+          render: "Terjadi Kesalahan, silahkan coba lagi!",
           type: "error",
           autoClose: 5000,
           closeButton: true,
@@ -139,6 +139,11 @@ export default function RingkasanBeforeBuyPaketPenerbitan({
         if (error?.response?.data?.message.file_buku !== undefined) {
           setErrorMessageFile(
             error?.response?.data?.message.file_buku[0] || "An error occurred."
+          );
+        }
+        if (error?.response?.data?.message.file_mou !== undefined) {
+          setErrorMessageFileMou(
+            error?.response?.data?.message.file_mou[0] || "An error occurred."
           );
         }
         if (error?.response?.data?.message.judul_buku !== undefined) {

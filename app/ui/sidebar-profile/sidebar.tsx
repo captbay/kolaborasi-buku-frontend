@@ -32,7 +32,7 @@ export default function SidebarProfile({
     const file = e.target.files?.[0];
     if (file) {
       // if file size is more than 2MB
-      if (file.size > 2097152) {
+      if (file.size > 2000000) {
         toast.error("Ukuran file terlalu besar, maksimal 2MB");
       } else {
         // Create a FileReader instance

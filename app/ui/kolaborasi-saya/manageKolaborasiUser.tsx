@@ -36,9 +36,9 @@ export default function ManageKolaborasiUser({
   ) => {
     const file = e.target.files?.[0];
     if (file) {
-      // if file size is more than 2MB
-      if (file.size > 2097152) {
-        toast.error("Ukuran file terlalu besar, maksimal 2MB");
+      // if file size is more than 20MB
+      if (file.size > 20000000) {
+        toast.error("Ukuran file terlalu besar, maksimal 20MB");
       } else {
         // hit the upload function
         handleBabUpload(file);
@@ -87,7 +87,7 @@ export default function ManageKolaborasiUser({
     const file = e.target.files?.[0];
     if (file) {
       // if file size is more than 2MB
-      if (file.size > 2097152) {
+      if (file.size > 2000000) {
         toast.error("Ukuran file terlalu besar, maksimal 2MB");
       } else {
         // hit the upload function

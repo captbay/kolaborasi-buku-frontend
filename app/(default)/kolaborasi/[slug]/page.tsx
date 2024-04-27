@@ -66,7 +66,7 @@ export default async function Page({ params }: Props) {
         </section>
         <section className="px-14 lg:px-28 py-12">
           <div className="flex flex-col lg:flex-row justify-between gap-16">
-            <div className="flex flex-col gap-16">
+            <div className="flex w-full flex-col gap-16">
               <div className="flex flex-col lg:flex-row justify-between gap-8">
                 <div className="lg:w-1/2 flex flex-col lg:sticky lg:top-[182px] h-fit">
                   <Image
@@ -142,14 +142,14 @@ export default async function Page({ params }: Props) {
                 </div>
               </div>
             </div>
-            <div className="h-fit flex flex-col items-center sticky top-[182px]">
+            {/* <div className="h-fit flex flex-col items-center sticky top-[182px]">
               <h2 className={`${lusitana.className} text-lg font-semibold`}>
                 Timeline
               </h2>
               <div className="mt-8 flex flex-col lg:flex-row justify-center">
                 <TimelinePenulisan data={detailBuku.timeline_kolaborasi} />
               </div>
-            </div>
+            </div> */}
           </div>
         </section>
       </Suspense>

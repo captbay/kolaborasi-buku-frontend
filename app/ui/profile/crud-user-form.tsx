@@ -1035,7 +1035,7 @@ function FormMember({
         }
       } catch (error: any) {
         toast.update(loading, {
-          render: "Terjadi Kesalahan!",
+          render: "Terjadi Kesalahan, silahkan coba lagi!",
           type: "error",
           autoClose: 5000,
           closeButton: true,

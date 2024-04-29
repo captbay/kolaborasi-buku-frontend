@@ -54,7 +54,7 @@ export default function ProfileCircle({
           <Image
             alt="Gambar Profil"
             height="500"
-            src={"http://kolaborasi-buku-backend.test/storage/" + fotoProfil}
+            src={process.env.NEXT_PUBLIC_STORAGE_FILE + fotoProfil}
             width="500"
             className="w-10 h-10 rounded-full shadow-lg"
           />

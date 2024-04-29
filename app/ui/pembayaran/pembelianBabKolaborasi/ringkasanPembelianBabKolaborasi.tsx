@@ -172,7 +172,7 @@ export default function ringkasanPembelianBabKolaborasi({
               <Image
                 className="p-2 w-full lg:w-32 h-full"
                 src={
-                  "http://kolaborasi-buku-backend.test/storage/" +
+                  process.env.NEXT_PUBLIC_STORAGE_FILE +
                   data.buku_kolaborasi.cover_buku
                 }
                 alt="Gambar Buku"

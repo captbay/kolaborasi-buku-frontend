@@ -36,7 +36,7 @@ const CardBooksKoleksiPenerbitanUser: React.FC<
           ) : (
             <Image
               className="p-4 w-48 h-48"
-              src={"http://kolaborasi-buku-backend.test/storage/" + coverBuku}
+              src={process.env.NEXT_PUBLIC_STORAGE_FILE + coverBuku}
               alt="product image"
               width={500}
               height={500}

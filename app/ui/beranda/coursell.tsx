@@ -36,7 +36,7 @@ export default async function Coursell() {
           {data?.map((event, index) => (
             <Image
               key={index}
-              src={"http://kolaborasi-buku-backend.test/storage/" + event.file}
+              src={process.env.NEXT_PUBLIC_STORAGE_FILE + event.file}
               alt="Picture of the event"
               width={1000}
               height={1000}

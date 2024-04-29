@@ -1,7 +1,7 @@
 import ax from "axios";
 
 export const axios = ax.create({
-  baseURL: "http://kolaborasi-buku-backend.test/api",
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   // headers: {
   //   "Content-Type": "application/json",
   //   // "X-Requested-With": "XMLHttpRequest",

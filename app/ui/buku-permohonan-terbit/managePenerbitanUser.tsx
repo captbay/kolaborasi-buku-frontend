@@ -77,10 +77,7 @@ export default function ManagePenerbitanUser({
               ) : (
                 <Image
                   className="h-auto w-full max-w-full rounded-lg object-contain object-center lg:h-[480px]"
-                  src={
-                    "http://kolaborasi-buku-backend.test/storage/" +
-                    data.cover_buku
-                  }
+                  src={process.env.NEXT_PUBLIC_STORAGE_FILE + data.cover_buku}
                   alt="hero_image"
                   width={500}
                   height={500}

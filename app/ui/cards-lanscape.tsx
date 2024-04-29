@@ -38,7 +38,7 @@ export default function CardsLanscape({
       </div>
       <Image
         className="p-4 w-32 h-32"
-        src={"http://kolaborasi-buku-backend.test/storage/" + cover}
+        src={process.env.NEXT_PUBLIC_STORAGE_FILE + cover}
         alt="Gambar Buku"
         width={500}
         height={500}

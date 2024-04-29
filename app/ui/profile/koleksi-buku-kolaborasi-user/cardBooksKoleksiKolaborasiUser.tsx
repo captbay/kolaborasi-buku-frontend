@@ -64,7 +64,7 @@ const CardBooksKoleksiKolaborasiUser: React.FC<
           <figure className="flex justify-center">
             <Image
               className="p-4 w-48 h-48"
-              src={"http://kolaborasi-buku-backend.test/storage/" + cover_buku}
+              src={process.env.NEXT_PUBLIC_STORAGE_FILE + cover_buku}
               alt="product image"
               width={500}
               height={500}

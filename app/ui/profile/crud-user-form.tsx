@@ -1091,21 +1091,21 @@ function FormMember({
           </p>
           <div className="flex flex-col items-center justify-center mt-4">
             <Link
-              href={`http://kolaborasi-buku-backend.test/storage/${data.file_cv}`}
+              href={process.env.NEXT_PUBLIC_STORAGE_FILE + data.file_cv}
               target="_blank"
               rel="noreferrer"
             >
               <Button className="w-full">Lihat File CV</Button>
             </Link>
             <Link
-              href={`http://kolaborasi-buku-backend.test/storage/${data.file_ktp}`}
+              href={process.env.NEXT_PUBLIC_STORAGE_FILE + data.file_ktp}
               target="_blank"
               rel="noreferrer"
             >
               <Button className="w-full mt-4">Lihat File KTP</Button>
             </Link>
             <Link
-              href={`http://kolaborasi-buku-backend.test/storage/${data.file_ttd}`}
+              href={process.env.NEXT_PUBLIC_STORAGE_FILE + data.file_ttd}
               target="_blank"
               rel="noreferrer"
             >
@@ -1120,21 +1120,21 @@ function FormMember({
           </p>
           <div className="flex flex-col items-center justify-center mt-4">
             <Link
-              href={`http://kolaborasi-buku-backend.test/storage/${data.file_cv}`}
+              href={process.env.NEXT_PUBLIC_STORAGE_FILE + data.file_cv}
               target="_blank"
               rel="noreferrer"
             >
               <Button className="w-full">Lihat File CV</Button>
             </Link>
             <Link
-              href={`http://kolaborasi-buku-backend.test/storage/${data.file_ktp}`}
+              href={process.env.NEXT_PUBLIC_STORAGE_FILE + data.file_ktp}
               target="_blank"
               rel="noreferrer"
             >
               <Button className="w-full mt-4">Lihat File KTP</Button>
             </Link>
             <Link
-              href={`http://kolaborasi-buku-backend.test/storage/${data.file_ttd}`}
+              href={process.env.NEXT_PUBLIC_STORAGE_FILE + data.file_ttd}
               target="_blank"
               rel="noreferrer"
             >

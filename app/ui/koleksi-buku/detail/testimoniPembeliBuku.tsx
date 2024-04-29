@@ -54,10 +54,7 @@ export default function TestimoniPembeliBuku({
               <div className="flex gap-4 items-center">
                 <Avatar
                   alt="User"
-                  img={
-                    "http://kolaborasi-buku-backend.test/storage/" +
-                    item.foto_profil
-                  }
+                  img={process.env.NEXT_PUBLIC_STORAGE_FILE + item.foto_profil}
                   rounded
                 />
                 <h3 className="text-md font-medium">{item.nama}</h3>

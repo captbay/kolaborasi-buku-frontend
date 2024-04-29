@@ -72,7 +72,7 @@ export default async function Page({ params }: Props) {
                   <Image
                     className="h-auto w-full max-w-full rounded-lg object-cover object-center lg:h-[480px]"
                     src={
-                      "http://kolaborasi-buku-backend.test/storage/" +
+                      process.env.NEXT_PUBLIC_STORAGE_FILE +
                       detailBuku.cover_buku
                     }
                     alt="hero_image"

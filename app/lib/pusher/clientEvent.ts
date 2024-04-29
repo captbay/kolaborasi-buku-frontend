@@ -5,7 +5,7 @@ export const pusher = (token: string, token_type: string) =>
   new Pusher("535231f4d169022dd692", {
     forceTLS: true,
     cluster: "ap1",
-    authEndpoint: "http://kolaborasi-buku-backend.test/api/broadcasting/auth",
+    authEndpoint: process.env.NEXT_PUBLIC_API_URL + "/broadcasting/auth",
     authorizer: (channel: any, _: any) => {
       return {
         authorize: (socketId: any, callback: any) => {

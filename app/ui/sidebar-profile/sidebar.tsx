@@ -128,7 +128,7 @@ export default function SidebarProfile({
                 src={
                   previewImage != null
                     ? previewImage
-                    : `http://kolaborasi-buku-backend.test/storage/${fotoProfil}`
+                    : process.env.NEXT_PUBLIC_STORAGE_FILE + fotoProfil
                 }
                 width="500"
                 className="w-28 h-28 rounded-full shadow-lg"

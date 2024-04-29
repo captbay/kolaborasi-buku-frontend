@@ -36,7 +36,7 @@ export default function cardAdsLandscape({
       <figure className="mx-4">
         <Image
           className="p-4 w-full h-48"
-          src={"http://kolaborasi-buku-backend.test/storage/" + coverBuku}
+          src={process.env.NEXT_PUBLIC_STORAGE_FILE + coverBuku}
           alt="product image"
           width={500}
           height={500}

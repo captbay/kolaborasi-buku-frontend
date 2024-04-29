@@ -40,8 +40,7 @@ export default async function testimoni() {
                 width={500}
                 height={500}
                 src={
-                  "http://kolaborasi-buku-backend.test/storage/" +
-                  testimoni.foto_profil
+                  process.env.NEXT_PUBLIC_STORAGE_FILE + testimoni.foto_profil
                 }
                 alt="profile picture"
               />

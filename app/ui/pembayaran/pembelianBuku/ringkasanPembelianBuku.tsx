@@ -175,10 +175,7 @@ export default function ringkasanPembelianBuku({
               >
                 <Image
                   className="p-2 w-full lg:w-32 h-full"
-                  src={
-                    "http://kolaborasi-buku-backend.test/storage/" +
-                    item.cover_buku
-                  }
+                  src={process.env.NEXT_PUBLIC_STORAGE_FILE + item.cover_buku}
                   alt="Gambar Buku"
                   width={500}
                   height={500}

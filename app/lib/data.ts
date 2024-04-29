@@ -393,7 +393,11 @@ export async function getNotifikasi(token: string, token_type: string) {
     .catch((error) => {
       console.error(error);
       if (error.response.data.message === "Unauthenticated.") {
-        return "Unauthenticated.";
+        return {
+          count_not_read: 0,
+          data: [],
+          message: "Unauthenticated.",
+        };
       }
     });
 }

@@ -157,6 +157,7 @@ export type Keranjang = {
 export type NotifikasiResponse = {
   count_not_read: number;
   data: Notifikasi[];
+  message: string;
 };
 
 // countKeranjang

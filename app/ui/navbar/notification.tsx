@@ -24,6 +24,7 @@ export default function Notification() {
   const [data, setData] = useState<NotifikasiResponse>({
     count_not_read: 0,
     data: [],
+    message: "",
   });
   const { token, token_type, id, clearCookie } = useGetCookie();
   const [isClient, setIsClient] = useState(false);
@@ -34,7 +35,7 @@ export default function Notification() {
       token,
       token_type
     );
-    if (notifikasi === "Unauthenticated.") {
+    if (notifikasi.message === "Unauthenticated.") {
       clearCookie();
       router.refresh();
     } else {

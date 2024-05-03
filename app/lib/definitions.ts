@@ -1,5 +1,14 @@
 // definisi var yang masuk
 
+// configData
+export type configData = {
+  id: string;
+  key: string;
+  tipe: string;
+  value: string;
+  active_flag: number;
+};
+
 export type BukuPenerbitanUserDetail = {
   id: string;
   judul: string;
@@ -358,6 +367,13 @@ export type faqData = {
   judul: string;
   answer: string;
   active_flag: number;
+};
+
+// rekeningData
+export type rekeningData = {
+  no_rek: string;
+  bank_rek: string;
+  nama_rek: string;
 };
 
 // kategori

@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 
-import { getTrxPenjualanBuku } from "@/app/lib/data";
+import { getRekening, getTrxPenjualanBuku } from "@/app/lib/data";
 
 import { redirect } from "next/navigation";
 
-import { getTrxPenjualanBukuResponse } from "@/app/lib/definitions";
+import {
+  getTrxPenjualanBukuResponse,
+  rekeningData,
+} from "@/app/lib/definitions";
 import { Suspense } from "react";
 import RingkasanPembelianBuku from "@/app/ui/pembayaran/pembelianBuku/ringkasanPembelianBuku";
 
@@ -39,13 +42,15 @@ export default async function Page({ searchParams }: Props) {
     token_type
   );
 
+  const rekening: rekeningData = await getRekening(token, token_type);
+
   if (!data) {
     redirect("/");
   }
 
   return (
     <Suspense fallback={<p>Loading feed...</p>}>
-      <RingkasanPembelianBuku data={data} />
+      <RingkasanPembelianBuku data={data} rekening={rekening} />
     </Suspense>
   );
 }

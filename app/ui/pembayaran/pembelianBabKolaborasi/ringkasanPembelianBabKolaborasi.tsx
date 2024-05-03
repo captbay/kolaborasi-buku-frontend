@@ -6,7 +6,10 @@ import { Button } from "@/app/ui/button";
 import { toast } from "react-toastify";
 import Image from "next/image";
 import TimerClock from "@/app/ui/pembayaran/timerClock";
-import { getTrxBabKolaborasiResponse } from "@/app/lib/definitions";
+import {
+  getTrxBabKolaborasiResponse,
+  rekeningData,
+} from "@/app/lib/definitions";
 import {
   updateStatusTransaksiKolaborasiBuku,
   uploadBuktiBayarPembelianKolaborasiBuku,
@@ -18,6 +21,7 @@ import type { CustomFlowbiteTheme } from "flowbite-react";
 import { Flowbite } from "flowbite-react";
 import Link from "next/link";
 import clsx from "clsx";
+import BankPenerbitan from "@/app/ui/bankPenerbitan";
 
 const customTheme: CustomFlowbiteTheme = {
   modal: {
@@ -40,8 +44,10 @@ const customTheme: CustomFlowbiteTheme = {
 
 export default function ringkasanPembelianBabKolaborasi({
   data,
+  rekening,
 }: {
   data: getTrxBabKolaborasiResponse;
+  rekening: rekeningData;
 }) {
   const { token, token_type } = useGetCookie();
   const [timeExp, setTimeExp] = useState(false);
@@ -209,24 +215,7 @@ export default function ringkasanPembelianBabKolaborasi({
         </section>
         {data.status == "PROGRESS" ? (
           <section className="flex-1 h-fit flex flex-col sticky top-16 space-y-3">
-            <div className="bg-white border border-gray-200 rounded-lg min-w-full">
-              <div className="flex flex-col m-6">
-                <h2 className="text-2xl font-semibold tracking-tight text-blackColor">
-                  No Rekening
-                </h2>
-                <div className="flex flex-col items-center gap-2 mt-4">
-                  <p className="text-base font-light tracking-tight text-blackColor">
-                    92031903901923
-                  </p>
-                  <p className="text-base font-medium tracking-tight text-blackColor">
-                    BANK SEJAHTERA
-                  </p>
-                  <p className="text-base font-light tracking-tight text-blackColor">
-                    Atas Nama: PENERBITAN
-                  </p>
-                </div>
-              </div>
-            </div>
+            <BankPenerbitan rekening={rekening} />
             <form onSubmit={handleUploadFile} className="space-y-3">
               <div className="bg-white border border-gray-200 rounded-lg min-w-full">
                 <div className="flex flex-col m-6">

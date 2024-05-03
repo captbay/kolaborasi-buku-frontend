@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 
-import { getTrxBabKolaborasi } from "@/app/lib/data";
+import { getRekening, getTrxBabKolaborasi } from "@/app/lib/data";
 
 import { redirect } from "next/navigation";
 
-import { getTrxBabKolaborasiResponse } from "@/app/lib/definitions";
+import {
+  getTrxBabKolaborasiResponse,
+  rekeningData,
+} from "@/app/lib/definitions";
 import { Suspense } from "react";
 import RingkasanPembelianBabKolaborasi from "@/app/ui/pembayaran/pembelianBabKolaborasi/ringkasanPembelianBabKolaborasi";
 
@@ -39,13 +42,15 @@ export default async function Page({ searchParams }: Props) {
     token_type
   );
 
+  const rekening: rekeningData = await getRekening(token, token_type);
+
   if (!data) {
     redirect("/");
   }
 
   return (
     <Suspense fallback={<p>Loading feed...</p>}>
-      <RingkasanPembelianBabKolaborasi data={data} />
+      <RingkasanPembelianBabKolaborasi data={data} rekening={rekening} />
     </Suspense>
   );
 }

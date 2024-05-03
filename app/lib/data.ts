@@ -709,3 +709,24 @@ export async function getFaq() {
       console.error(error);
     });
 }
+
+/*
+  config
+  */
+export async function getRekening(token: string, token_type: string) {
+  noStore();
+  return await axios
+    .get("/config/getRekening", {
+      headers: {
+        Authorization: token_type + " " + token,
+      },
+    })
+    .then((response) => {
+      if (response.status === 200 || response.status === 201) {
+        return response.data.data;
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}

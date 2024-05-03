@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 
-import { getTrxPaketPenerbitanById } from "@/app/lib/data";
+import { getRekening, getTrxPaketPenerbitanById } from "@/app/lib/data";
 
 import { redirect } from "next/navigation";
 
-import { getTrxPaketResponse } from "@/app/lib/definitions";
+import { getTrxPaketResponse, rekeningData } from "@/app/lib/definitions";
 import { Suspense } from "react";
 import RingkasanPembelianPaketPenerbitan from "@/app/ui/pembayaran/pembelianPaketPenerbitan/ringkasanPembelianPaketPenerbitan";
 
@@ -39,13 +39,15 @@ export default async function Page({ searchParams }: Props) {
     token_type
   );
 
+  const rekening: rekeningData = await getRekening(token, token_type);
+
   if (!data) {
     redirect("/");
   }
 
   return (
     <Suspense fallback={<p>Loading feed...</p>}>
-      <RingkasanPembelianPaketPenerbitan data={data} />
+      <RingkasanPembelianPaketPenerbitan data={data} rekening={rekening} />
     </Suspense>
   );
 }

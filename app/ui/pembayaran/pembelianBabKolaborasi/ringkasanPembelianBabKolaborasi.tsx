@@ -165,7 +165,7 @@ export default function ringkasanPembelianBabKolaborasi({
           )}
           {data.date_time_exp && (
             <TimerClock
-              msTime={Date.parse(data.date_time_exp)}
+              msTime={Date.parse(data.date_time_exp) - 25200}
               onComplete={handleCompleteTime}
             />
           )}

@@ -57,7 +57,9 @@ const CardBooksKoleksiKolaborasiUser: React.FC<
             </div>
           )}
           {datetime_deadline && (
-            <TimerKolaborasi msTime={Date.parse(datetime_deadline) - 25200} />
+            <TimerKolaborasi
+              msTime={Date.parse(datetime_deadline) - 25200000}
+            />
           )}
         </div>
         <div className="flex flex-col justify-between items-center">

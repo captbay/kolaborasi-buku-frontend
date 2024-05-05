@@ -226,7 +226,7 @@ export default function ManageKolaborasiUser({
                 )}
                 {data.datetime_deadline && (
                   <TimerKolaborasi
-                    msTime={Date.parse(data.datetime_deadline) - 25200}
+                    msTime={Date.parse(data.datetime_deadline) - 25200000}
                     onComplete={handleCompleteTime}
                   />
                 )}

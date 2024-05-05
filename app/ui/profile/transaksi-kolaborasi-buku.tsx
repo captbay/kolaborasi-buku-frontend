@@ -177,7 +177,9 @@ function ListTrxProgress({ data }: { data: getTrxBabKolaborasiResponse[] }) {
                   </div>
                 )}
                 {trx.date_time_exp && (
-                  <TimerOnly msTime={Date.parse(trx.date_time_exp) - 25200} />
+                  <TimerOnly
+                    msTime={Date.parse(trx.date_time_exp) - 25200000}
+                  />
                 )}
               </div>
               <div className="p-2 flex items-center">

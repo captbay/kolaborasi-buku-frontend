@@ -175,7 +175,11 @@ function ListTrxProgress({ data }: { data: getTrxPenjualanBukuResponse[] }) {
                   </div>
                 )}
                 {trx.date_time_exp && (
-                  <TimerOnly msTime={Date.parse(trx.date_time_exp)} />
+                  <TimerOnly
+                    msTime={Date.parse(
+                      new Date(trx.date_time_exp).toISOString()
+                    )}
+                  />
                 )}
               </div>
               <div className="p-2 flex items-center">

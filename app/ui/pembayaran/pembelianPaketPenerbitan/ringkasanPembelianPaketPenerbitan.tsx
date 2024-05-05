@@ -220,7 +220,7 @@ export default function RingkasanPembelianPaketPenerbitan({
           )}
           {data.date_time_exp && (
             <TimerClockPenerbitan
-              msTime={Date.parse(data.date_time_exp) - 25200000}
+              msTime={Date.parse(data.date_time_exp)}
               onComplete={handleCompleteTime}
             />
           )}

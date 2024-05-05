@@ -165,7 +165,7 @@ export default function ringkasanPembelianBuku({
           )}
           {data.date_time_exp && (
             <TimerClock
-              msTime={Date.parse(data.date_time_exp) - 25200000}
+              msTime={Date.parse(data.date_time_exp)}
               onComplete={handleCompleteTime}
             />
           )}

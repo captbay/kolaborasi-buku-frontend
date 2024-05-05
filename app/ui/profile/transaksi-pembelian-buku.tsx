@@ -181,6 +181,8 @@ function ListTrxProgress({ data }: { data: getTrxPenjualanBukuResponse[] }) {
                     )}
                   />
                 )}
+                {/* hapus ini */}
+                <p>{Date.now()}</p>
               </div>
               <div className="p-2 flex items-center">
                 <p className="text-xs font-semibold tracking-tight text-blackColor">

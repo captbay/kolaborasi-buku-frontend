@@ -176,13 +176,12 @@ function ListTrxProgress({ data }: { data: getTrxPenjualanBukuResponse[] }) {
                 )}
                 {trx.date_time_exp && (
                   <TimerOnly
-                    msTime={Date.parse(
-                      new Date(trx.date_time_exp).toISOString()
-                    )}
+                    // msTime={Date.parse(
+                    //   new Date(trx.date_time_exp).toISOString()
+                    // )}
+                    dateExp={trx.date_time_exp}
                   />
                 )}
-                {/* hapus ini */}
-                <p>{Date.now()}</p>
               </div>
               <div className="p-2 flex items-center">
                 <p className="text-xs font-semibold tracking-tight text-blackColor">

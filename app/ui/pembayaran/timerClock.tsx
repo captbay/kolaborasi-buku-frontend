@@ -81,19 +81,17 @@ const renderer = ({
 };
 
 export default function TimerClock({
-  msTime,
+  // msTime,
+  dateExp,
   onComplete,
 }: {
-  msTime: number;
+  // msTime: number;
+  dateExp: string;
   onComplete: () => void;
 }) {
-  const timer = calcTimeDelta(msTime);
+  // const timer = calcTimeDelta(msTime);
 
   return (
-    <Countdown
-      date={Date.now() + timer.total}
-      renderer={renderer}
-      onComplete={onComplete}
-    />
+    <Countdown date={dateExp} renderer={renderer} onComplete={onComplete} />
   );
 }

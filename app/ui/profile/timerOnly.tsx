@@ -43,8 +43,14 @@ const renderer = ({
   }
 };
 
-export default function TimerOnly({ msTime }: { msTime: number }) {
-  const timer = calcTimeDelta(msTime);
+export default function TimerOnly({
+  // msTime,
+  dateExp,
+}: {
+  // msTime: number;
+  dateExp: string;
+}) {
+  // const timer = calcTimeDelta(msTime);
 
-  return <Countdown date={Date.now() + timer.total} renderer={renderer} />;
+  return <Countdown date={dateExp} renderer={renderer} />;
 }

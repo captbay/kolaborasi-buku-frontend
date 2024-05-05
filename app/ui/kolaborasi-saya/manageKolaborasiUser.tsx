@@ -226,9 +226,10 @@ export default function ManageKolaborasiUser({
                 )}
                 {data.datetime_deadline && (
                   <TimerKolaborasi
-                    msTime={Date.parse(
-                      new Date(data.datetime_deadline).toISOString()
-                    )}
+                    // msTime={Date.parse(
+                    //   new Date(data.datetime_deadline).toISOString()
+                    // )}
+                    dateExp={data.datetime_deadline}
                     onComplete={handleCompleteTime}
                   />
                 )}

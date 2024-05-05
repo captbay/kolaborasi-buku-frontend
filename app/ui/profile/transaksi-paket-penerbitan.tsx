@@ -277,9 +277,10 @@ function ListTrxProgress({ data }: { data: getTrxPaketResponse[] }) {
                 )}
                 {trx.date_time_exp && (
                   <TimerOnly
-                    msTime={Date.parse(
-                      new Date(trx.date_time_exp).toISOString()
-                    )}
+                    // msTime={Date.parse(
+                    //   new Date(trx.date_time_exp).toISOString()
+                    // )}
+                    dateExp={trx.date_time_exp}
                   />
                 )}
               </div>

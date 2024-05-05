@@ -58,7 +58,8 @@ const CardBooksKoleksiKolaborasiUser: React.FC<
           )}
           {datetime_deadline && (
             <TimerKolaborasi
-              msTime={Date.parse(new Date(datetime_deadline).toISOString())}
+              // msTime={Date.parse(new Date(datetime_deadline).toISOString())}
+              dateExp={datetime_deadline}
             />
           )}
         </div>

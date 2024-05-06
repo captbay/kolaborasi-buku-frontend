@@ -103,6 +103,7 @@ export default function HamburgerBtn({
           pathname={pathname}
           onClick={() => setOpen(!open)}
           dataUser={dataUser}
+          token={token}
         />
       )}
     </>
@@ -113,10 +114,12 @@ function NavSmallScreen({
   pathname,
   onClick,
   dataUser,
+  token,
 }: {
   pathname: string;
   onClick: () => void;
   dataUser: User | null;
+  token: any;
 }) {
   return (
     <div className="w-full lg:hidden" id="navbar-search">
@@ -142,12 +145,16 @@ function NavSmallScreen({
         </ul>
       </nav>
       <div className="flex justify-around my-4">
-        <Notification />
-        <ProfileCircle
-          fotoProfil={dataUser?.foto_profil}
-          namaLengkap={dataUser?.nama_lengkap}
-          email={dataUser?.email}
-        />
+        {token && (
+          <>
+            <Notification />
+            <ProfileCircle
+              fotoProfil={dataUser?.foto_profil}
+              namaLengkap={dataUser?.nama_lengkap}
+              email={dataUser?.email}
+            />
+          </>
+        )}
       </div>
     </div>
   );

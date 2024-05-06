@@ -40,12 +40,12 @@ export default function AuthLayout({
                 alt="Book Images"
                 width={1000}
                 height={1000}
-                className="w-full h-full lg:h-full object-cover"
+                className="w-full h-full object-cover"
               ></Image>
             </figure>
           </section>
-          <section className="lg:mx-28 my-16 lg:flex lg:items-center lg:justify-center lg:align-middle">
-            <div className="w-full h-fit top-0 bottom-0 absolute lg:static z-20 my-auto">
+          <section className="lg:mx-28 my-2 md:my-auto lg:flex lg:items-center lg:justify-center lg:align-middle">
+            <div className="w-full h-full absolute lg:static z-20 my-auto">
               <Suspense fallback={<p>Loading feed...</p>}>{children}</Suspense>
             </div>
           </section>

@@ -116,6 +116,7 @@ export default function cardBuy({
           isLoading: false,
         });
         setIsModalTestimoni(false);
+        router.refresh();
       }
     } catch (error: any) {
       toast.update(loading, {
@@ -146,6 +147,14 @@ export default function cardBuy({
                 Berikan Testimoni
               </Button>
             )}
+          </>
+        ) : isDibeli ? (
+          <>
+            <h2 className="text-2xl font-semibold tracking-tight text-blackColor">
+              Terima Kasih, Sudah{" "}
+              <span className=" text-green-500">Berkontribusi</span>!
+            </h2>
+            <DownloadBukuUser buku_dijual_id={buku_dijual_id} judul={judul} />
           </>
         ) : isTransaksi ? (
           <>

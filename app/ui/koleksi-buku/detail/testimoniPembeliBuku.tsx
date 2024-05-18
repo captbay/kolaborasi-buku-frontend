@@ -52,11 +52,17 @@ export default function TestimoniPembeliBuku({
                 </p>
               </Rating>
               <div className="flex gap-4 items-center">
-                <Avatar
-                  alt="User"
-                  img={process.env.NEXT_PUBLIC_STORAGE_FILE + item.foto_profil}
-                  rounded
-                />
+                {item.foto_profil == null ? (
+                  <Avatar alt="User" img={"/default_profile.jpg"} rounded />
+                ) : (
+                  <Avatar
+                    alt="User"
+                    img={
+                      process.env.NEXT_PUBLIC_STORAGE_FILE + item.foto_profil
+                    }
+                    rounded
+                  />
+                )}
                 <h3 className="text-md font-medium">{item.nama}</h3>
               </div>
               <p className="text-gray-500">{item.ulasan}</p>

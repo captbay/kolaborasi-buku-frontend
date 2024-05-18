@@ -35,15 +35,25 @@ export default async function testimoni() {
               <p className="my-4">{testimoni.ulasan}</p>
             </blockquote>
             <figcaption className="flex items-center justify-center ">
-              <Image
+              {testimoni.foto_profil == null ? (
+                <Image
                 className="rounded-full w-9 h-9"
                 width={500}
                 height={500}
-                src={
-                  process.env.NEXT_PUBLIC_STORAGE_FILE + testimoni.foto_profil
-                }
+                src="/default_profile.jpg"
                 alt="profile picture"
-              />
+                />
+              ) : (
+                <Image
+                  className="rounded-full w-9 h-9"
+                  width={500}
+                  height={500}
+                  src={
+                    process.env.NEXT_PUBLIC_STORAGE_FILE + testimoni.foto_profil
+                  }
+                  alt="profile picture"
+                />
+              )}
               <div className="space-y-0.5 font-medium  text-left rtl:text-right ms-3">
                 <div>{testimoni.nama_lengkap}</div>
               </div>

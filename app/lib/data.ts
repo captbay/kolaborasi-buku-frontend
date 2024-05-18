@@ -371,6 +371,30 @@ export async function getUser(id: string, token: string, token_type: string) {
     })
     .catch((error) => {
       console.error(error);
+      if (error.response.status === 401) {
+        return {
+          id: null,
+          nama_lengkap: null,
+          nama_depan: null,
+          nama_belakang: null,
+          email: null,
+          no_telepon: null,
+          tgl_lahir: null,
+          gender: null,
+          alamat: null,
+          provinsi: null,
+          kecamatan: null,
+          kota: null,
+          kode_pos: null,
+          foto_profil: null,
+          file_cv: null,
+          file_ktp: null,
+          file_ttd: null,
+          role: null,
+          status_verif_email: null,
+          message: "Unauthenticated.",
+        };
+      }
     });
 }
 

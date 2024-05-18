@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { saveAs } from "file-saver";
 import useGetCookie from "@/app/lib/useGetCookies";
 import {
+  getDownloadHakCipta,
   getDownloadMou,
   updateTimeExpKolaborasiUser,
   uploadBabKolaborasi,
@@ -144,6 +145,45 @@ export default function ManageKolaborasiUser({
 
         toast.update(loading, {
           render: "Berhasil Download File MOU",
+          type: "success",
+          autoClose: 5000,
+          isLoading: false,
+        });
+      } else {
+        toast.update(loading, {
+          render: res.data.message,
+          type: "error",
+          autoClose: 5000,
+          closeButton: true,
+          isLoading: false,
+        });
+      }
+    } catch (error: any) {
+      toast.update(loading, {
+        render: "Terjadi Kesalahan",
+        type: "error",
+        autoClose: 5000,
+        closeButton: true,
+        isLoading: false,
+      });
+    }
+  };
+
+  const handleDownloadHakCipta = async () => {
+    const loading = toast.loading("Sedang Download File Hak Cipta...");
+
+    try {
+      const res = await getDownloadHakCipta(
+        data.buku_kolaborasi_id,
+        token,
+        token_type
+      );
+      if (res.status === 200 || res.status === 201) {
+        const blob = new Blob([res.data], { type: "application/pdf" });
+        saveAs(blob, `HakCipta_${data.judul_buku}.pdf`);
+
+        toast.update(loading, {
+          render: "Berhasil Download File Hak Cipta",
           type: "success",
           autoClose: 5000,
           isLoading: false,
@@ -367,6 +407,19 @@ export default function ManageKolaborasiUser({
                       </div>
                     )}
                   </div>
+                  {data.file_hak_cipta != null && (
+                    <div>
+                      <div className="flex justify-between items-center">
+                        <h2 className="text-xl font-semibold">
+                          File Hak Cipta Anda
+                        </h2>
+                        {/* download button file mou */}
+                        <Button onClick={handleDownloadHakCipta}>
+                          <ArrowDownTrayIcon className="w-5 h-5" />
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                 </>
               )}
             </div>

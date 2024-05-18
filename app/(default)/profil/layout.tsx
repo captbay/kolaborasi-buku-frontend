@@ -36,6 +36,7 @@ export default async function ProfileLayout({
         <section>
           <Suspense fallback={<div>Loading...</div>}>
             <SidebarProfile
+              message={user.message}
               fotoProfil={user.foto_profil}
               namaLengkap={user.nama_lengkap}
               role={user.role}

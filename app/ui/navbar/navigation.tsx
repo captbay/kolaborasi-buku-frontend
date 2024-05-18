@@ -25,7 +25,7 @@ export default async function NavBar() {
   }
 
   return (
-    <section className="sticky top-0 w-full bg-whiteColor px-8 lg:px-28 z-20">
+    <section className="sticky top-0 w-full bg-whiteColor px-8 lg:px-28 z-20 shadow-md">
       <div className="flex flex-col">
         <HamburgerBtn
           dataKeranjang={countKeranjang}

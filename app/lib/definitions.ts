@@ -100,6 +100,7 @@ export type KoleksiBukuKolaborasiUser = {
   cover_buku: string;
   kategori_buku: string;
   file_mou: string;
+  file_hak_cipta: string;
   timeline_kolaborasi: TimelineKolaborasi[];
   buku_kolaborasi_id: string;
 };
@@ -126,6 +127,7 @@ export type KoleksiBukuUser = {
   cover_buku: string;
   judul: string;
   kategori: string;
+  active_flag: boolean;
 };
 
 // Trx Penjualan Buku
@@ -205,6 +207,7 @@ export type User = {
   file_ttd: string;
   role: string;
   status_verif_email: boolean;
+  message: string;
 };
 
 // event

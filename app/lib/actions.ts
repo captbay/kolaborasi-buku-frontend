@@ -395,6 +395,21 @@ export const getDownloadMou = (
   });
 };
 
+// getDownloadHakCipta
+export const getDownloadHakCipta = (
+  id: string,
+  token: string,
+  token_type: string
+) => {
+  return axios.get(`/koleksi-buku-kolaborasi-user/downloadFileHakCipta/${id}`, {
+    responseType: "blob",
+    headers: {
+      Authorization: `${token_type} ${token}`,
+      Accept: "application/pdf",
+    },
+  });
+};
+
 // add testimoni
 export const addTestimoni = (
   buku_dijual_id: string,

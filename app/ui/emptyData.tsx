@@ -14,7 +14,7 @@ export default function EmptyData({
   isButton?: boolean;
 }) {
   return (
-    <section className="flex h-full flex-col items-center justify-center gap-2">
+    <section className="flex min-h-[480px] h-full flex-col items-center justify-center gap-2">
       <FaceFrownIcon className="w-10 text-gray-400" />
       <h2 className="text-xl font-semibold">{title}</h2>
       <p>{value}</p>

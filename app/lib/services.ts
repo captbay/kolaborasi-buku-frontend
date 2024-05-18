@@ -1,4 +1,7 @@
+// "use server";
 import ax from "axios";
+// import { NextRequest, NextResponse } from "next/server";
+// import { useRouter } from "next/navigation";
 
 export const axios = ax.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -10,3 +13,15 @@ export const axios = ax.create({
   // withCredentials: true,
   // withXSRFToken: true,
 });
+
+// axios.interceptors.response.use(
+//   (response) => {
+//     return response;
+//   },
+//   (error) => {
+//     if (error.response.status === 401) {
+//       console.log(error);
+//     }
+//     return error;
+//   }
+// );

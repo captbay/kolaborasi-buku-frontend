@@ -52,6 +52,7 @@ export default async function ListBukuUserPagination({
             judul={item.judul}
             kategori={item.kategori}
             coverBuku={item.cover_buku}
+            active_flag={item.active_flag}
           />
         ))}
       </section>

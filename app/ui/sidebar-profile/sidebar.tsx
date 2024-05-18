@@ -11,11 +11,13 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 
 export default function SidebarProfile({
+  message,
   fotoProfil,
   namaLengkap,
   role,
   email,
 }: {
+  message: string;
   fotoProfil: string;
   namaLengkap: string;
   role: string;
@@ -24,6 +26,11 @@ export default function SidebarProfile({
   const { token, token_type, clearCookie } = useGetCookie();
   const pathname = usePathname();
   const router = useRouter();
+
+  if (message === "Unauthenticated.") {
+    clearCookie();
+    router.refresh();
+  }
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);

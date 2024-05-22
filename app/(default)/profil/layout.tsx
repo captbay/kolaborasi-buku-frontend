@@ -7,10 +7,10 @@ import { User } from "@/app/lib/definitions";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Penerbitan Buku",
-    default: "Profil Penerbitan Buku",
+    template: "%s | Arunika Budi Agung Abadi",
+    default: "Profil Arunika Budi Agung Abadi",
   },
-  description: "Website Penerbitan Buku",
+  description: "Website Arunika Budi Agung Abadi",
   // metadataBase: new URL("https://next-learn-dashboard.vercel.sh"),
 };
 

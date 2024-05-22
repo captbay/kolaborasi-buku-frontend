@@ -29,9 +29,9 @@ export default function Footer() {
           </Link>
           {/* description perusahan */}
           <p className="mt-2 lg:mt-4 text-wrap text-xs">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            tincidunt, nunc vitae. Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit. Nunc tincidunt, nunc vitae.
+            Arunika Budi Agung Abadi adalah perusahaan penerbitan buku yang
+            berkomitmen untuk membantu membantu pembelian buku, berkolaborasi
+            dan menerbitkan buku yang memberi penulis menemukan peluang terbaik.
           </p>
         </div>
         <div className="mt-8 lg:mt-0">
@@ -51,8 +51,9 @@ export default function Footer() {
         <div className="w-full lg:w-1/3 mt-8 lg:mt-0">
           <h1 className="text-sm font-medium">Memiliki Pertanyaan ?</h1>
           <p className="mt-2 lg:mt-4 text-wrap text-xs">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            tincidunt, nunc vitae. Nunc tincidunt, nunc vitae.
+            Arunika Budi Agung Abadi akan membantu menjawab seluruh pertanyaan
+            Anda. Tekan tombol dibawah ini untuk menemukan jawaban dari
+            pertanyaan Anda.
           </p>
           <Link href="/hubungi-kami">
             <Button className="w-full h-8 mt-2">Hubungi Kami</Button>
@@ -86,7 +87,7 @@ export default function Footer() {
           </Link>
         </figure>
         <p className="text-xs text-center lg:text-base">
-          © 2024 Penerbitan Buku
+          © 2024 Arunika Budi Agung Abadi
         </p>
       </div>
     </footer>

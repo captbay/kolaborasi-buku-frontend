@@ -39,8 +39,8 @@ export default async function Page() {
             Testimoni Pelanggan
           </h2>
           <p className="text-center text-sm font-light">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-            tincidunt, nisl non tincidunt.
+            Apa kata mereka yang sudah berbelanja di toko kita? Yuk, lihat
+            kata-kata mereka yang berbelanja di toko kita.
           </p>
         </div>
         <div className="mt-4">

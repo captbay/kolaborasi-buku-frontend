@@ -16,10 +16,10 @@ import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Penerbitan Buku",
-    default: "Penerbitan Buku",
+    template: "%s | Arunika Budi Agung Abadi",
+    default: "Arunika Budi Agung Abadi",
   },
-  description: "Website Penerbitan Buku",
+  description: "Website Arunika Budi Agung Abadi",
   // metadataBase: new URL("https://next-learn-dashboard.vercel.sh"),
 };
 

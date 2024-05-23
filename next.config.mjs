@@ -21,6 +21,12 @@ const nextConfig = {
         port: "8080",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "admin.penerbitarunika.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

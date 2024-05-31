@@ -131,7 +131,7 @@ export default function RingkasanBeforeBuyPaketPenerbitan({
       } catch (error: any) {
         if (
           error?.response?.data?.message ===
-          "Kolaborasi Hanya Bisa Dilakukan Oleh Member, Silahkan Mendaftar Terlebih Dahulu Di Menu Akun!"
+          "Penerbitan Hanya Bisa Dilakukan Oleh Member, Silahkan Mendaftar Terlebih Dahulu Di Menu Akun!"
         ) {
           toast.update(loading, {
             render: error?.response?.data?.message,

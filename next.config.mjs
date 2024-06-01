@@ -27,6 +27,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "demo.admin.penerbitarunika.com",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };

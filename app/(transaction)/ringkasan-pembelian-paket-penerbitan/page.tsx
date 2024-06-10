@@ -50,7 +50,7 @@ export default async function Page({ searchParams }: Props) {
   }
 
   return (
-    <Suspense fallback={<p>Loading feed...</p>}>
+    <Suspense key={paket_id} fallback={<p>Loading feed...</p>}>
       <RingkasanBeforeBuyPaketPenerbitan
         dataPaket={dataPaket}
         dataJasaTambahan={dataJasaTambahan}

@@ -50,95 +50,6 @@ export default function RingkasanPembelianPaketPenerbitan({
   const route = useRouter();
   const { token, token_type } = useGetCookie();
   const [successUpload, setSuccessUpload] = useState(false);
-  const [file, setFile] = useState<File | undefined>();
-  const [errorMessageFile, setErrorMessageFile] = useState<string>("");
-
-  const handleUploadFile = async (e: FormEvent<HTMLFormElement>) => {
-    // ganti error message
-    setErrorMessageFile("");
-
-    // toast loading register
-    const loading = toast.loading("Silahkan tunggu sebentar...");
-
-    e.preventDefault();
-
-    if (file) {
-      const form = new FormData();
-      form.append("foto_bukti_bayar", file);
-
-      try {
-        const res = await uploadBuktiBayarPenerbitanBuku(
-          data.trx_id,
-          form,
-          token,
-          token_type
-        );
-        if (res.status === 200 || res.status === 201) {
-          toast.update(loading, {
-            render:
-              "Bukti bayar berhasil diunggah, silahkan tunggu konfirmasi admin dan pantau notifikasi atau koleksi buku penerbitan anda!",
-            type: "success",
-            autoClose: 5000,
-            isLoading: false,
-          });
-          // seletah berhasil
-          setSuccessUpload(true);
-        }
-      } catch (error: any) {
-        toast.update(loading, {
-          render: "Terjadi Kesalahan!",
-          type: "error",
-          autoClose: 5000,
-          closeButton: true,
-          isLoading: false,
-        });
-
-        if (error?.response?.data?.message.foto_bukti_bayar !== undefined) {
-          setErrorMessageFile(
-            error?.response?.data?.message.foto_bukti_bayar[0] ||
-              "An error occurred."
-          );
-        }
-      }
-    } else {
-      toast.update(loading, {
-        render: "Bukti bayar harus diisi",
-        type: "error",
-        autoClose: 5000,
-        closeButton: true,
-        isLoading: false,
-      });
-    }
-  };
-
-  const handleCompleteTime = async () => {
-    const loading = toast.loading("Silahkan tunggu sebentar...");
-
-    try {
-      const res = await updateStatusTransaksiPenerbitan(
-        data.trx_id,
-        token,
-        token_type
-      );
-      if (res.status === 200 || res.status === 201) {
-        toast.update(loading, {
-          render: res.data.message,
-          type: "success",
-          autoClose: 5000,
-          isLoading: false,
-        });
-        route.refresh();
-      }
-    } catch (error: any) {
-      toast.update(loading, {
-        render: error.response.data.message,
-        type: "error",
-        autoClose: 5000,
-        closeButton: true,
-        isLoading: false,
-      });
-    }
-  };
 
   const handleTrxPaketAgain = async () => {
     const loading = toast.loading("Silahkan tunggu sebentar...");
@@ -219,10 +130,11 @@ export default function RingkasanPembelianPaketPenerbitan({
             </div>
           )}
           {data.date_time_exp && (
-            <TimerClockPenerbitan
-              // msTime={Date.parse(new Date(data.date_time_exp).toISOString())}
-              dateExp={data.date_time_exp}
-              onComplete={handleCompleteTime}
+            <CountdownHandle
+              data={data}
+              token={token}
+              token_type={token_type}
+              route={route}
             />
           )}
         </div>
@@ -342,105 +254,12 @@ export default function RingkasanPembelianPaketPenerbitan({
               </div>
             </div>
             <BankPenerbitan rekening={rekening} />
-            <form onSubmit={handleUploadFile} className="space-y-3">
-              <div className="bg-white border border-gray-200 rounded-lg min-w-full">
-                <div className="flex flex-col m-6">
-                  <h2 className="text-2xl font-semibold tracking-tight text-blackColor">
-                    Upload Bukti Bayar
-                    {data.status === "TERIMA DRAFT" && " DP"}
-                    {data.status === "DRAFT SELESAI" && " Pelunasan"}
-                  </h2>
-                  <p className="text-base font-light tracking-tight text-blackColor">
-                    Silakan upload bukti bayar
-                    {data.status === "TERIMA DRAFT" && " DP"}
-                    {data.status === "DRAFT SELESAI" && " Pelunasan"}
-                    Anda di sini
-                  </p>
-                  <input
-                    className="mt-4"
-                    id="file"
-                    type="file"
-                    accept="image/jpeg, image/png, image/jpg"
-                    name="file"
-                    placeholder="Masukan bukti bayar anda"
-                    onChange={(e) => {
-                      setFile(e.target.files?.[0]);
-                    }}
-                  />
-                  {errorMessageFile && (
-                    <div
-                      className="flex h-8 items-center space-x-1 mt-2"
-                      aria-live="polite"
-                      aria-atomic="true"
-                    >
-                      <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
-                      <p className="text-sm text-dangerColor">
-                        {errorMessageFile}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="bg-white border border-gray-200 rounded-lg min-w-full">
-                <div className="flex flex-col m-6">
-                  <h2 className="text-2xl font-semibold tracking-tight text-blackColor">
-                    Ringkasan Penerbitan
-                  </h2>
-                  <div className="flex flex-col lg:flex-row justify-between mt-4">
-                    <h3 className="text-base font-light tracking-tight text-blackColor">
-                      <span className="font-bold">Paket Penerbitan: </span>
-                      {data.paket_penerbitan.nama}
-                    </h3>
-                    <h3 className="text-base font-semibold tracking-tight text-blackColor">
-                      {formatCurrency(data.paket_penerbitan.harga)}
-                    </h3>
-                  </div>
-                  {data.jasa_tambahan.map((data, index) => (
-                    <div
-                      className="flex flex-col lg:flex-row justify-between mt-4"
-                      key={index}
-                    >
-                      <h3 className="text-base font-light tracking-tight text-blackColor">
-                        {data.nama}
-                      </h3>
-                      <h3 className="text-base font-semibold tracking-tight text-blackColor">
-                        {formatCurrency(data.harga)}
-                      </h3>
-                    </div>
-                  ))}
-                  <div className="hidden lg:block h-0.5 w-full bg-primaryCard px-20 my-4"></div>
-                  <div className="flex flex-col lg:flex-row justify-between">
-                    <h3 className="text-base font-light tracking-tight text-blackColor mr-2">
-                      DP Harga (pembulat ke atas) :
-                    </h3>
-                    <h3 className="text-base font-semibold tracking-tight text-blackColor">
-                      {formatCurrency(Math.ceil(data.total_harga / 2))}
-                    </h3>
-                  </div>
-                  <div className="flex flex-col lg:flex-row justify-between">
-                    <h3 className="text-base font-light tracking-tight text-blackColor mr-2">
-                      Pelunasan Harga (pembulat ke atas) :
-                    </h3>
-                    <h3 className="text-base font-semibold tracking-tight text-blackColor">
-                      {formatCurrency(Math.ceil(data.total_harga / 2))}
-                    </h3>
-                  </div>
-                  <div className="flex flex-col lg:flex-row justify-end">
-                    <h3 className="text-base font-light tracking-tight text-blackColor mr-2">
-                      Total Harga :
-                    </h3>
-                    <h3 className="text-base font-semibold tracking-tight text-blackColor">
-                      {formatCurrency(data.total_harga)}
-                    </h3>
-                  </div>
-                  <Button className="mt-4" type="submit">
-                    Sudah Upload Bukti Bayar
-                    {data.status === "TERIMA DRAFT" && " DP"}
-                    {data.status === "DRAFT SELESAI" && " Pelunasan"}
-                  </Button>
-                </div>
-              </div>
-            </form>
+            <FormUploadBuktiBayar
+              data={data}
+              setSuccessUpload={setSuccessUpload}
+              token={token}
+              token_type={token_type}
+            />
           </section>
         ) : (
           <section className="flex-1 h-fit flex flex-col sticky top-16 space-y-3">
@@ -518,5 +337,227 @@ export default function RingkasanPembelianPaketPenerbitan({
         </Flowbite>
       )}
     </section>
+  );
+}
+
+function FormUploadBuktiBayar({
+  token,
+  token_type,
+  data,
+  setSuccessUpload,
+}: {
+  token: string;
+  token_type: string;
+  data: getTrxPaketResponse;
+  setSuccessUpload: (success: boolean) => void;
+}) {
+  const [file, setFile] = useState<File | undefined>();
+  const [errorMessageFile, setErrorMessageFile] = useState<string>("");
+
+  const handleUploadFile = async (e: FormEvent<HTMLFormElement>) => {
+    // ganti error message
+    setErrorMessageFile("");
+
+    // toast loading register
+    const loading = toast.loading("Silahkan tunggu sebentar...");
+
+    e.preventDefault();
+
+    if (file) {
+      const form = new FormData();
+      form.append("foto_bukti_bayar", file);
+
+      try {
+        const res = await uploadBuktiBayarPenerbitanBuku(
+          data.trx_id,
+          form,
+          token,
+          token_type
+        );
+        if (res.status === 200 || res.status === 201) {
+          toast.update(loading, {
+            render:
+              "Bukti bayar berhasil diunggah, silahkan tunggu konfirmasi admin dan pantau notifikasi atau koleksi buku penerbitan anda!",
+            type: "success",
+            autoClose: 5000,
+            isLoading: false,
+          });
+          // seletah berhasil
+          setSuccessUpload(true);
+        }
+      } catch (error: any) {
+        toast.update(loading, {
+          render: "Terjadi Kesalahan!",
+          type: "error",
+          autoClose: 5000,
+          closeButton: true,
+          isLoading: false,
+        });
+
+        if (error?.response?.data?.message.foto_bukti_bayar !== undefined) {
+          setErrorMessageFile(
+            error?.response?.data?.message.foto_bukti_bayar[0] ||
+              "An error occurred."
+          );
+        }
+      }
+    } else {
+      toast.update(loading, {
+        render: "Bukti bayar harus diisi",
+        type: "error",
+        autoClose: 5000,
+        closeButton: true,
+        isLoading: false,
+      });
+    }
+  };
+
+  return (
+    <form onSubmit={handleUploadFile} className="space-y-3">
+      <div className="bg-white border border-gray-200 rounded-lg min-w-full">
+        <div className="flex flex-col m-6">
+          <h2 className="text-2xl font-semibold tracking-tight text-blackColor">
+            Upload Bukti Bayar
+            {data.status === "TERIMA DRAFT" && " DP"}
+            {data.status === "DRAFT SELESAI" && " Pelunasan"}
+          </h2>
+          <p className="text-base font-light tracking-tight text-blackColor">
+            Silakan upload bukti bayar
+            {data.status === "TERIMA DRAFT" && " DP"}
+            {data.status === "DRAFT SELESAI" && " Pelunasan"}
+            Anda di sini
+          </p>
+          <input
+            className="mt-4"
+            id="file"
+            type="file"
+            accept="image/jpeg, image/png, image/jpg"
+            name="file"
+            placeholder="Masukan bukti bayar anda"
+            onChange={(e) => {
+              setFile(e.target.files?.[0]);
+              setErrorMessageFile("");
+            }}
+          />
+          {errorMessageFile && (
+            <div
+              className="flex h-8 items-center space-x-1 mt-2"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              <ExclamationCircleIcon className="h-5 w-5 text-dangerColor" />
+              <p className="text-sm text-dangerColor">{errorMessageFile}</p>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="bg-white border border-gray-200 rounded-lg min-w-full">
+        <div className="flex flex-col m-6">
+          <h2 className="text-2xl font-semibold tracking-tight text-blackColor">
+            Ringkasan Penerbitan
+          </h2>
+          <div className="flex flex-col lg:flex-row justify-between mt-4">
+            <h3 className="text-base font-light tracking-tight text-blackColor">
+              <span className="font-bold">Paket Penerbitan: </span>
+              {data.paket_penerbitan.nama}
+            </h3>
+            <h3 className="text-base font-semibold tracking-tight text-blackColor">
+              {formatCurrency(data.paket_penerbitan.harga)}
+            </h3>
+          </div>
+          {data.jasa_tambahan.map((data, index) => (
+            <div
+              className="flex flex-col lg:flex-row justify-between mt-4"
+              key={index}
+            >
+              <h3 className="text-base font-light tracking-tight text-blackColor">
+                {data.nama}
+              </h3>
+              <h3 className="text-base font-semibold tracking-tight text-blackColor">
+                {formatCurrency(data.harga)}
+              </h3>
+            </div>
+          ))}
+          <div className="hidden lg:block h-0.5 w-full bg-primaryCard px-20 my-4"></div>
+          <div className="flex flex-col lg:flex-row justify-between">
+            <h3 className="text-base font-light tracking-tight text-blackColor mr-2">
+              DP Harga (pembulat ke atas) :
+            </h3>
+            <h3 className="text-base font-semibold tracking-tight text-blackColor">
+              {formatCurrency(Math.ceil(data.total_harga / 2))}
+            </h3>
+          </div>
+          <div className="flex flex-col lg:flex-row justify-between">
+            <h3 className="text-base font-light tracking-tight text-blackColor mr-2">
+              Pelunasan Harga (pembulat ke atas) :
+            </h3>
+            <h3 className="text-base font-semibold tracking-tight text-blackColor">
+              {formatCurrency(Math.ceil(data.total_harga / 2))}
+            </h3>
+          </div>
+          <div className="flex flex-col lg:flex-row justify-end">
+            <h3 className="text-base font-light tracking-tight text-blackColor mr-2">
+              Total Harga :
+            </h3>
+            <h3 className="text-base font-semibold tracking-tight text-blackColor">
+              {formatCurrency(data.total_harga)}
+            </h3>
+          </div>
+          <Button className="mt-4" type="submit">
+            Sudah Upload Bukti Bayar
+            {data.status === "TERIMA DRAFT" && " DP"}
+            {data.status === "DRAFT SELESAI" && " Pelunasan"}
+          </Button>
+        </div>
+      </div>
+    </form>
+  );
+}
+
+function CountdownHandle({
+  data,
+  token,
+  token_type,
+  route,
+}: {
+  data: getTrxPaketResponse;
+  token: string;
+  token_type: string;
+  route: any;
+}) {
+  const handleCompleteTime = async () => {
+    const loading = toast.loading("Silahkan tunggu sebentar...");
+
+    try {
+      const res = await updateStatusTransaksiPenerbitan(
+        data.trx_id,
+        token,
+        token_type
+      );
+      if (res.status === 200 || res.status === 201) {
+        toast.update(loading, {
+          render: res.data.message,
+          type: "error",
+          autoClose: 5000,
+          isLoading: false,
+        });
+        route.refresh();
+      }
+    } catch (error: any) {
+      toast.update(loading, {
+        render: error.response.data.message,
+        type: "error",
+        autoClose: 5000,
+        closeButton: true,
+        isLoading: false,
+      });
+    }
+  };
+
+  return (
+    <TimerClockPenerbitan
+      dateExp={data.date_time_exp}
+      onComplete={handleCompleteTime}
+    />
   );
 }

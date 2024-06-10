@@ -49,7 +49,7 @@ export default async function Page({ searchParams }: Props) {
   }
 
   return (
-    <Suspense fallback={<p>Loading feed...</p>}>
+    <Suspense key={token_trx} fallback={<p>Loading feed...</p>}>
       <RingkasanPembelianBuku data={data} rekening={rekening} />
     </Suspense>
   );

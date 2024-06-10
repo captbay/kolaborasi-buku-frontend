@@ -1167,6 +1167,7 @@ function FormMember({
                     placeholder="Masukan File CV anda"
                     onChange={(e) => {
                       setFileCv(e.target.files?.[0]);
+                      setErrorMessageFileCv("");
                     }}
                   />
                 </div>
@@ -1199,6 +1200,7 @@ function FormMember({
                     placeholder="Masukan File KTP anda"
                     onChange={(e) => {
                       setFileKtp(e.target.files?.[0]);
+                      setErrorMessageFileKtp("");
                     }}
                   />
                 </div>
@@ -1231,6 +1233,7 @@ function FormMember({
                     placeholder="Masukan File Tanda Tangan anda"
                     onChange={(e) => {
                       setFileTtd(e.target.files?.[0]);
+                      setErrorMessageFileTtd("");
                     }}
                   />
                 </div>

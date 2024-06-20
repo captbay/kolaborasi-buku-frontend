@@ -149,6 +149,23 @@ export default function RingkasanBeforeBuyPaketPenerbitan({
             isLoading: false,
           });
         }
+        if (error?.response?.data?.message === "Judul Buku Sudah Ada") {
+          toast.update(loading, {
+            render: error?.response?.data?.message,
+            type: "error",
+            autoClose: 5000,
+            closeButton: true,
+            isLoading: false,
+          });
+        } else {
+          toast.update(loading, {
+            render: "Terjadi Kesalahan, silahkan coba lagi!",
+            type: "error",
+            autoClose: 5000,
+            closeButton: true,
+            isLoading: false,
+          });
+        }
         if (error?.response?.data?.message.file_buku !== undefined) {
           setErrorMessageFile(
             error?.response?.data?.message.file_buku[0] || "An error occurred."

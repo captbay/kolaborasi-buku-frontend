@@ -48,9 +48,5 @@ export default async function Page({ searchParams }: Props) {
     redirect("/");
   }
 
-  return (
-    <Suspense key={token_trx} fallback={<p>Loading feed...</p>}>
-      <RingkasanPembelianBuku data={data} rekening={rekening} />
-    </Suspense>
-  );
+  return <RingkasanPembelianBuku data={data} rekening={rekening} />;
 }

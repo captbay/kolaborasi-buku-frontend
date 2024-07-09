@@ -44,7 +44,7 @@ export default function downloadBukuUser({
   };
   return (
     <Button className="mt-4 w-full" onClick={handleDownload}>
-      Download
+      Download Buku
     </Button>
   );
 }
